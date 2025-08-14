@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { MessageCircle, Phone } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import ChatbotModal from "@/components/ui/chatbot-modal";
 
 export default function FloatingChat() {
+  const [chatbotOpen, setChatbotOpen] = useState(false);
+
   const handleWhatsAppClick = () => {
     window.open("https://wa.me/message/XQJXF6ITDWTTP1", "_blank");
   };
 
   const handleChatbotClick = () => {
-    // Future chatbot integration can be added here
-    console.log("Chatbot clicked - integration coming soon");
+    setChatbotOpen(true);
   };
 
   return (
@@ -47,7 +50,7 @@ export default function FloatingChat() {
 
       {/* Phone Button (Optional) */}
       <button
-        onClick={() => window.open("tel:+1234567890", "_self")}
+        onClick={() => window.open("tel:+2348136842241", "_self")}
         className="group flex items-center justify-center w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
         data-testid="button-phone-call"
         aria-label="Call Us"
@@ -60,6 +63,9 @@ export default function FloatingChat() {
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
         </div>
       </button>
+
+      {/* Chatbot Modal */}
+      <ChatbotModal open={chatbotOpen} onOpenChange={setChatbotOpen} />
     </div>
   );
 }
