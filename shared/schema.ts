@@ -116,6 +116,21 @@ export const venues = pgTable("venues", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+// Services table
+export const services = pgTable("services", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: varchar("title").notNull(),
+  description: text("description").notNull(),
+  features: text("features").array().notNull().default(sql`'{}'`),
+  color: varchar("color").notNull().default('primary'),
+  icon: varchar("icon").notNull().default('Calendar'),
+  imageUrl: varchar("image_url"),
+  active: boolean("active").notNull().default(true),
+  displayOrder: integer("display_order").notNull().default(0),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
 // Schema exports for validation
 export const insertQuoteRequestSchema = createInsertSchema(quoteRequests).omit({
   id: true,
@@ -144,6 +159,12 @@ export const insertVenueSchema = createInsertSchema(venues).omit({
   createdAt: true,
 });
 
+export const insertServiceSchema = createInsertSchema(services).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 // Type exports
 export type User = typeof users.$inferSelect;
 export type UpsertUser = typeof users.$inferInsert;
@@ -157,3 +178,5 @@ export type GalleryItem = typeof galleryItems.$inferSelect;
 export type InsertGalleryItem = z.infer<typeof insertGalleryItemSchema>;
 export type Venue = typeof venues.$inferSelect;
 export type InsertVenue = z.infer<typeof insertVenueSchema>;
+export type Service = typeof services.$inferSelect;
+export type InsertService = z.infer<typeof insertServiceSchema>;

@@ -5,6 +5,7 @@ import {
   blogPosts,
   galleryItems,
   venues,
+  services,
   type User,
   type UpsertUser,
   type QuoteRequest,
@@ -17,6 +18,8 @@ import {
   type InsertGalleryItem,
   type Venue,
   type InsertVenue,
+  type Service,
+  type InsertService,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, like, and, sql } from "drizzle-orm";
@@ -55,6 +58,13 @@ export interface IStorage {
   getVenue(id: string): Promise<Venue | undefined>;
   updateVenue(id: string, venue: Partial<InsertVenue>): Promise<Venue>;
   deleteVenue(id: string): Promise<void>;
+  
+  // Service operations
+  createService(service: InsertService): Promise<Service>;
+  getServices(activeOnly?: boolean): Promise<Service[]>;
+  getService(id: string): Promise<Service | undefined>;
+  updateService(id: string, service: Partial<InsertService>): Promise<Service>;
+  deleteService(id: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -265,6 +275,48 @@ export class DatabaseStorage implements IStorage {
 
   async deleteVenue(id: string): Promise<void> {
     await db.delete(venues).where(eq(venues.id, id));
+  }
+
+  // Service operations
+  async createService(service: InsertService): Promise<Service> {
+    const [newService] = await db
+      .insert(services)
+      .values(service)
+      .returning();
+    return newService;
+  }
+
+  async getServices(activeOnly: boolean = false): Promise<Service[]> {
+    const conditions = [];
+    if (activeOnly) {
+      conditions.push(eq(services.active, true));
+    }
+    
+    return await db.select()
+      .from(services)
+      .where(and(...conditions))
+      .orderBy(services.displayOrder, services.title);
+  }
+
+  async getService(id: string): Promise<Service | undefined> {
+    const [service] = await db
+      .select()
+      .from(services)
+      .where(eq(services.id, id));
+    return service;
+  }
+
+  async updateService(id: string, service: Partial<InsertService>): Promise<Service> {
+    const [updatedService] = await db
+      .update(services)
+      .set({ ...service, updatedAt: new Date() })
+      .where(eq(services.id, id))
+      .returning();
+    return updatedService;
+  }
+
+  async deleteService(id: string): Promise<void> {
+    await db.delete(services).where(eq(services.id, id));
   }
 }
 
