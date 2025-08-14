@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -467,9 +468,27 @@ export default function Admin() {
                             <Button size="sm" variant="outline" onClick={() => updateBlogMutation.mutate({ id: post.id, data: { ...post, published: !post.published } })}>
                               {post.published ? 'Unpublish' : 'Publish'}
                             </Button>
-                            <Button size="sm" variant="outline" onClick={() => deleteBlogMutation.mutate(post.id)}>
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button size="sm" variant="outline">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent className="bg-white dark:bg-gray-900">
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Delete Blog Post</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete "{post.title}"? This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => deleteBlogMutation.mutate(post.id)} className="bg-red-600 hover:bg-red-700">
+                                    Delete
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </div>
                       </div>
@@ -510,9 +529,27 @@ export default function Admin() {
                             <Badge variant={item.featured ? 'default' : 'secondary'}>
                               {item.featured ? 'Featured' : 'Regular'}
                             </Badge>
-                            <Button size="sm" variant="outline" onClick={() => deleteGalleryMutation.mutate(item.id)}>
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button size="sm" variant="outline">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent className="bg-white dark:bg-gray-900">
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Delete Gallery Item</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete "{item.title}"? This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => deleteGalleryMutation.mutate(item.id)} className="bg-red-600 hover:bg-red-700">
+                                    Delete
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </div>
                       </div>
@@ -555,9 +592,27 @@ export default function Admin() {
                             <Badge variant={venue.available ? 'default' : 'secondary'}>
                               {venue.available ? 'Available' : 'Unavailable'}
                             </Badge>
-                            <Button size="sm" variant="outline" onClick={() => deleteVenueMutation.mutate(venue.id)}>
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button size="sm" variant="outline">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent className="bg-white dark:bg-gray-900">
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Delete Venue</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete "{venue.name}"? This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => deleteVenueMutation.mutate(venue.id)} className="bg-red-600 hover:bg-red-700">
+                                    Delete
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </div>
                       </div>
@@ -603,9 +658,27 @@ export default function Admin() {
                             <Button size="sm" variant="outline" onClick={() => updateServiceMutation.mutate({ id: service.id, data: { ...service, active: !service.active } })}>
                               {service.active ? 'Deactivate' : 'Activate'}
                             </Button>
-                            <Button size="sm" variant="outline" onClick={() => deleteServiceMutation.mutate(service.id)}>
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button size="sm" variant="outline">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent className="bg-white dark:bg-gray-900">
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>Delete Service</AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete "{service.title}"? This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction onClick={() => deleteServiceMutation.mutate(service.id)} className="bg-red-600 hover:bg-red-700">
+                                    Delete
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
                           </div>
                         </div>
                       </div>
@@ -641,7 +714,7 @@ function CreateBlogDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onS
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Blog Post</DialogTitle>
         </DialogHeader>
@@ -762,7 +835,7 @@ function CreateGalleryDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Gallery Item</DialogTitle>
         </DialogHeader>
@@ -872,7 +945,7 @@ function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; on
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Venue</DialogTitle>
         </DialogHeader>
@@ -1043,7 +1116,7 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
   return (
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Service</DialogTitle>
         </DialogHeader>
@@ -1090,7 +1163,7 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                   <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
                     <span>{feature}</span>
                     <Button type="button" size="sm" variant="ghost" onClick={() => removeFeature(index)}>
-                      <Trash2 className="h-4 w-4" />
+                      ×
                     </Button>
                   </div>
                 ))}
