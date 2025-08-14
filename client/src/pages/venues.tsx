@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import FloatingChat from "@/components/layout/floating-chat";
 import VenueCard from "@/components/ui/venue-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -194,6 +195,9 @@ export default function Venues() {
       </section>
 
       <Footer />
+      
+      {/* Floating Chat Icons */}
+      <FloatingChat />
     </div>
   );
 }

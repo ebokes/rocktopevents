@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import FloatingChat from "@/components/layout/floating-chat";
 import GalleryItem from "@/components/ui/gallery-item";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -171,6 +172,9 @@ export default function Gallery() {
       </section>
 
       <Footer />
+      
+      {/* Floating Chat Icons */}
+      <FloatingChat />
     </div>
   );
 }

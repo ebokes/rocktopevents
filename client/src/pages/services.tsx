@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import FloatingChat from "@/components/layout/floating-chat";
 import ServiceCard from "@/components/ui/service-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -289,6 +290,9 @@ export default function Services() {
       </section>
 
       <Footer />
+      
+      {/* Floating Chat Icons */}
+      <FloatingChat />
     </div>
   );
 }

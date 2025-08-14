@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import FloatingChat from "@/components/layout/floating-chat";
 import BlogCard from "@/components/ui/blog-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -215,6 +216,9 @@ export default function Blog() {
       </section>
 
       <Footer />
+      
+      {/* Floating Chat Icons */}
+      <FloatingChat />
     </div>
   );
 }

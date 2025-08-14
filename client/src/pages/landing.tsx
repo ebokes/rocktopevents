@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/layout/navbar";
+import FloatingChat from "@/components/layout/floating-chat";
 import Footer from "@/components/layout/footer";
 import QuoteForm from "@/components/forms/quote-form";
 import ServiceCard from "@/components/ui/service-card";
@@ -326,6 +327,9 @@ export default function Landing() {
       </section>
 
       <Footer />
+      
+      {/* Floating Chat Icons */}
+      <FloatingChat />
     </div>
   );
 }
