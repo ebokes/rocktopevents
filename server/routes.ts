@@ -1,25 +1,13 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAdminAuth, requireAdmin } from "./adminAuth";
 import { insertQuoteRequestSchema, insertContactMessageSchema, insertBlogPostSchema, insertGalleryItemSchema, insertVenueSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Auth middleware
-  await setupAuth(app);
-
-  // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
+  // Setup admin authentication
+  setupAdminAuth(app);
 
   // Quote request routes
   app.post("/api/quotes", async (req, res) => {
@@ -37,7 +25,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/quotes", isAuthenticated, async (req, res) => {
+  app.get("/api/quotes", requireAdmin, async (req, res) => {
     try {
       const quotes = await storage.getQuoteRequests();
       res.json(quotes);
@@ -47,7 +35,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/quotes/:id", isAuthenticated, async (req, res) => {
+  app.get("/api/quotes/:id", requireAdmin, async (req, res) => {
     try {
       const quote = await storage.getQuoteRequest(req.params.id);
       if (!quote) {
@@ -60,7 +48,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/quotes/:id/status", isAuthenticated, async (req, res) => {
+  app.patch("/api/quotes/:id/status", requireAdmin, async (req, res) => {
     try {
       const { status, estimatedCost } = req.body;
       const quote = await storage.updateQuoteRequestStatus(req.params.id, status, estimatedCost);
@@ -87,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/contact", isAuthenticated, async (req, res) => {
+  app.get("/api/contact", requireAdmin, async (req, res) => {
     try {
       const messages = await storage.getContactMessages();
       res.json(messages);
@@ -97,7 +85,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/contact/:id/status", isAuthenticated, async (req, res) => {
+  app.patch("/api/contact/:id/status", requireAdmin, async (req, res) => {
     try {
       const { status } = req.body;
       const message = await storage.updateContactMessageStatus(req.params.id, status);
@@ -133,7 +121,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog", isAuthenticated, async (req, res) => {
+  app.post("/api/blog", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertBlogPostSchema.parse(req.body);
       const post = await storage.createBlogPost(validatedData);
@@ -148,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/blog/:id", isAuthenticated, async (req, res) => {
+  app.put("/api/blog/:id", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertBlogPostSchema.partial().parse(req.body);
       const post = await storage.updateBlogPost(req.params.id, validatedData);
@@ -163,7 +151,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/blog/:id", isAuthenticated, async (req, res) => {
+  app.delete("/api/blog/:id", requireAdmin, async (req, res) => {
     try {
       await storage.deleteBlogPost(req.params.id);
       res.json({ message: "Blog post deleted successfully" });
@@ -185,7 +173,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/gallery", isAuthenticated, async (req, res) => {
+  app.post("/api/gallery", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertGalleryItemSchema.parse(req.body);
       const item = await storage.createGalleryItem(validatedData);
@@ -200,7 +188,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/gallery/:id", isAuthenticated, async (req, res) => {
+  app.delete("/api/gallery/:id", requireAdmin, async (req, res) => {
     try {
       await storage.deleteGalleryItem(req.params.id);
       res.json({ message: "Gallery item deleted successfully" });
@@ -239,7 +227,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/venues", isAuthenticated, async (req, res) => {
+  app.post("/api/venues", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertVenueSchema.parse(req.body);
       const venue = await storage.createVenue(validatedData);
@@ -254,7 +242,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/venues/:id", isAuthenticated, async (req, res) => {
+  app.put("/api/venues/:id", requireAdmin, async (req, res) => {
     try {
       const validatedData = insertVenueSchema.partial().parse(req.body);
       const venue = await storage.updateVenue(req.params.id, validatedData);
@@ -269,7 +257,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/venues/:id", isAuthenticated, async (req, res) => {
+  app.delete("/api/venues/:id", requireAdmin, async (req, res) => {
     try {
       await storage.deleteVenue(req.params.id);
       res.json({ message: "Venue deleted successfully" });

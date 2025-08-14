@@ -34,10 +34,11 @@ Preferred communication style: Simple, everyday language.
 - **Data Models**: Users, quote requests, contact messages, blog posts, gallery items, venues, and sessions
 
 ### Authentication & Authorization
-- **Provider**: Replit OpenID Connect (OIDC) authentication
-- **Session Storage**: PostgreSQL-backed session store with automatic cleanup
+- **Provider**: Simple admin authentication with hardcoded credentials
+- **Admin Credentials**: Username: "admin", Password: "rocktop@1@2"
+- **Session Storage**: Express session middleware with memory store
 - **Security**: HTTP-only cookies with secure settings for production
-- **User Management**: Automatic user creation and profile management
+- **Access Control**: Admin-only access for site management (quotes, content, analytics)
 
 ### Content Management
 - **Quote System**: Multi-step quote request form with service selection and status tracking
@@ -64,10 +65,8 @@ Preferred communication style: Simple, everyday language.
 - **drizzle-zod**: Integration between Drizzle and Zod for schema validation
 
 ### Authentication & Security
-- **openid-client**: OpenID Connect client for Replit authentication
-- **passport**: Authentication middleware for Express.js
-- **express-session**: Session management with PostgreSQL storage
-- **connect-pg-simple**: PostgreSQL session store adapter
+- **express-session**: Session management for admin authentication
+- **Simple Admin Auth**: Custom authentication system for site management
 
 ### Frontend Libraries
 - **@tanstack/react-query**: Server state management and caching

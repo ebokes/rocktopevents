@@ -5,6 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 
+function LogoutButton({ mobile = false, onLogout }: { mobile?: boolean; onLogout?: () => void }) {
+  const { logoutMutation } = useAuth();
+  
+  const handleLogout = () => {
+    onLogout?.();
+    logoutMutation.mutate();
+  };
+
+  return (
+    <Button 
+      variant="outline" 
+      className={mobile ? "w-full" : ""}
+      onClick={handleLogout}
+      data-testid={mobile ? "mobile-button-logout" : "button-logout"}
+    >
+      Logout
+    </Button>
+  );
+}
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
@@ -63,44 +83,21 @@ export default function Navbar() {
             ) : isAuthenticated ? (
               <>
                 <div className="flex items-center space-x-3">
-                  {user?.profileImageUrl && (
-                    <img 
-                      src={user.profileImageUrl} 
-                      alt="Profile" 
-                      className="w-8 h-8 rounded-full object-cover"
-                      data-testid="profile-image"
-                    />
-                  )}
                   <span className="text-sm text-slate-700" data-testid="user-name">
-                    {user?.firstName || user?.email}
+                    Admin
                   </span>
                 </div>
                 <Button asChild>
                   <Link href="/admin" data-testid="button-admin">Dashboard</Link>
                 </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => window.location.href = "/api/logout"}
-                  data-testid="button-logout"
-                >
-                  Logout
-                </Button>
+                <LogoutButton />
               </>
             ) : (
               <>
-                <Button 
-                  variant="ghost" 
-                  onClick={() => window.location.href = "/api/login"}
-                  data-testid="button-login"
-                >
-                  Login
-                </Button>
-                <Button 
-                  className="bg-purple-600 hover:bg-purple-700"
-                  onClick={() => window.location.href = "/api/login"}
-                  data-testid="button-get-quote"
-                >
-                  Get Quote
+                <Button asChild>
+                  <Link href="/contact" data-testid="button-get-quote">
+                    Get Quote
+                  </Link>
                 </Button>
               </>
             )}
@@ -137,7 +134,7 @@ export default function Navbar() {
                       <>
                         <div className="px-3 py-2">
                           <div className="text-sm text-slate-700">
-                            {user?.firstName || user?.email}
+                            Admin
                           </div>
                         </div>
                         <Button 
@@ -147,37 +144,16 @@ export default function Navbar() {
                         >
                           <Link href="/admin">Dashboard</Link>
                         </Button>
-                        <Button 
-                          variant="outline" 
-                          className="w-full"
-                          onClick={() => {
-                            setIsOpen(false);
-                            window.location.href = "/api/logout";
-                          }}
-                        >
-                          Logout
-                        </Button>
+                        <LogoutButton mobile onLogout={() => setIsOpen(false)} />
                       </>
                     ) : (
                       <>
                         <Button 
-                          variant="ghost" 
                           className="w-full mb-2"
-                          onClick={() => {
-                            setIsOpen(false);
-                            window.location.href = "/api/login";
-                          }}
+                          asChild
+                          onClick={() => setIsOpen(false)}
                         >
-                          Login
-                        </Button>
-                        <Button 
-                          className="w-full bg-purple-600 hover:bg-purple-700"
-                          onClick={() => {
-                            setIsOpen(false);
-                            window.location.href = "/api/login";
-                          }}
-                        >
-                          Get Quote
+                          <Link href="/contact">Get Quote</Link>
                         </Button>
                       </>
                     )}
