@@ -214,10 +214,10 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getVenues(filters?: { city?: string, capacity?: string, eventType?: string }): Promise<Venue[]> {
-    let query = db.select().from(venues).where(eq(venues.available, true));
+    const conditions = [eq(venues.available, true)];
     
     if (filters?.city) {
-      query = query.where(like(venues.city, `%${filters.city}%`));
+      conditions.push(like(venues.city, `%${filters.city}%`));
     }
     
     if (filters?.capacity) {
@@ -231,14 +231,19 @@ export class DatabaseStorage implements IStorage {
       
       const range = capacityRanges[filters.capacity];
       if (range) {
-        query = query.where(and(
-          sql`${venues.capacity} >= ${range[0]}`,
-          sql`${venues.capacity} <= ${range[1]}`
-        ));
+        conditions.push(sql`${venues.capacity} >= ${range[0]}`);
+        conditions.push(sql`${venues.capacity} <= ${range[1]}`);
       }
     }
     
-    return await query.orderBy(desc(venues.rating));
+    if (filters?.eventType) {
+      conditions.push(like(venues.suitableFor, `%${filters.eventType}%`));
+    }
+    
+    return await db.select()
+      .from(venues)
+      .where(and(...conditions))
+      .orderBy(desc(venues.rating));
   }
 
   async getVenue(id: string): Promise<Venue | undefined> {

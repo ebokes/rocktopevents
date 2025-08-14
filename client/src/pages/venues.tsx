@@ -27,8 +27,8 @@ export default function Venues() {
     queryFn: async () => {
       const params = new URLSearchParams();
       if (filters.location) params.append("city", filters.location);
-      if (filters.capacity) params.append("capacity", filters.capacity);
-      if (filters.eventType) params.append("eventType", filters.eventType);
+      if (filters.capacity && filters.capacity !== "any") params.append("capacity", filters.capacity);
+      if (filters.eventType && filters.eventType !== "any") params.append("eventType", filters.eventType);
       
       const response = await fetch(`/api/venues?${params}`);
       if (!response.ok) throw new Error("Failed to fetch venues");
@@ -83,7 +83,7 @@ export default function Venues() {
                     <SelectValue placeholder="Any capacity" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Any capacity</SelectItem>
+                    <SelectItem value="any">Any capacity</SelectItem>
                     <SelectItem value="1-50">1-50 guests</SelectItem>
                     <SelectItem value="51-100">51-100 guests</SelectItem>
                     <SelectItem value="101-200">101-200 guests</SelectItem>
@@ -97,7 +97,7 @@ export default function Venues() {
                     <SelectValue placeholder="Any event type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Any event type</SelectItem>
+                    <SelectItem value="any">Any event type</SelectItem>
                     <SelectItem value="wedding">Wedding</SelectItem>
                     <SelectItem value="corporate">Corporate</SelectItem>
                     <SelectItem value="social">Social Event</SelectItem>
