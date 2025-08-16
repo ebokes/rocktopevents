@@ -1,4 +1,13 @@
 import { Link } from "wouter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFacebookF,
+  faInstagram,
+  faXTwitter,
+  faPinterest,
+} from "@fortawesome/free-brands-svg-icons";
+import Rocktop from "../../../assets/rocktop-img3.webp";
+import RocktopLogo3 from "../../../assets/rocktop-logo4.webp";
 
 export default function Footer() {
   const services = [
@@ -12,7 +21,7 @@ export default function Footer() {
 
   const quickLinks = [
     { name: "Home", href: "/" },
-    { name: "Get Quote", href: "#quote" },
+    { name: "Get Quote", href: "/contact" },
     { name: "Find Venues", href: "/venues" },
     { name: "Portfolio", href: "/gallery" },
     { name: "Blog", href: "/blog" },
@@ -20,10 +29,26 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Facebook", icon: "facebook-f", href: "#" },
-    { name: "Instagram", icon: "instagram", href: "#" },
-    { name: "Twitter", icon: "twitter", href: "#" },
-    { name: "LinkedIn", icon: "linkedin-in", href: "#" },
+    {
+      name: "Facebook",
+      icon: faFacebookF,
+      href: "https://www.facebook.com/Rocktopevents/",
+    },
+    {
+      name: "Instagram",
+      icon: faInstagram,
+      href: "https://www.instagram.com/rocktopevents/",
+    },
+    {
+      name: "X",
+      icon: faXTwitter,
+      href: "https://x.com/Rocktop_events",
+    },
+    {
+      name: "Pinterest",
+      icon: faPinterest,
+      href: "https://www.pinterest.com/rocktopevents/",
+    },
   ];
 
   return (
@@ -32,22 +57,52 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <div className="mb-6">
-              <span className="text-3xl font-bold text-purple-400">ROCKTOP</span>
-              <span className="text-lg text-gray-300 block -mt-1">PREMIUM EVENTS</span>
+            {/* <div className="mb-6">
+              <span className="text-3xl font-bold text-purple-400">
+                ROCKTOP
+              </span>
+              <span className="text-lg text-gray-300 block -mt-1">
+                PREMIUM EVENTS
+              </span>
+            </div> */}
+            <div className="flex items-center mb-6">
+              <Link href="/" data-testid="logo">
+                <div className="flex space-x-2 items-stretch">
+                  <img
+                    src={RocktopLogo3}
+                    className="w-16 h-14 mt-1"
+                    alt="Rocktop Logo"
+                    style={{ maxWidth: "100%" }}
+                  />
+                  <div className="flex flex-col">
+                    <img
+                      src={Rocktop}
+                      className="mt-1 w-24"
+                      alt="rocktop img"
+                      style={{ maxWidth: "100%" }}
+                    />
+                    <span className="text-sm text-slate-200 min-w-[110px]">
+                      Premium Events
+                    </span>
+                  </div>
+                </div>
+              </Link>
             </div>
             <p className="text-gray-300 mb-6">
-              Creating unforgettable events and experiences with professional planning, stunning decoration, and premium equipment.
+              Creating unforgettable events and experiences with professional
+              planning, stunning decoration, and premium equipment.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                   data-testid={`social-${social.name.toLowerCase()}`}
                 >
-                  <i className={`fab fa-${social.icon} text-xl`}></i>
+                  <FontAwesomeIcon icon={social.icon} className="text-xl" />
                 </a>
               ))}
             </div>
@@ -59,10 +114,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service}>
-                  <Link 
-                    href="/services" 
+                  <Link
+                    href="/services"
                     className="text-gray-300 hover:text-purple-400 transition-colors"
-                    data-testid={`service-link-${service.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
+                    data-testid={`service-link-${service
+                      .toLowerCase()
+                      .replace(/[^a-z0-9]/g, "-")}`}
                   >
                     {service}
                   </Link>
@@ -77,10 +134,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <Link 
-                    href={link.href} 
+                  <Link
+                    href={link.href}
                     className="text-gray-300 hover:text-purple-400 transition-colors"
-                    data-testid={`quick-link-${link.name.toLowerCase().replace(' ', '-')}`}
+                    data-testid={`quick-link-${link.name
+                      .toLowerCase()
+                      .replace(" ", "-")}`}
                   >
                     {link.name}
                   </Link>
@@ -99,25 +158,32 @@ export default function Footer() {
                   <span className="text-gray-300">Office Location</span>
                 </div>
                 <p className="text-gray-400 ml-6" data-testid="contact-address">
-                  123 Event Plaza, Suite 456<br />
-                  Downtown City, ST 12345
+                  4 Amawbia bypass,
+                  <br />
+                  Opposite Jezco Petrol Station,
+                  <br />
+                  Awka, Anambra State.
                 </p>
               </div>
-              
+
               <div>
                 <div className="flex items-center mb-2">
                   <i className="fas fa-phone text-purple-400 mr-3"></i>
                   <span className="text-gray-300">Phone</span>
                 </div>
-                <p className="text-gray-400 ml-6" data-testid="contact-phone">(555) 123-4567</p>
+                <p className="text-gray-400 ml-6" data-testid="contact-phone">
+                  (+234) 813 6842 241
+                </p>
               </div>
-              
+
               <div>
                 <div className="flex items-center mb-2">
                   <i className="fas fa-envelope text-purple-400 mr-3"></i>
                   <span className="text-gray-300">Email</span>
                 </div>
-                <p className="text-gray-400 ml-6" data-testid="contact-email">info@rocktoppremium.com</p>
+                <p className="text-gray-400 ml-6" data-testid="contact-email">
+                  rocktopevents@gmail.com
+                </p>
               </div>
             </div>
           </div>
@@ -127,16 +193,28 @@ export default function Footer() {
         <div className="border-t border-gray-700 pt-8 mt-12">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm" data-testid="copyright">
-              &copy; 2024 ROCKTOP PREMIUM EVENTS. All rights reserved.
+              &copy; 2025 ROCKTOP PREMIUM EVENTS. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors" data-testid="privacy-link">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+                data-testid="privacy-link"
+              >
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors" data-testid="terms-link">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+                data-testid="terms-link"
+              >
                 Terms of Service
               </a>
-              <a href="#" className="text-gray-400 hover:text-purple-400 text-sm transition-colors" data-testid="cookie-link">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+                data-testid="cookie-link"
+              >
                 Cookie Policy
               </a>
             </div>

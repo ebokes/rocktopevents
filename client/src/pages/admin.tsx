@@ -9,22 +9,51 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { 
-  Calendar, 
-  DollarSign, 
-  FileText, 
-  Star, 
-  Users, 
+import {
+  Calendar,
+  DollarSign,
+  FileText,
+  Star,
+  Users,
   TrendingUp,
   MessageCircle,
   Image,
@@ -35,7 +64,7 @@ import {
   Plus,
   Edit,
   Trash2,
-  Eye
+  Eye,
 } from "lucide-react";
 
 // Form schemas
@@ -142,13 +171,23 @@ export default function Admin() {
 
   // Calculate dashboard stats
   const totalQuotes = Array.isArray(quotes) ? quotes.length : 0;
-  const pendingQuotes = Array.isArray(quotes) ? quotes.filter((q: any) => q.status === 'pending').length : 0;
-  const completedQuotes = Array.isArray(quotes) ? quotes.filter((q: any) => q.status === 'completed').length : 0;
-  const totalRevenue = Array.isArray(quotes) ? quotes.reduce((sum: number, q: any) => sum + (parseFloat(q.estimatedCost) || 0), 0) : 0;
+  const pendingQuotes = Array.isArray(quotes)
+    ? quotes.filter((q: any) => q.status === "pending").length
+    : 0;
+  const completedQuotes = Array.isArray(quotes)
+    ? quotes.filter((q: any) => q.status === "completed").length
+    : 0;
+  const totalRevenue = Array.isArray(quotes)
+    ? quotes.reduce(
+        (sum: number, q: any) => sum + (parseFloat(q.estimatedCost) || 0),
+        0
+      )
+    : 0;
 
   // CRUD mutations
   const createBlogMutation = useMutation({
-    mutationFn: async (data: any) => await apiRequest("POST", "/api/blog", data),
+    mutationFn: async (data: any) =>
+      await apiRequest("POST", "/api/blog", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
       toast({ title: "Blog post created successfully" });
@@ -157,7 +196,8 @@ export default function Admin() {
   });
 
   const updateBlogMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => await apiRequest("PUT", `/api/blog/${id}`, data),
+    mutationFn: async ({ id, data }: { id: string; data: any }) =>
+      await apiRequest("PUT", `/api/blog/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
       toast({ title: "Blog post updated successfully" });
@@ -166,7 +206,8 @@ export default function Admin() {
   });
 
   const deleteBlogMutation = useMutation({
-    mutationFn: async (id: string) => await apiRequest("DELETE", `/api/blog/${id}`),
+    mutationFn: async (id: string) =>
+      await apiRequest("DELETE", `/api/blog/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
       toast({ title: "Blog post deleted successfully" });
@@ -174,7 +215,8 @@ export default function Admin() {
   });
 
   const createGalleryMutation = useMutation({
-    mutationFn: async (data: any) => await apiRequest("POST", "/api/gallery", data),
+    mutationFn: async (data: any) =>
+      await apiRequest("POST", "/api/gallery", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/gallery"] });
       toast({ title: "Gallery item created successfully" });
@@ -183,7 +225,8 @@ export default function Admin() {
   });
 
   const deleteGalleryMutation = useMutation({
-    mutationFn: async (id: string) => await apiRequest("DELETE", `/api/gallery/${id}`),
+    mutationFn: async (id: string) =>
+      await apiRequest("DELETE", `/api/gallery/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/gallery"] });
       toast({ title: "Gallery item deleted successfully" });
@@ -191,7 +234,8 @@ export default function Admin() {
   });
 
   const createVenueMutation = useMutation({
-    mutationFn: async (data: any) => await apiRequest("POST", "/api/venues", data),
+    mutationFn: async (data: any) =>
+      await apiRequest("POST", "/api/venues", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/venues"] });
       toast({ title: "Venue created successfully" });
@@ -200,7 +244,8 @@ export default function Admin() {
   });
 
   const updateVenueMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => await apiRequest("PUT", `/api/venues/${id}`, data),
+    mutationFn: async ({ id, data }: { id: string; data: any }) =>
+      await apiRequest("PUT", `/api/venues/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/venues"] });
       toast({ title: "Venue updated successfully" });
@@ -209,7 +254,8 @@ export default function Admin() {
   });
 
   const deleteVenueMutation = useMutation({
-    mutationFn: async (id: string) => await apiRequest("DELETE", `/api/venues/${id}`),
+    mutationFn: async (id: string) =>
+      await apiRequest("DELETE", `/api/venues/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/venues"] });
       toast({ title: "Venue deleted successfully" });
@@ -217,7 +263,8 @@ export default function Admin() {
   });
 
   const createServiceMutation = useMutation({
-    mutationFn: async (data: any) => await apiRequest("POST", "/api/services", data),
+    mutationFn: async (data: any) =>
+      await apiRequest("POST", "/api/services", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/services"] });
       toast({ title: "Service created successfully" });
@@ -226,7 +273,8 @@ export default function Admin() {
   });
 
   const updateServiceMutation = useMutation({
-    mutationFn: async ({ id, data }: { id: string; data: any }) => await apiRequest("PUT", `/api/services/${id}`, data),
+    mutationFn: async ({ id, data }: { id: string; data: any }) =>
+      await apiRequest("PUT", `/api/services/${id}`, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/services"] });
       toast({ title: "Service updated successfully" });
@@ -235,7 +283,8 @@ export default function Admin() {
   });
 
   const deleteServiceMutation = useMutation({
-    mutationFn: async (id: string) => await apiRequest("DELETE", `/api/services/${id}`),
+    mutationFn: async (id: string) =>
+      await apiRequest("DELETE", `/api/services/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/services"] });
       toast({ title: "Service deleted successfully" });
@@ -243,8 +292,19 @@ export default function Admin() {
   });
 
   const updateQuoteStatusMutation = useMutation({
-    mutationFn: async ({ id, status, estimatedCost }: { id: string, status: string, estimatedCost?: string }) => {
-      return apiRequest("PATCH", `/api/quotes/${id}/status`, { status, estimatedCost });
+    mutationFn: async ({
+      id,
+      status,
+      estimatedCost,
+    }: {
+      id: string;
+      status: string;
+      estimatedCost?: string;
+    }) => {
+      return apiRequest("PATCH", `/api/quotes/${id}/status`, {
+        status,
+        estimatedCost,
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/quotes"] });
@@ -269,11 +329,15 @@ export default function Admin() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-slate-800 mb-2">Admin Dashboard</h1>
-          <p className="text-slate-600">Manage your event business content and monitor performance</p>
+          <h1 className="text-3xl font-bold text-slate-800 mb-2">
+            Admin Dashboard
+          </h1>
+          <p className="text-slate-600">
+            Manage your event business content and monitor performance
+          </p>
         </div>
 
         {/* Dashboard Stats */}
@@ -285,8 +349,12 @@ export default function Admin() {
                   <FileText className="h-6 w-6 text-purple-600" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-slate-600">Total Quotes</p>
-                  <p className="text-2xl font-bold text-slate-800">{totalQuotes}</p>
+                  <p className="text-sm font-medium text-slate-600">
+                    Total Quotes
+                  </p>
+                  <p className="text-2xl font-bold text-slate-800">
+                    {totalQuotes}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -300,7 +368,9 @@ export default function Admin() {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-slate-600">Pending</p>
-                  <p className="text-2xl font-bold text-slate-800">{pendingQuotes}</p>
+                  <p className="text-2xl font-bold text-slate-800">
+                    {pendingQuotes}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -313,8 +383,12 @@ export default function Admin() {
                   <Star className="h-6 w-6 text-green-600" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-slate-600">Completed</p>
-                  <p className="text-2xl font-bold text-slate-800">{completedQuotes}</p>
+                  <p className="text-sm font-medium text-slate-600">
+                    Completed
+                  </p>
+                  <p className="text-2xl font-bold text-slate-800">
+                    {completedQuotes}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -328,7 +402,9 @@ export default function Admin() {
                 </div>
                 <div className="ml-4">
                   <p className="text-sm font-medium text-slate-600">Revenue</p>
-                  <p className="text-2xl font-bold text-slate-800">${totalRevenue.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-slate-800">
+                    ${totalRevenue.toFixed(2)}
+                  </p>
                 </div>
               </div>
             </CardContent>
@@ -365,27 +441,50 @@ export default function Admin() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-semibold">{quote.name}</h3>
-                            <p className="text-sm text-slate-600">{quote.email}</p>
+                            <p className="text-sm text-slate-600">
+                              {quote.email}
+                            </p>
                           </div>
-                          <Badge variant={quote.status === 'pending' ? 'secondary' : 'default'}>
+                          <Badge
+                            variant={
+                              quote.status === "pending"
+                                ? "secondary"
+                                : "default"
+                            }
+                          >
                             {quote.status}
                           </Badge>
                         </div>
-                        <p className="text-sm mb-2">Event: {quote.eventType} - {quote.guestCount} guests</p>
-                        <p className="text-sm mb-2">Date: {new Date(quote.eventDate).toLocaleDateString()}</p>
+                        <p className="text-sm mb-2">
+                          Event: {quote.eventType} - {quote.guestCount} guests
+                        </p>
+                        <p className="text-sm mb-2">
+                          Date: {new Date(quote.eventDate).toLocaleDateString()}
+                        </p>
                         <div className="flex gap-2">
-                          <Select 
+                          <Select
                             defaultValue={quote.status}
-                            onValueChange={(status) => updateQuoteStatusMutation.mutate({ id: quote.id, status })}
+                            onValueChange={(status) =>
+                              updateQuoteStatusMutation.mutate({
+                                id: quote.id,
+                                status,
+                              })
+                            }
                           >
                             <SelectTrigger className="w-32">
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="pending">Pending</SelectItem>
-                              <SelectItem value="in-progress">In Progress</SelectItem>
-                              <SelectItem value="completed">Completed</SelectItem>
-                              <SelectItem value="cancelled">Cancelled</SelectItem>
+                              <SelectItem value="in-progress">
+                                In Progress
+                              </SelectItem>
+                              <SelectItem value="completed">
+                                Completed
+                              </SelectItem>
+                              <SelectItem value="cancelled">
+                                Cancelled
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -393,7 +492,9 @@ export default function Admin() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No quotes found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No quotes found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -417,20 +518,34 @@ export default function Admin() {
                       <div key={contact.id} className="border rounded-lg p-4">
                         <div className="flex justify-between items-start mb-2">
                           <div>
-                            <h3 className="font-semibold">{contact.firstName} {contact.lastName}</h3>
-                            <p className="text-sm text-slate-600">{contact.email}</p>
+                            <h3 className="font-semibold">
+                              {contact.firstName} {contact.lastName}
+                            </h3>
+                            <p className="text-sm text-slate-600">
+                              {contact.email}
+                            </p>
                           </div>
-                          <Badge variant={contact.status === 'unread' ? 'secondary' : 'default'}>
+                          <Badge
+                            variant={
+                              contact.status === "unread"
+                                ? "secondary"
+                                : "default"
+                            }
+                          >
                             {contact.status}
                           </Badge>
                         </div>
                         <h4 className="font-medium mb-1">{contact.subject}</h4>
-                        <p className="text-sm text-slate-600">{contact.message}</p>
+                        <p className="text-sm text-slate-600">
+                          {contact.message}
+                        </p>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No messages found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No messages found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -444,8 +559,13 @@ export default function Admin() {
                   <FileText className="h-5 w-5" />
                   Blog Posts
                 </CardTitle>
-                <CreateBlogDialog 
-                  trigger={<Button className="flex items-center gap-2"><Plus className="h-4 w-4" />New Post</Button>}
+                <CreateBlogDialog
+                  trigger={
+                    <Button className="flex items-center gap-2">
+                      <Plus className="h-4 w-4" />
+                      New Post
+                    </Button>
+                  }
                   onSubmit={(data) => createBlogMutation.mutate(data)}
                 />
               </CardHeader>
@@ -459,14 +579,27 @@ export default function Admin() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-semibold">{post.title}</h3>
-                            <p className="text-sm text-slate-600">{post.excerpt}</p>
+                            <p className="text-sm text-slate-600">
+                              {post.excerpt}
+                            </p>
                           </div>
                           <div className="flex gap-2">
-                            <Badge variant={post.published ? 'default' : 'secondary'}>
-                              {post.published ? 'Published' : 'Draft'}
+                            <Badge
+                              variant={post.published ? "default" : "secondary"}
+                            >
+                              {post.published ? "Published" : "Draft"}
                             </Badge>
-                            <Button size="sm" variant="outline" onClick={() => updateBlogMutation.mutate({ id: post.id, data: { ...post, published: !post.published } })}>
-                              {post.published ? 'Unpublish' : 'Publish'}
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() =>
+                                updateBlogMutation.mutate({
+                                  id: post.id,
+                                  data: { ...post, published: !post.published },
+                                })
+                              }
+                            >
+                              {post.published ? "Unpublish" : "Publish"}
                             </Button>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
@@ -476,14 +609,22 @@ export default function Admin() {
                               </AlertDialogTrigger>
                               <AlertDialogContent className="bg-white dark:bg-gray-900">
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Delete Blog Post</AlertDialogTitle>
+                                  <AlertDialogTitle>
+                                    Delete Blog Post
+                                  </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to delete "{post.title}"? This action cannot be undone.
+                                    Are you sure you want to delete "
+                                    {post.title}"? This action cannot be undone.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => deleteBlogMutation.mutate(post.id)} className="bg-red-600 hover:bg-red-700">
+                                  <AlertDialogAction
+                                    onClick={() =>
+                                      deleteBlogMutation.mutate(post.id)
+                                    }
+                                    className="bg-red-600 hover:bg-red-700"
+                                  >
                                     Delete
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
@@ -495,7 +636,9 @@ export default function Admin() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No blog posts found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No blog posts found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -509,8 +652,13 @@ export default function Admin() {
                   <Image className="h-5 w-5" />
                   Gallery Items
                 </CardTitle>
-                <CreateGalleryDialog 
-                  trigger={<Button className="flex items-center gap-2"><Plus className="h-4 w-4" />New Item</Button>}
+                <CreateGalleryDialog
+                  trigger={
+                    <Button className="flex items-center gap-2">
+                      <Plus className="h-4 w-4" />
+                      New Item
+                    </Button>
+                  }
                   onSubmit={(data) => createGalleryMutation.mutate(data)}
                 />
               </CardHeader>
@@ -520,14 +668,25 @@ export default function Admin() {
                 ) : Array.isArray(galleryItems) && galleryItems.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {galleryItems.map((item: any) => (
-                      <div key={item.id} className="border rounded-lg overflow-hidden">
-                        <img src={item.imageUrl} alt={item.title} className="w-full h-48 object-cover" />
+                      <div
+                        key={item.id}
+                        className="border rounded-lg overflow-hidden"
+                      >
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title}
+                          className="w-full h-48 object-cover"
+                        />
                         <div className="p-4">
                           <h3 className="font-semibold mb-1">{item.title}</h3>
-                          <p className="text-sm text-slate-600 mb-2">{item.category}</p>
+                          <p className="text-sm text-slate-600 mb-2">
+                            {item.category}
+                          </p>
                           <div className="flex justify-between">
-                            <Badge variant={item.featured ? 'default' : 'secondary'}>
-                              {item.featured ? 'Featured' : 'Regular'}
+                            <Badge
+                              variant={item.featured ? "default" : "secondary"}
+                            >
+                              {item.featured ? "Featured" : "Regular"}
                             </Badge>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
@@ -537,14 +696,22 @@ export default function Admin() {
                               </AlertDialogTrigger>
                               <AlertDialogContent className="bg-white dark:bg-gray-900">
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Delete Gallery Item</AlertDialogTitle>
+                                  <AlertDialogTitle>
+                                    Delete Gallery Item
+                                  </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to delete "{item.title}"? This action cannot be undone.
+                                    Are you sure you want to delete "
+                                    {item.title}"? This action cannot be undone.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => deleteGalleryMutation.mutate(item.id)} className="bg-red-600 hover:bg-red-700">
+                                  <AlertDialogAction
+                                    onClick={() =>
+                                      deleteGalleryMutation.mutate(item.id)
+                                    }
+                                    className="bg-red-600 hover:bg-red-700"
+                                  >
                                     Delete
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
@@ -556,7 +723,9 @@ export default function Admin() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No gallery items found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No gallery items found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -570,8 +739,13 @@ export default function Admin() {
                   <MapPin className="h-5 w-5" />
                   Venues
                 </CardTitle>
-                <CreateVenueDialog 
-                  trigger={<Button className="flex items-center gap-2"><Plus className="h-4 w-4" />New Venue</Button>}
+                <CreateVenueDialog
+                  trigger={
+                    <Button className="flex items-center gap-2">
+                      <Plus className="h-4 w-4" />
+                      New Venue
+                    </Button>
+                  }
                   onSubmit={(data) => createVenueMutation.mutate(data)}
                 />
               </CardHeader>
@@ -585,12 +759,21 @@ export default function Admin() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-semibold">{venue.name}</h3>
-                            <p className="text-sm text-slate-600">{venue.address}, {venue.city}, {venue.state}</p>
-                            <p className="text-sm">Capacity: {venue.capacity} • ${venue.pricePerDay}/day</p>
+                            <p className="text-sm text-slate-600">
+                              {venue.address}, {venue.city}, {venue.state}
+                            </p>
+                            <p className="text-sm">
+                              Capacity: {venue.capacity} • ${venue.pricePerDay}
+                              /day
+                            </p>
                           </div>
                           <div className="flex gap-2">
-                            <Badge variant={venue.available ? 'default' : 'secondary'}>
-                              {venue.available ? 'Available' : 'Unavailable'}
+                            <Badge
+                              variant={
+                                venue.available ? "default" : "secondary"
+                              }
+                            >
+                              {venue.available ? "Available" : "Unavailable"}
                             </Badge>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
@@ -600,14 +783,22 @@ export default function Admin() {
                               </AlertDialogTrigger>
                               <AlertDialogContent className="bg-white dark:bg-gray-900">
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Delete Venue</AlertDialogTitle>
+                                  <AlertDialogTitle>
+                                    Delete Venue
+                                  </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to delete "{venue.name}"? This action cannot be undone.
+                                    Are you sure you want to delete "
+                                    {venue.name}"? This action cannot be undone.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => deleteVenueMutation.mutate(venue.id)} className="bg-red-600 hover:bg-red-700">
+                                  <AlertDialogAction
+                                    onClick={() =>
+                                      deleteVenueMutation.mutate(venue.id)
+                                    }
+                                    className="bg-red-600 hover:bg-red-700"
+                                  >
                                     Delete
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
@@ -619,7 +810,9 @@ export default function Admin() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No venues found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No venues found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -633,8 +826,13 @@ export default function Admin() {
                   <Star className="h-5 w-5" />
                   Services
                 </CardTitle>
-                <CreateServiceDialog 
-                  trigger={<Button className="flex items-center gap-2"><Plus className="h-4 w-4" />New Service</Button>}
+                <CreateServiceDialog
+                  trigger={
+                    <Button className="flex items-center gap-2">
+                      <Plus className="h-4 w-4" />
+                      New Service
+                    </Button>
+                  }
                   onSubmit={(data) => createServiceMutation.mutate(data)}
                 />
               </CardHeader>
@@ -648,15 +846,30 @@ export default function Admin() {
                         <div className="flex justify-between items-start mb-2">
                           <div>
                             <h3 className="font-semibold">{service.title}</h3>
-                            <p className="text-sm text-slate-600">{service.description}</p>
-                            <p className="text-sm">Features: {service.features?.join(', ')}</p>
+                            <p className="text-sm text-slate-600">
+                              {service.description}
+                            </p>
+                            <p className="text-sm">
+                              Features: {service.features?.join(", ")}
+                            </p>
                           </div>
                           <div className="flex gap-2">
-                            <Badge variant={service.active ? 'default' : 'secondary'}>
-                              {service.active ? 'Active' : 'Inactive'}
+                            <Badge
+                              variant={service.active ? "default" : "secondary"}
+                            >
+                              {service.active ? "Active" : "Inactive"}
                             </Badge>
-                            <Button size="sm" variant="outline" onClick={() => updateServiceMutation.mutate({ id: service.id, data: { ...service, active: !service.active } })}>
-                              {service.active ? 'Deactivate' : 'Activate'}
+                            <Button
+                              size="sm"
+                              variant="outline"
+                              onClick={() =>
+                                updateServiceMutation.mutate({
+                                  id: service.id,
+                                  data: { ...service, active: !service.active },
+                                })
+                              }
+                            >
+                              {service.active ? "Deactivate" : "Activate"}
                             </Button>
                             <AlertDialog>
                               <AlertDialogTrigger asChild>
@@ -666,14 +879,23 @@ export default function Admin() {
                               </AlertDialogTrigger>
                               <AlertDialogContent className="bg-white dark:bg-gray-900">
                                 <AlertDialogHeader>
-                                  <AlertDialogTitle>Delete Service</AlertDialogTitle>
+                                  <AlertDialogTitle>
+                                    Delete Service
+                                  </AlertDialogTitle>
                                   <AlertDialogDescription>
-                                    Are you sure you want to delete "{service.title}"? This action cannot be undone.
+                                    Are you sure you want to delete "
+                                    {service.title}"? This action cannot be
+                                    undone.
                                   </AlertDialogDescription>
                                 </AlertDialogHeader>
                                 <AlertDialogFooter>
                                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                  <AlertDialogAction onClick={() => deleteServiceMutation.mutate(service.id)} className="bg-red-600 hover:bg-red-700">
+                                  <AlertDialogAction
+                                    onClick={() =>
+                                      deleteServiceMutation.mutate(service.id)
+                                    }
+                                    className="bg-red-600 hover:bg-red-700"
+                                  >
                                     Delete
                                   </AlertDialogAction>
                                 </AlertDialogFooter>
@@ -685,7 +907,9 @@ export default function Admin() {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-8 text-slate-500">No services found</div>
+                  <div className="text-center py-8 text-slate-500">
+                    No services found
+                  </div>
                 )}
               </CardContent>
             </Card>
@@ -697,7 +921,13 @@ export default function Admin() {
 }
 
 // Create Dialog Components
-function CreateBlogDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onSubmit: (data: any) => void }) {
+function CreateBlogDialog({
+  trigger,
+  onSubmit,
+}: {
+  trigger: React.ReactNode;
+  onSubmit: (data: any) => void;
+}) {
   const form = useForm({
     resolver: zodResolver(blogPostSchema),
     defaultValues: {
@@ -804,14 +1034,19 @@ function CreateBlogDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onS
               render={({ field }) => (
                 <FormItem className="flex items-center space-x-2">
                   <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                   <FormLabel>Published</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Create Blog Post</Button>
+            <Button type="submit" className="w-full">
+              Create Blog Post
+            </Button>
           </form>
         </Form>
       </DialogContent>
@@ -819,7 +1054,13 @@ function CreateBlogDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onS
   );
 }
 
-function CreateGalleryDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onSubmit: (data: any) => void }) {
+function CreateGalleryDialog({
+  trigger,
+  onSubmit,
+}: {
+  trigger: React.ReactNode;
+  onSubmit: (data: any) => void;
+}) {
   const form = useForm({
     resolver: zodResolver(galleryItemSchema),
     defaultValues: {
@@ -874,7 +1115,10 @@ function CreateGalleryDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
                       <SelectTrigger>
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
@@ -909,14 +1153,19 @@ function CreateGalleryDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
               render={({ field }) => (
                 <FormItem className="flex items-center space-x-2">
                   <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                   <FormLabel>Featured</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Create Gallery Item</Button>
+            <Button type="submit" className="w-full">
+              Create Gallery Item
+            </Button>
           </form>
         </Form>
       </DialogContent>
@@ -924,7 +1173,13 @@ function CreateGalleryDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
   );
 }
 
-function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onSubmit: (data: any) => void }) {
+function CreateVenueDialog({
+  trigger,
+  onSubmit,
+}: {
+  trigger: React.ReactNode;
+  onSubmit: (data: any) => void;
+}) {
   const form = useForm({
     resolver: zodResolver(venueSchema),
     defaultValues: {
@@ -1026,7 +1281,13 @@ function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; on
                   <FormItem>
                     <FormLabel>Capacity</FormLabel>
                     <FormControl>
-                      <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseInt(e.target.value))
+                        }
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -1040,7 +1301,14 @@ function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; on
                 <FormItem>
                   <FormLabel>Price Per Day</FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" {...field} onChange={(e) => field.onChange(parseFloat(e.target.value))} />
+                    <Input
+                      type="number"
+                      step="0.01"
+                      {...field}
+                      onChange={(e) =>
+                        field.onChange(parseFloat(e.target.value))
+                      }
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -1065,14 +1333,19 @@ function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; on
               render={({ field }) => (
                 <FormItem className="flex items-center space-x-2">
                   <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
                   </FormControl>
                   <FormLabel>Available</FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Create Venue</Button>
+            <Button type="submit" className="w-full">
+              Create Venue
+            </Button>
           </form>
         </Form>
       </DialogContent>
@@ -1080,11 +1353,17 @@ function CreateVenueDialog({ trigger, onSubmit }: { trigger: React.ReactNode; on
   );
 }
 
-function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; onSubmit: (data: any) => void }) {
+function CreateServiceDialog({
+  trigger,
+  onSubmit,
+}: {
+  trigger: React.ReactNode;
+  onSubmit: (data: any) => void;
+}) {
   const [features, setFeatures] = useState<string[]>([]);
   const [newFeature, setNewFeature] = useState("");
 
-  const form = useForm({
+  const form = useForm<z.infer<typeof serviceSchema>>({
     resolver: zodResolver(serviceSchema),
     defaultValues: {
       title: "",
@@ -1102,7 +1381,7 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
     if (newFeature.trim()) {
       const updatedFeatures = [...features, newFeature.trim()];
       setFeatures(updatedFeatures);
-      form.setValue('features', updatedFeatures);
+      form.setValue("features", updatedFeatures);
       setNewFeature("");
     }
   };
@@ -1110,7 +1389,7 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
   const removeFeature = (index: number) => {
     const updatedFeatures = features.filter((_, i) => i !== index);
     setFeatures(updatedFeatures);
-    form.setValue('features', updatedFeatures);
+    form.setValue("features", updatedFeatures);
   };
 
   return (
@@ -1156,13 +1435,23 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                   onChange={(e) => setNewFeature(e.target.value)}
                   placeholder="Add a feature"
                 />
-                <Button type="button" onClick={addFeature}>Add</Button>
+                <Button type="button" onClick={addFeature}>
+                  Add
+                </Button>
               </div>
               <div className="space-y-1">
                 {features.map((feature, index) => (
-                  <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between bg-gray-50 p-2 rounded"
+                  >
                     <span>{feature}</span>
-                    <Button type="button" size="sm" variant="ghost" onClick={() => removeFeature(index)}>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => removeFeature(index)}
+                    >
                       ×
                     </Button>
                   </div>
@@ -1177,7 +1466,10 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                   <FormItem>
                     <FormLabel>Color</FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
@@ -1227,7 +1519,13 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                   <FormItem>
                     <FormLabel>Display Order</FormLabel>
                     <FormControl>
-                      <Input type="number" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={(e) =>
+                          field.onChange(parseInt(e.target.value))
+                        }
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -1239,7 +1537,10 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                 render={({ field }) => (
                   <FormItem className="flex items-center space-x-2">
                     <FormControl>
-                      <Switch checked={field.value} onCheckedChange={field.onChange} />
+                      <Switch
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
                     </FormControl>
                     <FormLabel>Active</FormLabel>
                     <FormMessage />
@@ -1247,7 +1548,9 @@ function CreateServiceDialog({ trigger, onSubmit }: { trigger: React.ReactNode; 
                 )}
               />
             </div>
-            <Button type="submit" className="w-full">Create Service</Button>
+            <Button type="submit" className="w-full">
+              Create Service
+            </Button>
           </form>
         </Form>
       </DialogContent>

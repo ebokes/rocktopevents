@@ -14,8 +14,17 @@ import { Input } from "@/components/ui/input";
 export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const { data: blogPosts, isLoading, error } = useQuery({
+  const {
+    data: blogPosts = [],
+    isLoading,
+    error,
+  } = useQuery<any[]>({
     queryKey: ["/api/blog"],
+    queryFn: async () => {
+      const res = await fetch("/api/blog");
+      if (!res.ok) return [];
+      return await res.json();
+    },
   });
 
   const { data: featuredPost } = useQuery({
@@ -30,30 +39,38 @@ export default function Blog() {
     enabled: !!blogPosts,
   });
 
-  const filteredPosts = blogPosts?.filter((post: any) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    post.category.toLowerCase().includes(searchTerm.toLowerCase())
-  ) || [];
+  const filteredPosts =
+    blogPosts?.filter(
+      (post: any) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.category.toLowerCase().includes(searchTerm.toLowerCase())
+    ) || [];
 
-  const categories = Array.from(new Set(blogPosts?.map((post: any) => post.category) || []));
+  const categories = Array.from(
+    new Set(blogPosts?.map((post: any) => post.category) || [])
+  );
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-accent text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-accent/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6" data-testid="blog-hero-title">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6"
+            data-testid="blog-hero-title"
+          >
             Event Planning Insights
           </h1>
           <p className="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto">
-            Get insights, tips, and inspiration for planning the perfect event. Stay updated with the latest trends in event management.
+            Get insights, tips, and inspiration for planning the perfect event.
+            Stay updated with the latest trends in event management.
           </p>
-          
+
           {/* Search Bar */}
           <div className="max-w-md mx-auto relative">
             <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -73,14 +90,19 @@ export default function Blog() {
         <section className="py-16 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">Featured Article</h2>
+              <h2 className="text-3xl font-bold text-slate-800 mb-4">
+                Featured Article
+              </h2>
             </div>
-            
+
             <Card className="overflow-hidden shadow-2xl">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 <div className="h-64 lg:h-auto">
-                  <img 
-                    src={featuredPost.featuredImage || "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"}
+                  <img
+                    src={
+                      featuredPost.featuredImage ||
+                      "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                    }
                     alt={featuredPost.title}
                     className="w-full h-full object-cover"
                     data-testid="featured-post-image"
@@ -91,20 +113,32 @@ export default function Blog() {
                     <Badge className="mr-3">Featured</Badge>
                     <Calendar className="h-4 w-4 mr-1" />
                     <span data-testid="featured-post-date">
-                      {new Date(featuredPost.publishedAt || featuredPost.createdAt).toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric'
+                      {new Date(
+                        featuredPost.publishedAt || featuredPost.createdAt
+                      ).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
                       })}
                     </span>
                   </div>
-                  <h3 className="text-3xl font-bold text-slate-800 mb-4" data-testid="featured-post-title">
+                  <h3
+                    className="text-3xl font-bold text-slate-800 mb-4"
+                    data-testid="featured-post-title"
+                  >
                     {featuredPost.title}
                   </h3>
-                  <p className="text-slate-600 mb-6 text-lg" data-testid="featured-post-excerpt">
+                  <p
+                    className="text-slate-600 mb-6 text-lg"
+                    data-testid="featured-post-excerpt"
+                  >
                     {featuredPost.excerpt}
                   </p>
-                  <Button asChild className="bg-primary hover:bg-primary/90" data-testid="featured-post-read-button">
+                  <Button
+                    asChild
+                    className="bg-primary hover:bg-primary/90"
+                    data-testid="featured-post-read-button"
+                  >
                     <Link href={`/blog/${featuredPost.slug}`}>
                       Read Full Article
                       <ArrowRight className="ml-2 h-4 w-4" />
@@ -122,7 +156,9 @@ export default function Blog() {
         <section className="py-8 bg-gray-100 border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-3">
-              <Badge variant="outline" className="text-sm">All Categories</Badge>
+              <Badge variant="outline" className="text-sm">
+                All Categories
+              </Badge>
               {categories.map((category: string) => (
                 <Badge key={category} variant="outline" className="text-sm">
                   {category}
@@ -137,7 +173,9 @@ export default function Blog() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800">Latest Articles</h2>
+            <h2 className="text-3xl font-bold text-slate-800">
+              Latest Articles
+            </h2>
             {filteredPosts.length > 0 && (
               <span className="text-slate-600" data-testid="blog-posts-count">
                 {filteredPosts.length} articles
@@ -177,12 +215,12 @@ export default function Blog() {
           ) : (
             <div className="text-center py-12" data-testid="blog-empty">
               <div className="text-slate-600 mb-4">
-                {searchTerm ? `No articles found for "${searchTerm}"` : "No blog posts available."}
+                {searchTerm
+                  ? `No articles found for "${searchTerm}"`
+                  : "No blog posts available."}
               </div>
               {searchTerm && (
-                <Button onClick={() => setSearchTerm("")}>
-                  Clear Search
-                </Button>
+                <Button onClick={() => setSearchTerm("")}>Clear Search</Button>
               )}
             </div>
           )}
@@ -192,11 +230,10 @@ export default function Blog() {
       {/* Newsletter Signup */}
       <section className="py-20 bg-gradient-to-r from-primary to-accent text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Stay Updated
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Stay Updated</h2>
           <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
-            Get the latest event planning tips, trends, and insights delivered to your inbox.
+            Get the latest event planning tips, trends, and insights delivered
+            to your inbox.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
             <Input
@@ -204,9 +241,9 @@ export default function Blog() {
               className="bg-white text-slate-800"
               data-testid="newsletter-email"
             />
-            <Button 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-primary"
+            <Button
+              variant="outline"
+              className="border-white bg-white text-primary"
               data-testid="newsletter-subscribe"
             >
               Subscribe
@@ -216,7 +253,7 @@ export default function Blog() {
       </section>
 
       <Footer />
-      
+
       {/* Floating Chat Icons */}
       <FloatingChat />
     </div>

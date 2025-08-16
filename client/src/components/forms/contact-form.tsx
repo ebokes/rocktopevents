@@ -6,9 +6,22 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Send } from "lucide-react";
 
@@ -69,7 +82,10 @@ export default function ContactForm() {
     <Card className="w-full" data-testid="contact-form">
       <CardHeader>
         <CardTitle className="text-2xl">Send us a message</CardTitle>
-        <p className="text-slate-600">We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        <p className="text-slate-600">
+          We'd love to hear from you. Send us a message and we'll respond as
+          soon as possible.
+        </p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -82,13 +98,17 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>First Name *</FormLabel>
                     <FormControl>
-                      <Input placeholder="John" {...field} data-testid="input-first-name" />
+                      <Input
+                        placeholder="John"
+                        {...field}
+                        data-testid="input-first-name"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="lastName"
@@ -96,7 +116,11 @@ export default function ContactForm() {
                   <FormItem>
                     <FormLabel>Last Name *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Doe" {...field} data-testid="input-last-name" />
+                      <Input
+                        placeholder="Doe"
+                        {...field}
+                        data-testid="input-last-name"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -111,7 +135,12 @@ export default function ContactForm() {
                 <FormItem>
                   <FormLabel>Email Address *</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="john@example.com" {...field} data-testid="input-email" />
+                    <Input
+                      type="email"
+                      placeholder="john@example.com"
+                      {...field}
+                      data-testid="input-email"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,7 +154,12 @@ export default function ContactForm() {
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
-                    <Input type="tel" placeholder="(555) 123-4567" {...field} data-testid="input-phone" />
+                    <Input
+                      type="tel"
+                      placeholder="(+234) 801 234 5678"
+                      {...field}
+                      data-testid="input-phone"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,7 +172,10 @@ export default function ContactForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Subject *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger data-testid="select-subject">
                         <SelectValue placeholder="Select a subject" />
@@ -146,8 +183,12 @@ export default function ContactForm() {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="quote">Request a Quote</SelectItem>
-                      <SelectItem value="consultation">Free Consultation</SelectItem>
-                      <SelectItem value="partnership">Partnership Inquiry</SelectItem>
+                      <SelectItem value="consultation">
+                        Free Consultation
+                      </SelectItem>
+                      <SelectItem value="partnership">
+                        Partnership Inquiry
+                      </SelectItem>
                       <SelectItem value="support">Customer Support</SelectItem>
                       <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
@@ -164,7 +205,7 @@ export default function ContactForm() {
                 <FormItem>
                   <FormLabel>Message *</FormLabel>
                   <FormControl>
-                    <Textarea 
+                    <Textarea
                       rows={5}
                       placeholder="Tell us about your event or how we can help you..."
                       {...field}
@@ -176,8 +217,8 @@ export default function ContactForm() {
               )}
             />
 
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="w-full bg-primary hover:bg-primary/90"
               disabled={createContactMutation.isPending}
               data-testid="button-send-message"

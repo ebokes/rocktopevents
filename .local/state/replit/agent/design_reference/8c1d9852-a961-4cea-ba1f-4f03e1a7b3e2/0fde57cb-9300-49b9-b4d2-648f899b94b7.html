@@ -1,0 +1,1656 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCKTOP PREMIUM EVENTS - Professional Event Management Services</title>
+    <meta name="description" content="Professional event planning, decoration, rentals, lighting and staging services. Get quotes, explore venues, and plan your perfect event.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#7C3AED',
+                        secondary: '#F59E0B',
+                        accent: '#EC4899',
+                        dark: '#1E293B',
+                        muted: '#475569',
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Navigation -->
+    <!-- @COMPONENT: Navigation [responsive, sticky, user auth state] -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50" data-mock="true">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-2xl font-bold text-primary">ROCKTOP</span>
+                        <span class="text-sm text-muted block -mt-1">PREMIUM EVENTS</span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="text-dark hover:text-primary px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#services" class="text-muted hover:text-primary px-3 py-2 text-sm font-medium">Services</a>
+                        <a href="#venues" class="text-muted hover:text-primary px-3 py-2 text-sm font-medium">Find Venues</a>
+                        <a href="#gallery" class="text-muted hover:text-primary px-3 py-2 text-sm font-medium">Gallery</a>
+                        <a href="#blog" class="text-muted hover:text-primary px-3 py-2 text-sm font-medium">Blog</a>
+                        <a href="#contact" class="text-muted hover:text-primary px-3 py-2 text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Auth Buttons -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-muted hover:text-primary px-3 py-2 text-sm font-medium" data-event="click:handleLogin">Login</button>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-800 transition-colors" data-event="click:handleSignUp">Get Quote</button>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button class="text-muted hover:text-primary" data-event="click:toggleMobileMenu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <!-- @STATE: isMobileMenuOpen:boolean = false -->
+        <div class="md:hidden hidden" id="mobileMenu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-dark hover:text-primary">Home</a>
+                <a href="#services" class="block px-3 py-2 text-base font-medium text-muted hover:text-primary">Services</a>
+                <a href="#venues" class="block px-3 py-2 text-base font-medium text-muted hover:text-primary">Find Venues</a>
+                <a href="#gallery" class="block px-3 py-2 text-base font-medium text-muted hover:text-primary">Gallery</a>
+                <a href="#blog" class="block px-3 py-2 text-base font-medium text-muted hover:text-primary">Blog</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-muted hover:text-primary">Contact</a>
+                <div class="border-t pt-3 mt-3">
+                    <button class="block w-full text-left px-3 py-2 text-base font-medium text-muted hover:text-primary" data-event="click:handleLogin">Login</button>
+                    <button class="block w-full mt-2 bg-primary text-white px-3 py-2 rounded-lg text-base font-medium hover:bg-purple-800 transition-colors" data-event="click:handleSignUp">Get Quote</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: Navigation -->
+
+    <!-- Hero Section -->
+    <!-- @COMPONENT: HeroSection [video background, CTA buttons, animated text] -->
+    <section class="relative bg-dark text-white overflow-hidden" id="home">
+        <!-- A luxurious wedding reception setup with elegant lighting and floral arrangements -->
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080');">
+            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                    Create <span class="text-secondary">Unforgettable</span><br>
+                    Events & Experiences
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    From intimate celebrations to grand corporate events, we bring your vision to life with professional planning, stunning decoration, and premium equipment.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="bg-primary hover:bg-purple-800 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105" data-event="click:handleGetQuote">
+                        Get Free Quote
+                    </button>
+                    <button class="border border-white text-white hover:bg-white hover:text-dark px-8 py-4 rounded-lg text-lg font-semibold transition-all" data-event="click:handleViewPortfolio">
+                        View Our Work
+                    </button>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-secondary" data-bind="stats.eventsCompleted">500+</div>
+                        <div class="text-gray-300">Events Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-secondary" data-bind="stats.happyClients">200+</div>
+                        <div class="text-gray-300">Happy Clients</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-secondary" data-bind="stats.yearsExperience">8</div>
+                        <div class="text-gray-300">Years Experience</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-secondary" data-bind="stats.teamMembers">25+</div>
+                        <div class="text-gray-300">Team Members</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Action Buttons -->
+        <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+            <!-- Chatbot -->
+            <button class="bg-primary hover:bg-purple-800 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110" data-event="click:openChatbot" title="Chat with us">
+                <i class="fas fa-comments text-xl"></i>
+            </button>
+            
+            <!-- WhatsApp -->
+            <button class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110" data-event="click:openWhatsApp" title="WhatsApp us">
+                <i class="fab fa-whatsapp text-xl"></i>
+            </button>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- Services Section -->
+    <!-- @COMPONENT: ServicesSection [service cards, hover effects, CTAs] -->
+    <section class="py-20 bg-white" id="services">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Our Services</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Comprehensive event solutions tailored to your needs. From concept to completion, we handle every detail.
+                </p>
+            </div>
+
+            <!-- @MAP: services.map(service => ( -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event Planning -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- Professional event planner discussing with clients over event layout plans -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-calendar-alt text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Event Planning</h3>
+                        </div>
+                        <p class="text-muted mb-6">Complete event planning from concept to execution. Timeline management, vendor coordination, and logistics planning.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Timeline Development</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Vendor Management</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Budget Planning</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Day-of Coordination</li>
+                        </ul>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:handleServiceInquiry" data-service="planning">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Decoration & Design -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- Elegant floral centerpieces and luxury table settings for a formal dinner -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-palette text-accent text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Decoration & Design</h3>
+                        </div>
+                        <p class="text-muted mb-6">Transform your venue with stunning decorations and custom design elements that reflect your style and vision.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Floral Arrangements</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Theme Development</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Custom Backdrops</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Table Settings</li>
+                        </ul>
+                        <button class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition-colors" data-event="click:handleServiceInquiry" data-service="decoration">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Equipment Rentals -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- Professional audio visual equipment setup for a large corporate event -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-tools text-secondary text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Equipment Rentals</h3>
+                        </div>
+                        <p class="text-muted mb-6">Premium equipment rentals including furniture, linens, dishes, and specialty items for any event size.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Furniture & Seating</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Linens & Tableware</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Tents & Structures</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Specialty Items</li>
+                        </ul>
+                        <button class="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors" data-event="click:handleServiceInquiry" data-service="rentals">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lighting & Audio -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- Professional stage lighting with colorful LED setup for a concert venue -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-lightbulb text-primary text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Lighting & Audio</h3>
+                        </div>
+                        <p class="text-muted mb-6">Professional lighting and sound systems to create the perfect ambiance and ensure crystal clear audio.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>LED Lighting Systems</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Sound Systems</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Microphones & AV</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>DJ Equipment</li>
+                        </ul>
+                        <button class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:handleServiceInquiry" data-service="lighting">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Staging & Displays -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- Professional event stage setup with large LED screens and modern staging -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://images.unsplash.com/photo-1556125574-d7f27ec36a06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-tv text-accent text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Staging & Displays</h3>
+                        </div>
+                        <p class="text-muted mb-6">Custom staging solutions, LED screens, and display systems for presentations and performances.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Custom Stages</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>LED Video Walls</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Projection Systems</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Backdrops & Signage</li>
+                        </ul>
+                        <button class="w-full bg-accent text-white py-3 rounded-lg font-semibold hover:bg-pink-600 transition-colors" data-event="click:handleServiceInquiry" data-service="staging">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Academic Portal Services -->
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group" data-mock="true">
+                    <!-- University graduation ceremony with academic regalia and formal staging -->
+                    <div class="h-64 bg-cover bg-center group-hover:scale-105 transition-transform duration-300" style="background-image: url('https://pixabay.com/get/gfcffa9a0d258858dab92ebdd7a2c9832dba45e476fefd13e3458258e8ad5eace0834debd79c61f1c5056b179e988c3ef9c74713a62dc23c1b00ad7776105bcd9_1280.jpg');"></div>
+                    <div class="p-8">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mr-4">
+                                <i class="fas fa-graduation-cap text-secondary text-2xl"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-dark">Academic Events</h3>
+                        </div>
+                        <p class="text-muted mb-6">Specialized services for academic institutions including graduations, conferences, and educational seminars.</p>
+                        <ul class="text-sm text-muted mb-6 space-y-2">
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Graduation Ceremonies</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Academic Conferences</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Educational Seminars</li>
+                            <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i>Award Ceremonies</li>
+                        </ul>
+                        <button class="w-full bg-secondary text-white py-3 rounded-lg font-semibold hover:bg-yellow-600 transition-colors" data-event="click:handleServiceInquiry" data-service="academic">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ServicesSection -->
+
+    <!-- Quote Request Section -->
+    <!-- @COMPONENT: QuoteRequestSection [multi-step form, service selection, date picker] -->
+    <section class="py-20 bg-gray-100" id="quote">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Get Your Free Quote</h2>
+                <p class="text-xl text-muted">Tell us about your event and we'll provide a customized quote within 24 hours.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                <!-- @STATE: currentStep:number = 1, formData:object = {} -->
+                <form class="space-y-8" data-event="submit:handleQuoteSubmission">
+                    <!-- Step 1: Event Details -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-semibold text-dark mb-6">Event Details</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Event Type *</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.eventType" required>
+                                    <option value="">Select event type</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="corporate">Corporate Event</option>
+                                    <option value="birthday">Birthday Party</option>
+                                    <option value="graduation">Graduation</option>
+                                    <option value="conference">Conference</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Number of Guests *</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.guestCount" required>
+                                    <option value="">Select guest count</option>
+                                    <option value="1-50">1-50</option>
+                                    <option value="51-100">51-100</option>
+                                    <option value="101-200">101-200</option>
+                                    <option value="201-500">201-500</option>
+                                    <option value="500+">500+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Event Date *</label>
+                                <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.eventDate" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Budget Range *</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.budget" required>
+                                    <option value="">Select budget range</option>
+                                    <option value="5000-10000">$5,000 - $10,000</option>
+                                    <option value="10000-25000">$10,000 - $25,000</option>
+                                    <option value="25000-50000">$25,000 - $50,000</option>
+                                    <option value="50000+">$50,000+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Venue</label>
+                            <input type="text" placeholder="Venue name or 'Need venue recommendation'" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.venue">
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Services Needed -->
+                    <div class="space-y-6 border-t pt-8">
+                        <h3 class="text-2xl font-semibold text-dark mb-6">Services Needed</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.planning">
+                                <div>
+                                    <div class="font-medium text-dark">Event Planning</div>
+                                    <div class="text-sm text-muted">Complete planning and coordination</div>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.decoration">
+                                <div>
+                                    <div class="font-medium text-dark">Decoration & Design</div>
+                                    <div class="text-sm text-muted">Custom decorations and themes</div>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.rentals">
+                                <div>
+                                    <div class="font-medium text-dark">Equipment Rentals</div>
+                                    <div class="text-sm text-muted">Furniture, linens, and more</div>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.lighting">
+                                <div>
+                                    <div class="font-medium text-dark">Lighting & Audio</div>
+                                    <div class="text-sm text-muted">Professional lighting and sound</div>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.staging">
+                                <div>
+                                    <div class="font-medium text-dark">Staging & Displays</div>
+                                    <div class="text-sm text-muted">Stages and visual displays</div>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary border-gray-300 rounded" data-bind="formData.services.academic">
+                                <div>
+                                    <div class="font-medium text-dark">Academic Events</div>
+                                    <div class="text-sm text-muted">Educational and institutional events</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Contact Information -->
+                    <div class="space-y-6 border-t pt-8">
+                        <h3 class="text-2xl font-semibold text-dark mb-6">Contact Information</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Full Name *</label>
+                                <input type="text" placeholder="Your full name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.name" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Email Address *</label>
+                                <input type="email" placeholder="your@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.email" required>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Phone Number *</label>
+                                <input type="tel" placeholder="(555) 123-4567" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.phone" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Preferred Contact Method</label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.contactMethod">
+                                    <option value="email">Email</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="text">Text Message</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Additional Details</label>
+                            <textarea rows="4" placeholder="Tell us more about your vision, specific requirements, or any questions you have..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="formData.details"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <button type="submit" class="flex-1 bg-primary text-white py-4 rounded-lg text-lg font-semibold hover:bg-purple-800 transition-colors">
+                            Get My Free Quote
+                        </button>
+                        <button type="button" class="px-8 py-4 border border-gray-300 text-muted rounded-lg font-semibold hover:bg-gray-50 transition-colors" data-event="click:handleSaveDraft">
+                            Save as Draft
+                        </button>
+                    </div>
+
+                    <p class="text-sm text-muted text-center">
+                        We'll review your request and provide a detailed quote within 24 hours. Your information is kept confidential.
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: QuoteRequestSection -->
+
+    <!-- Find Venues Section -->
+    <!-- @COMPONENT: VenueSearchSection [map integration, filters, grid display] -->
+    <section class="py-20 bg-white" id="venues">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Find Event Venues</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Discover the perfect venue for your event. Search by location, capacity, and amenities.
+                </p>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-dark mb-2">Location</label>
+                        <input type="text" placeholder="City, state, or zip code" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="venueSearch.location">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-dark mb-2">Capacity</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="venueSearch.capacity">
+                            <option value="">Any capacity</option>
+                            <option value="1-50">1-50 guests</option>
+                            <option value="51-100">51-100 guests</option>
+                            <option value="101-200">101-200 guests</option>
+                            <option value="201-500">201-500 guests</option>
+                            <option value="500+">500+ guests</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-dark mb-2">Event Type</label>
+                        <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="venueSearch.eventType">
+                            <option value="">Any event type</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate</option>
+                            <option value="social">Social Event</option>
+                            <option value="academic">Academic</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-end">
+                        <button class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:handleVenueSearch">
+                            <i class="fas fa-search mr-2"></i>Search Venues
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map and Results -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Map -->
+                <div class="lg:col-span-2">
+                    <div class="bg-gray-200 rounded-2xl shadow-lg h-96 lg:h-[600px] flex items-center justify-center">
+                        <!-- @FUNCTIONALITY: Integrate Google Maps API for venue locations -->
+                        <div class="text-center text-muted">
+                            <i class="fas fa-map-marked-alt text-6xl mb-4 text-primary"></i>
+                            <p class="text-lg font-medium">Interactive Map</p>
+                            <p class="text-sm">Google Maps integration shows venue locations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold text-dark">Nearby Venues</h3>
+                        <span class="text-sm text-muted" data-bind="searchResults.count">24 venues found</span>
+                    </div>
+
+                    <!-- @MAP: venues.map(venue => ( -->
+                    <div class="space-y-4 max-h-[500px] overflow-y-auto">
+                        <!-- Venue 1 -->
+                        <div class="bg-white border rounded-xl p-4 hover:shadow-lg transition-shadow cursor-pointer" data-mock="true" data-event="click:selectVenue">
+                            <div class="flex items-start space-x-4">
+                                <!-- Elegant ballroom interior with crystal chandeliers and marble floors -->
+                                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=200" alt="Grand Ballroom venue" class="w-20 h-20 object-cover rounded-lg">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-dark" data-bind="venue.name">Grand Ballroom Events</h4>
+                                    <p class="text-sm text-muted" data-bind="venue.location">Downtown • 2.3 miles</p>
+                                    <p class="text-sm text-muted" data-bind="venue.capacity">Up to 300 guests</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-muted ml-2" data-bind="venue.rating">4.9 (45 reviews)</span>
+                                    </div>
+                                    <p class="text-primary font-semibold mt-1" data-bind="venue.price">From $2,500/day</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Venue 2 -->
+                        <div class="bg-white border rounded-xl p-4 hover:shadow-lg transition-shadow cursor-pointer" data-mock="true" data-event="click:selectVenue">
+                            <div class="flex items-start space-x-4">
+                                <!-- Modern conference center with large windows and contemporary design -->
+                                <img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=200" alt="Modern Conference Center" class="w-20 h-20 object-cover rounded-lg">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-dark" data-bind="venue.name">Modern Conference Center</h4>
+                                    <p class="text-sm text-muted" data-bind="venue.location">Business District • 1.8 miles</p>
+                                    <p class="text-sm text-muted" data-bind="venue.capacity">Up to 500 guests</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-muted ml-2" data-bind="venue.rating">4.7 (32 reviews)</span>
+                                    </div>
+                                    <p class="text-primary font-semibold mt-1" data-bind="venue.price">From $1,800/day</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Venue 3 -->
+                        <div class="bg-white border rounded-xl p-4 hover:shadow-lg transition-shadow cursor-pointer" data-mock="true" data-event="click:selectVenue">
+                            <div class="flex items-start space-x-4">
+                                <!-- Outdoor garden venue with lush greenery and string lights -->
+                                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=300&h=200" alt="Garden Pavilion venue" class="w-20 h-20 object-cover rounded-lg">
+                                <div class="flex-1">
+                                    <h4 class="font-semibold text-dark" data-bind="venue.name">Garden Pavilion</h4>
+                                    <p class="text-sm text-muted" data-bind="venue.location">Suburbs • 5.2 miles</p>
+                                    <p class="text-sm text-muted" data-bind="venue.capacity">Up to 150 guests</p>
+                                    <div class="flex items-center mt-2">
+                                        <div class="flex text-yellow-400">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-muted ml-2" data-bind="venue.rating">5.0 (18 reviews)</span>
+                                    </div>
+                                    <p class="text-primary font-semibold mt-1" data-bind="venue.price">From $1,200/day</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+
+                    <button class="w-full bg-gray-100 text-dark py-3 rounded-lg font-semibold hover:bg-gray-200 transition-colors" data-event="click:loadMoreVenues">
+                        Load More Venues
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: VenueSearchSection -->
+
+    <!-- Gallery Section -->
+    <!-- @COMPONENT: GallerySection [masonry layout, lightbox, category filters] -->
+    <section class="py-20 bg-gray-100" id="gallery">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Our Portfolio</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Explore our recent events and see how we bring visions to life with creativity and attention to detail.
+                </p>
+            </div>
+
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="px-6 py-3 bg-primary text-white rounded-lg font-medium hover:bg-purple-800 transition-colors" data-event="click:filterGallery" data-category="all">
+                    All Events
+                </button>
+                <button class="px-6 py-3 bg-white text-muted border rounded-lg font-medium hover:bg-gray-50 transition-colors" data-event="click:filterGallery" data-category="weddings">
+                    Weddings
+                </button>
+                <button class="px-6 py-3 bg-white text-muted border rounded-lg font-medium hover:bg-gray-50 transition-colors" data-event="click:filterGallery" data-category="corporate">
+                    Corporate
+                </button>
+                <button class="px-6 py-3 bg-white text-muted border rounded-lg font-medium hover:bg-gray-50 transition-colors" data-event="click:filterGallery" data-category="social">
+                    Social Events
+                </button>
+                <button class="px-6 py-3 bg-white text-muted border rounded-lg font-medium hover:bg-gray-50 transition-colors" data-event="click:filterGallery" data-category="academic">
+                    Academic
+                </button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <!-- @MAP: galleryItems.map(item => ( -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Elegant white and gold wedding reception with floral centerpieces -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Elegant wedding reception" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Elegant Wedding Reception</h4>
+                                <p class="text-sm">Gold Coast Ballroom</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Modern corporate event setup with professional lighting and staging -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Corporate conference setup" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Corporate Conference</h4>
+                                <p class="text-sm">Tech Summit 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Colorful birthday party decoration with balloons and themed setup -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Birthday party decoration" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Birthday Celebration</h4>
+                                <p class="text-sm">Sweet 16 Party</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Graduation ceremony setup with academic regalia and formal staging -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://pixabay.com/get/g113c878b24719c177290b42114a3300ebb14b9105bddec4c7cd934b097b50c23c19d67e73bfd3d86cabadfe94a4dea95d4b257be9301432efa4aa9b14796f8b0_1280.jpg" alt="Graduation ceremony" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Graduation Ceremony</h4>
+                                <p class="text-sm">University Commencement</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Outdoor garden wedding with string lights and natural decorations -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Garden wedding setup" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Garden Wedding</h4>
+                                <p class="text-sm">Romantic Outdoor Ceremony</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Professional gala dinner with elegant table settings and ambient lighting -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Gala dinner event" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Charity Gala</h4>
+                                <p class="text-sm">Annual Fundraising Dinner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Music concert stage with professional lighting and sound equipment -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Concert stage setup" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Live Concert</h4>
+                                <p class="text-sm">Music Festival Stage</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="group cursor-pointer" data-mock="true" data-event="click:openLightbox">
+                    <!-- Luxury product launch event with modern decor and branding -->
+                    <div class="relative overflow-hidden rounded-xl shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" alt="Product launch event" class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-end">
+                            <div class="p-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <h4 class="font-semibold text-lg">Product Launch</h4>
+                                <p class="text-sm">Tech Company Event</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- @END_MAP )) -->
+
+            <div class="text-center mt-12">
+                <button class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:loadMoreGallery">
+                    Load More Projects
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: GallerySection -->
+
+    <!-- Admin Dashboard Preview -->
+    <!-- @COMPONENT: AdminDashboard [data visualization, management interface] -->
+    <section class="py-20 bg-white" id="admin">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Admin Dashboard</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Comprehensive management interface for administrators to oversee operations, manage bookings, and track performance.
+                </p>
+            </div>
+
+            <!-- Dashboard Preview -->
+            <div class="bg-gray-100 rounded-2xl p-8 shadow-xl">
+                <!-- Dashboard Header -->
+                <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-dark mb-2">Welcome back, Admin</h3>
+                        <p class="text-muted">Here's what's happening with your events today.</p>
+                    </div>
+                    <div class="mt-4 lg:mt-0 flex flex-wrap gap-3">
+                        <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-800 transition-colors" data-event="click:exportData">
+                            <i class="fas fa-download mr-2"></i>Export Data
+                        </button>
+                        <button class="bg-white text-muted border px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors" data-event="click:refreshDashboard">
+                            <i class="fas fa-refresh mr-2"></i>Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl p-6 shadow-sm" data-mock="true">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-muted">Total Bookings</p>
+                                <p class="text-3xl font-bold text-primary" data-bind="dashboard.totalBookings">87</p>
+                                <p class="text-sm text-green-600">↑ 12% from last month</p>
+                            </div>
+                            <div class="bg-primary bg-opacity-10 p-3 rounded-lg">
+                                <i class="fas fa-calendar-check text-primary text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm" data-mock="true">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-muted">Revenue</p>
+                                <p class="text-3xl font-bold text-secondary" data-bind="dashboard.revenue">$234K</p>
+                                <p class="text-sm text-green-600">↑ 8% from last month</p>
+                            </div>
+                            <div class="bg-secondary bg-opacity-10 p-3 rounded-lg">
+                                <i class="fas fa-dollar-sign text-secondary text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm" data-mock="true">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-muted">Active Quotes</p>
+                                <p class="text-3xl font-bold text-accent" data-bind="dashboard.activeQuotes">23</p>
+                                <p class="text-sm text-muted">Pending response</p>
+                            </div>
+                            <div class="bg-accent bg-opacity-10 p-3 rounded-lg">
+                                <i class="fas fa-file-invoice text-accent text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 shadow-sm" data-mock="true">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-muted">Client Satisfaction</p>
+                                <p class="text-3xl font-bold text-green-600" data-bind="dashboard.satisfaction">4.9</p>
+                                <p class="text-sm text-muted">Average rating</p>
+                            </div>
+                            <div class="bg-green-100 p-3 rounded-lg">
+                                <i class="fas fa-star text-green-600 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Tabs -->
+                <div class="bg-white rounded-xl shadow-sm">
+                    <!-- Tab Navigation -->
+                    <div class="border-b">
+                        <nav class="flex space-x-8 px-6" aria-label="Tabs">
+                            <button class="border-b-2 border-primary text-primary py-4 px-1 text-sm font-medium" data-event="click:switchTab" data-tab="bookings">
+                                Recent Bookings
+                            </button>
+                            <button class="border-b-2 border-transparent text-muted hover:text-dark py-4 px-1 text-sm font-medium" data-event="click:switchTab" data-tab="quotes">
+                                Quote Requests
+                            </button>
+                            <button class="border-b-2 border-transparent text-muted hover:text-dark py-4 px-1 text-sm font-medium" data-event="click:switchTab" data-tab="calendar">
+                                Event Calendar
+                            </button>
+                            <button class="border-b-2 border-transparent text-muted hover:text-dark py-4 px-1 text-sm font-medium" data-event="click:switchTab" data-tab="analytics">
+                                Analytics
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <!-- @STATE: activeTab:string = 'bookings' -->
+                    <div class="p-6">
+                        <!-- Recent Bookings Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b text-left">
+                                        <th class="pb-3 text-sm font-medium text-muted">Client</th>
+                                        <th class="pb-3 text-sm font-medium text-muted">Event</th>
+                                        <th class="pb-3 text-sm font-medium text-muted">Date</th>
+                                        <th class="pb-3 text-sm font-medium text-muted">Status</th>
+                                        <th class="pb-3 text-sm font-medium text-muted">Value</th>
+                                        <th class="pb-3 text-sm font-medium text-muted">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y">
+                                    <!-- @MAP: recentBookings.map(booking => ( -->
+                                    <tr data-mock="true">
+                                        <td class="py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center text-sm font-medium" data-bind="booking.client.initials">JS</div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-dark" data-bind="booking.client.name">John Smith</div>
+                                                    <div class="text-sm text-muted" data-bind="booking.client.email">john@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4">
+                                            <div class="text-sm font-medium text-dark" data-bind="booking.eventName">Corporate Annual Meeting</div>
+                                            <div class="text-sm text-muted" data-bind="booking.eventType">Corporate Event</div>
+                                        </td>
+                                        <td class="py-4 text-sm text-muted" data-bind="booking.eventDate">Dec 15, 2024</td>
+                                        <td class="py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800" data-bind="booking.status">Confirmed</span>
+                                        </td>
+                                        <td class="py-4 text-sm font-medium text-dark" data-bind="booking.value">$15,000</td>
+                                        <td class="py-4">
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:text-purple-800 text-sm" data-event="click:viewBooking">View</button>
+                                                <button class="text-muted hover:text-dark text-sm" data-event="click:editBooking">Edit</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <tr data-mock="true">
+                                        <td class="py-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-accent text-white rounded-full flex items-center justify-center text-sm font-medium" data-bind="booking.client.initials">EM</div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-dark" data-bind="booking.client.name">Emily Martinez</div>
+                                                    <div class="text-sm text-muted" data-bind="booking.client.email">emily@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4">
+                                            <div class="text-sm font-medium text-dark" data-bind="booking.eventName">Wedding Reception</div>
+                                            <div class="text-sm text-muted" data-bind="booking.eventType">Wedding</div>
+                                        </td>
+                                        <td class="py-4 text-sm text-muted" data-bind="booking.eventDate">Jan 20, 2025</td>
+                                        <td class="py-4">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800" data-bind="booking.status">Planning</span>
+                                        </td>
+                                        <td class="py-4 text-sm font-medium text-dark" data-bind="booking.value">$28,500</td>
+                                        <td class="py-4">
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary hover:text-purple-800 text-sm" data-event="click:viewBooking">View</button>
+                                                <button class="text-muted hover:text-dark text-sm" data-event="click:editBooking">Edit</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- @END_MAP )) -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AdminDashboard -->
+
+    <!-- Blog Section -->
+    <!-- @COMPONENT: BlogSection [article cards, pagination, categories] -->
+    <section class="py-20 bg-gray-100" id="blog">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Latest from Our Blog</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Get insights, tips, and inspiration for planning the perfect event. Stay updated with the latest trends in event management.
+                </p>
+            </div>
+
+            <!-- Featured Article -->
+            <div class="mb-16">
+                <article class="bg-white rounded-2xl shadow-xl overflow-hidden grid grid-cols-1 lg:grid-cols-2" data-mock="true">
+                    <!-- Professional event planning workspace with mood boards and color swatches -->
+                    <div class="h-64 lg:h-auto bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600');"></div>
+                    <div class="p-8 lg:p-12">
+                        <div class="flex items-center text-sm text-muted mb-4">
+                            <span class="bg-primary text-white px-3 py-1 rounded-full text-xs font-medium mr-3">Featured</span>
+                            <span data-bind="article.date">December 1, 2024</span>
+                            <span class="mx-2">•</span>
+                            <span data-bind="article.readTime">5 min read</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-dark mb-4" data-bind="article.title">
+                            The Ultimate Guide to Planning Your Dream Wedding in 2024
+                        </h3>
+                        <p class="text-muted mb-6 text-lg" data-bind="article.excerpt">
+                            Discover the latest trends, essential tips, and expert advice for creating an unforgettable wedding experience. From venue selection to timeline management, we cover everything you need to know.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center text-sm font-medium" data-bind="article.author.initials">SM</div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-medium text-dark" data-bind="article.author.name">Sarah Martinez</div>
+                                    <div class="text-sm text-muted" data-bind="article.author.title">Senior Event Planner</div>
+                                </div>
+                            </div>
+                            <button class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:readArticle">
+                                Read Article
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Blog Grid -->
+            <!-- @MAP: blogPosts.map(post => ( -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post 1 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Corporate event setup with modern staging and professional lighting -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-secondary text-white px-2 py-1 rounded text-xs font-medium mr-3">Corporate</span>
+                            <span data-bind="post.date">Nov 28, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            5 Corporate Event Trends That Will Dominate 2025
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            Explore the emerging trends in corporate event planning, from hybrid experiences to sustainable practices.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Elegant floral arrangements and table decorations for luxury events -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-accent text-white px-2 py-1 rounded text-xs font-medium mr-3">Design</span>
+                            <span data-bind="post.date">Nov 25, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            Creating Stunning Centerpieces on Any Budget
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            Learn how to design beautiful centerpieces that wow your guests without breaking the bank.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Event planning checklist and timeline organization on a desk -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1556155092-8707de31f9c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-primary text-white px-2 py-1 rounded text-xs font-medium mr-3">Planning</span>
+                            <span data-bind="post.date">Nov 22, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            The Complete Event Planning Timeline
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            A comprehensive guide to planning your event from 12 months out to the day-of execution.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Technology integration in events with tablets and digital displays -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-medium mr-3">Technology</span>
+                            <span data-bind="post.date">Nov 20, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            Integrating Technology into Modern Events
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            Discover how technology can enhance guest experience and streamline event operations.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Sustainable event setup with eco-friendly decorations and materials -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-green-500 text-white px-2 py-1 rounded text-xs font-medium mr-3">Sustainability</span>
+                            <span data-bind="post.date">Nov 18, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            Planning Eco-Friendly Events That Make an Impact
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            Learn sustainable practices that reduce environmental impact while creating memorable experiences.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow" data-mock="true">
+                    <!-- Professional catering setup with elegant food presentation -->
+                    <div class="h-48 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=400');"></div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-muted mb-3">
+                            <span class="bg-orange-500 text-white px-2 py-1 rounded text-xs font-medium mr-3">Catering</span>
+                            <span data-bind="post.date">Nov 15, 2024</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3" data-bind="post.title">
+                            Choosing the Perfect Menu for Your Event
+                        </h3>
+                        <p class="text-muted mb-4" data-bind="post.excerpt">
+                            Expert tips on menu planning, dietary considerations, and creating memorable dining experiences.
+                        </p>
+                        <button class="text-primary font-semibold hover:text-purple-800 transition-colors" data-event="click:readPost">
+                            Read More →
+                        </button>
+                    </div>
+                </article>
+            </div>
+            <!-- @END_MAP )) -->
+
+            <!-- Load More -->
+            <div class="text-center mt-12">
+                <button class="bg-primary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-800 transition-colors" data-event="click:loadMorePosts">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: BlogSection -->
+
+    <!-- Contact Section -->
+    <!-- @COMPONENT: ContactSection [contact form, map, social links] -->
+    <section class="py-20 bg-white" id="contact">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold text-dark mb-6">Get In Touch</h2>
+                <p class="text-xl text-muted max-w-3xl mx-auto">
+                    Ready to start planning your perfect event? Contact us today for a free consultation and let's bring your vision to life.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold text-dark mb-6">Send us a message</h3>
+                    <form class="space-y-6" data-event="submit:handleContactSubmission">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">First Name *</label>
+                                <input type="text" placeholder="John" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.firstName" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-dark mb-2">Last Name *</label>
+                                <input type="text" placeholder="Doe" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.lastName" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Email Address *</label>
+                            <input type="email" placeholder="john@example.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.email" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Phone Number</label>
+                            <input type="tel" placeholder="(555) 123-4567" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.phone">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Subject *</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="quote">Request a Quote</option>
+                                <option value="consultation">Free Consultation</option>
+                                <option value="partnership">Partnership Inquiry</option>
+                                <option value="support">Customer Support</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-dark mb-2">Message *</label>
+                            <textarea rows="5" placeholder="Tell us about your event or how we can help you..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="contact.message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-primary text-white py-4 rounded-lg text-lg font-semibold hover:bg-purple-800 transition-colors">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-dark mb-6">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-primary bg-opacity-10 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark mb-1">Our Office</h4>
+                                    <p class="text-muted">123 Event Plaza<br>Suite 456<br>Downtown City, ST 12345</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-secondary bg-opacity-10 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-phone text-secondary text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark mb-1">Phone</h4>
+                                    <p class="text-muted">(555) 123-4567</p>
+                                    <p class="text-sm text-muted">Mon-Fri: 9AM-6PM</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-accent bg-opacity-10 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-envelope text-accent text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-dark mb-1">Email</h4>
+                                    <p class="text-muted">info@rocktoppremium.com</p>
+                                    <p class="text-muted">quotes@rocktoppremium.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div>
+                        <h4 class="text-xl font-bold text-dark mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-primary text-white p-3 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:openSocial" data-platform="facebook">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:openSocial" data-platform="instagram">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:openSocial" data-platform="twitter">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:openSocial" data-platform="linkedin">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="bg-primary text-white p-3 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:openSocial" data-platform="youtube">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Business Hours -->
+                    <div>
+                        <h4 class="text-xl font-bold text-dark mb-4">Business Hours</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span class="text-muted">Monday - Friday</span>
+                                <span class="text-dark font-medium">9:00 AM - 6:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-muted">Saturday</span>
+                                <span class="text-dark font-medium">10:00 AM - 4:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-muted">Sunday</span>
+                                <span class="text-dark font-medium">By Appointment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- Footer -->
+    <!-- @COMPONENT: Footer [sitemap, legal links, social media] -->
+    <footer class="bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-6">
+                        <span class="text-3xl font-bold text-primary">ROCKTOP</span>
+                        <span class="text-lg text-gray-300 block -mt-1">PREMIUM EVENTS</span>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Creating unforgettable events and experiences with professional planning, stunning decoration, and premium equipment.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors" data-event="click:openSocial" data-platform="facebook">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors" data-event="click:openSocial" data-platform="instagram">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors" data-event="click:openSocial" data-platform="twitter">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary transition-colors" data-event="click:openSocial" data-platform="linkedin">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Event Planning</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Decoration & Design</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Equipment Rentals</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Lighting & Audio</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Staging & Displays</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-primary transition-colors">Academic Events</a></li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#quote" class="text-gray-300 hover:text-primary transition-colors">Get Quote</a></li>
+                        <li><a href="#venues" class="text-gray-300 hover:text-primary transition-colors">Find Venues</a></li>
+                        <li><a href="#gallery" class="text-gray-300 hover:text-primary transition-colors">Portfolio</a></li>
+                        <li><a href="#blog" class="text-gray-300 hover:text-primary transition-colors">Blog</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-primary transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Contact</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt text-primary mr-3"></i>
+                                <span class="text-gray-300">Office Location</span>
+                            </div>
+                            <p class="text-gray-400 ml-6">123 Event Plaza, Suite 456<br>Downtown City, ST 12345</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-phone text-primary mr-3"></i>
+                                <span class="text-gray-300">Phone</span>
+                            </div>
+                            <p class="text-gray-400 ml-6">(555) 123-4567</p>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-envelope text-primary mr-3"></i>
+                                <span class="text-gray-300">Email</span>
+                            </div>
+                            <p class="text-gray-400 ml-6">info@rocktoppremium.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-700 pt-8 mt-12">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">&copy; 2024 ROCKTOP PREMIUM EVENTS. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm transition-colors">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-primary text-sm transition-colors">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <!-- Chatbot Modal -->
+    <!-- @COMPONENT: ChatbotModal [AI assistant, conversation interface] -->
+    <div id="chatbotModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full max-h-[600px] flex flex-col">
+            <!-- Chatbot Header -->
+            <div class="bg-primary text-white p-6 rounded-t-2xl">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Event Assistant</h3>
+                            <p class="text-sm text-purple-200">Online now</p>
+                        </div>
+                    </div>
+                    <button class="text-white hover:text-purple-200 transition-colors" data-event="click:closeChatbot">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="flex-1 p-4 overflow-y-auto space-y-4" data-mock="true">
+                <!-- Bot Message -->
+                <div class="flex items-start">
+                    <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">Hi! I'm here to help you plan your perfect event. What type of event are you planning?</p>
+                    </div>
+                </div>
+
+                <!-- User Message -->
+                <div class="flex items-start justify-end">
+                    <div class="bg-primary text-white rounded-lg p-3 max-w-xs mr-3">
+                        <p class="text-sm">I'm planning a wedding for about 150 guests</p>
+                    </div>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center text-sm">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+
+                <!-- Bot Response -->
+                <div class="flex items-start">
+                    <div class="w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center text-sm mr-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="bg-gray-100 rounded-lg p-3 max-w-xs">
+                        <p class="text-sm">Congratulations! A wedding for 150 guests is a wonderful celebration. I can help you with venue recommendations, decoration styles, and provide a custom quote. Do you have a specific date in mind?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="p-4 border-t">
+                <div class="flex space-x-2">
+                    <input type="text" placeholder="Type your message..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="chatInput">
+                    <button class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-purple-800 transition-colors" data-event="click:sendChatMessage">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors" data-event="click:quickAction" data-action="quote">
+                        Get Quote
+                    </button>
+                    <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors" data-event="click:quickAction" data-action="venues">
+                        Find Venues
+                    </button>
+                    <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm hover:bg-gray-200 transition-colors" data-event="click:quickAction" data-action="services">
+                        Our Services
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: ChatbotModal -->
+
+    <!-- Authentication Modal -->
+    <!-- @COMPONENT: AuthModal [login/register forms, social auth] -->
+    <div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full">
+            <!-- @STATE: authMode:string = 'login' -->
+            <div class="p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-dark mb-2">Welcome Back</h2>
+                    <p class="text-muted">Sign in to your account to continue</p>
+                </div>
+
+                <!-- Social Login -->
+                <div class="space-y-3 mb-6">
+                    <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg font-medium text-muted hover:bg-gray-50 transition-colors" data-event="click:signInWithGoogle">
+                        <i class="fab fa-google text-red-500 mr-3"></i>
+                        Continue with Google
+                    </button>
+                    <button class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg font-medium text-muted hover:bg-gray-50 transition-colors" data-event="click:signInWithFacebook">
+                        <i class="fab fa-facebook text-blue-600 mr-3"></i>
+                        Continue with Facebook
+                    </button>
+                </div>
+
+                <div class="relative mb-6">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-muted">Or continue with email</span>
+                    </div>
+                </div>
+
+                <!-- Email Login Form -->
+                <form class="space-y-4" data-event="submit:handleAuthSubmission">
+                    <div>
+                        <label class="block text-sm font-medium text-dark mb-2">Email Address</label>
+                        <input type="email" placeholder="your@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="auth.email" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-dark mb-2">Password</label>
+                        <input type="password" placeholder="••••••••" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary" data-bind="auth.password" required>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="w-4 h-4 text-primary focus:ring-primary border-gray-300 rounded" data-bind="auth.rememberMe">
+                            <span class="ml-2 text-sm text-muted">Remember me</span>
+                        </label>
+                        <a href="#" class="text-sm text-primary hover:text-purple-800 transition-colors" data-event="click:forgotPassword">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-semibold hover:bg-purple-800 transition-colors">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="text-center mt-6">
+                    <p class="text-muted">
+                        Don't have an account? 
+                        <button class="text-primary hover:text-purple-800 transition-colors font-medium" data-event="click:switchToRegister">
+                            Sign up
+                        </button>
+                    </p>
+                </div>
+
+                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors" data-event="click:closeAuthModal">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- @END_COMPONENT: AuthModal -->
+
+    <script>
+        // TODO: Implement business logic, API calls, or state management
+        // This is a mockup - actual functionality would require backend integration
+        
+        (function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('[data-event="click:toggleMobileMenu"]');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Chatbot modal
+            const chatbotButton = document.querySelector('[data-event="click:openChatbot"]');
+            const chatbotModal = document.getElementById('chatbotModal');
+            const closeChatbotButton = document.querySelector('[data-event="click:closeChatbot"]');
+            
+            if (chatbotButton && chatbotModal) {
+                chatbotButton.addEventListener('click', () => {
+                    chatbotModal.classList.remove('hidden');
+                });
+            }
+            
+            if (closeChatbotButton && chatbotModal) {
+                closeChatbotButton.addEventListener('click', () => {
+                    chatbotModal.classList.add('hidden');
+                });
+            }
+
+            // Auth modal
+            const loginButton = document.querySelector('[data-event="click:handleLogin"]');
+            const authModal = document.getElementById('authModal');
+            const closeAuthButton = document.querySelector('[data-event="click:closeAuthModal"]');
+            
+            if (loginButton && authModal) {
+                loginButton.addEventListener('click', () => {
+                    authModal.classList.remove('hidden');
+                });
+            }
+            
+            if (closeAuthButton && authModal) {
+                closeAuthButton.addEventListener('click', () => {
+                    authModal.classList.add('hidden');
+                });
+            }
+
+            // Close modals when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === chatbotModal) {
+                    chatbotModal.classList.add('hidden');
+                }
+                if (e.target === authModal) {
+                    authModal.classList.add('hidden');
+                }
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

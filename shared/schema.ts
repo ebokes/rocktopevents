@@ -1,4 +1,4 @@
-import { sql } from 'drizzle-orm';
+import { sql } from "drizzle-orm";
 import {
   index,
   jsonb,
@@ -21,12 +21,14 @@ export const sessions = pgTable(
     sess: jsonb("sess").notNull(),
     expire: timestamp("expire").notNull(),
   },
-  (table) => [index("IDX_session_expire").on(table.expire)],
+  (table) => [index("IDX_session_expire").on(table.expire)]
 );
 
 // User storage table for Replit Auth
 export const users = pgTable("users", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   email: varchar("email").unique(),
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
@@ -37,7 +39,9 @@ export const users = pgTable("users", {
 
 // Quote requests table
 export const quoteRequests = pgTable("quote_requests", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   userId: varchar("user_id").references(() => users.id),
   eventType: varchar("event_type").notNull(),
   guestCount: varchar("guest_count").notNull(),
@@ -58,7 +62,9 @@ export const quoteRequests = pgTable("quote_requests", {
 
 // Contact messages table
 export const contactMessages = pgTable("contact_messages", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   firstName: varchar("first_name").notNull(),
   lastName: varchar("last_name").notNull(),
   email: varchar("email").notNull(),
@@ -71,7 +77,9 @@ export const contactMessages = pgTable("contact_messages", {
 
 // Blog posts table
 export const blogPosts = pgTable("blog_posts", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   title: varchar("title").notNull(),
   slug: varchar("slug").unique().notNull(),
   excerpt: text("excerpt").notNull(),
@@ -87,7 +95,9 @@ export const blogPosts = pgTable("blog_posts", {
 
 // Gallery items table
 export const galleryItems = pgTable("gallery_items", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   title: varchar("title").notNull(),
   description: text("description"),
   imageUrl: varchar("image_url").notNull(),
@@ -99,7 +109,9 @@ export const galleryItems = pgTable("gallery_items", {
 
 // Venues table
 export const venues = pgTable("venues", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   name: varchar("name").notNull(),
   description: text("description"),
   address: text("address").notNull(),
@@ -108,6 +120,7 @@ export const venues = pgTable("venues", {
   zipCode: varchar("zip_code").notNull(),
   capacity: integer("capacity").notNull(),
   pricePerDay: decimal("price_per_day", { precision: 10, scale: 2 }).notNull(),
+  suitableFor: text("suitable_for").array(),
   amenities: text("amenities").array(),
   images: text("images").array(),
   rating: decimal("rating", { precision: 2, scale: 1 }).default("0.0"),
@@ -118,12 +131,17 @@ export const venues = pgTable("venues", {
 
 // Services table
 export const services = pgTable("services", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: varchar("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   title: varchar("title").notNull(),
   description: text("description").notNull(),
-  features: text("features").array().notNull().default(sql`'{}'`),
-  color: varchar("color").notNull().default('primary'),
-  icon: varchar("icon").notNull().default('Calendar'),
+  features: text("features")
+    .array()
+    .notNull()
+    .default(sql`'{}'`),
+  color: varchar("color").notNull().default("primary"),
+  icon: varchar("icon").notNull().default("Calendar"),
   imageUrl: varchar("image_url"),
   active: boolean("active").notNull().default(true),
   displayOrder: integer("display_order").notNull().default(0),
@@ -138,7 +156,9 @@ export const insertQuoteRequestSchema = createInsertSchema(quoteRequests).omit({
   updatedAt: true,
 });
 
-export const insertContactMessageSchema = createInsertSchema(contactMessages).omit({
+export const insertContactMessageSchema = createInsertSchema(
+  contactMessages
+).omit({
   id: true,
   createdAt: true,
 });

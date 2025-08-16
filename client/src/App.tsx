@@ -14,6 +14,7 @@ import BlogPost from "@/pages/blog-post";
 import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
 import AdminLogin from "@/pages/admin-login";
+import ScrollToTop from "./components/ui/scroll-to-top";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -28,11 +29,11 @@ function Router() {
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/contact" component={Contact} />
-      
+
       {/* Admin routes */}
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin" component={isAuthenticated ? Admin : AdminLogin} />
-      
+
       <Route component={NotFound} />
     </Switch>
   );
@@ -42,6 +43,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <ScrollToTop />
         <Toaster />
         <Router />
       </TooltipProvider>

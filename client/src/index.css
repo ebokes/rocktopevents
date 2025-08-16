@@ -1,9 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
+  --background: 0 0% 100%;
+  --foreground: 215 16% 47%;
+  --card: 210 40% 98%;
+  --card-foreground: 215 16% 47%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 16% 47%;
+  --primary: 271 81% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 96% 56%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 217 19% 35%;
+  --muted-foreground: 215 16% 47%;
+  --accent: 328 85% 70%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 271 81% 56%;
+  --chart-1: 271 81% 56%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+  /* fonts & radius can stay as-is */
+}
+
+.dark {
+  --background: 215 28% 17%;
+  --foreground: 210 40% 98%;
+  --card: 215 28% 17%;
+  --card-foreground: 210 40% 98%;
+  --popover: 215 28% 17%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 271 81% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 43 96% 56%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 217 19% 27%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 328 85% 70%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 215 28% 27%;
+  --input: 215 28% 27%;
+  --ring: 271 81% 56%;
+  --chart-1: 271 81% 56%;
+  --chart-2: 160 60% 45%;
+  --chart-3: 30 80% 55%;
+  --chart-4: 280 65% 60%;
+  --chart-5: 340 75% 55%;
+}
+
+/* :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(215, 16%, 47%);
   --card: hsl(210, 40%, 98%);
@@ -75,19 +130,24 @@
   --sidebar-accent-foreground: hsl(210, 40%, 98%);
   --sidebar-border: hsl(215, 28%, 27%);
   --sidebar-ring: hsl(271, 81%, 56%);
-}
+} */
 
 @layer base {
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold;
   }
 }
@@ -99,7 +159,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;

@@ -4,18 +4,26 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import Rocktop from "../../../assets/rocktop-img.webp";
+import RocktopLogo1 from "../../../assets/rocktop-logo1.webp";
 
-function LogoutButton({ mobile = false, onLogout }: { mobile?: boolean; onLogout?: () => void }) {
+function LogoutButton({
+  mobile = false,
+  onLogout,
+}: {
+  mobile?: boolean;
+  onLogout?: () => void;
+}) {
   const { logoutMutation } = useAuth();
-  
+
   const handleLogout = () => {
     onLogout?.();
     logoutMutation.mutate();
   };
 
   return (
-    <Button 
-      variant="outline" 
+    <Button
+      variant="outline"
       className={mobile ? "w-full" : ""}
       onClick={handleLogout}
       data-testid={mobile ? "mobile-button-logout" : "button-logout"}
@@ -29,6 +37,11 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
   const { isAuthenticated, isLoading, user } = useAuth();
+  const [navColor, setNavColor] = useState(false);
+
+  const changeNavColorOnScroll = () =>
+    window.scrollY >= 7 ? setNavColor(true) : setNavColor(false);
+  window.addEventListener("scroll", changeNavColorOnScroll);
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -46,16 +59,40 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50" data-testid="navbar">
+    <nav
+      className={`${
+        navColor
+          ? "bg-white shadow-lg sticky top-0 z-50"
+          : "bg-transparent z-50"
+      }`}
+      data-testid="navbar"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 lg:h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex-shrink-0" data-testid="logo">
-              <span className="text-2xl font-bold text-purple-600">ROCKTOP</span>
-              <span className="text-sm text-slate-600 block -mt-1">PREMIUM EVENTS</span>
+            <Link href="/" data-testid="logo">
+              <div className="flex space-x-2 items-stretch">
+                <img
+                  src={RocktopLogo1}
+                  className="w-10 h-10 mt-1"
+                  alt="Rocktop Logo"
+                  style={{ maxWidth: "100%" }}
+                />
+                <div className="flex flex-col">
+                  <img
+                    src={Rocktop}
+                    className="mt-1 w-16"
+                    alt="rocktop img"
+                    style={{ maxWidth: "100%" }}
+                  />
+                  <span className="text-sm text-slate-600 min-w-[110px]">
+                    Premium Events
+                  </span>
+                </div>
+              </div>
             </Link>
           </div>
-          
+
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
@@ -65,10 +102,12 @@ export default function Navbar() {
                   href={item.href}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
-                      ? "text-slate-800 font-semibold"
+                      ? "text-purple-600 font-semibold"
                       : "text-slate-600 hover:text-purple-600"
                   }`}
-                  data-testid={`nav-${item.name.toLowerCase().replace(' ', '-')}`}
+                  data-testid={`nav-${item.name
+                    .toLowerCase()
+                    .replace(" ", "-")}`}
                 >
                   {item.name}
                 </Link>
@@ -83,12 +122,17 @@ export default function Navbar() {
             ) : isAuthenticated ? (
               <>
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm text-slate-700" data-testid="user-name">
+                  <span
+                    className="text-sm text-slate-700"
+                    data-testid="user-name"
+                  >
                     Admin
                   </span>
                 </div>
                 <Button asChild>
-                  <Link href="/admin" data-testid="button-admin">Dashboard</Link>
+                  <Link href="/admin" data-testid="button-admin">
+                    Dashboard
+                  </Link>
                 </Button>
                 <LogoutButton />
               </>
@@ -107,7 +151,11 @@ export default function Navbar() {
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" data-testid="mobile-menu-button">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  data-testid="mobile-menu-button"
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
@@ -119,36 +167,39 @@ export default function Navbar() {
                       href={item.href}
                       className={`block px-3 py-2 text-base font-medium transition-colors ${
                         isActive(item.href)
-                          ? "text-slate-800 font-semibold"
+                          ? " text-purple-600 font-semibold"
                           : "text-slate-600 hover:text-purple-600"
                       }`}
                       onClick={() => setIsOpen(false)}
-                      data-testid={`mobile-nav-${item.name.toLowerCase().replace(' ', '-')}`}
+                      data-testid={`mobile-nav-${item.name
+                        .toLowerCase()
+                        .replace(" ", "-")}`}
                     >
                       {item.name}
                     </Link>
                   ))}
-                  
+
                   <div className="border-t pt-4 mt-4">
                     {isAuthenticated ? (
                       <>
                         <div className="px-3 py-2">
-                          <div className="text-sm text-slate-700">
-                            Admin
-                          </div>
+                          <div className="text-sm text-slate-700">Admin</div>
                         </div>
-                        <Button 
-                          className="w-full mb-2" 
+                        <Button
+                          className="w-full mb-2"
                           asChild
                           onClick={() => setIsOpen(false)}
                         >
                           <Link href="/admin">Dashboard</Link>
                         </Button>
-                        <LogoutButton mobile onLogout={() => setIsOpen(false)} />
+                        <LogoutButton
+                          mobile
+                          onLogout={() => setIsOpen(false)}
+                        />
                       </>
                     ) : (
                       <>
-                        <Button 
+                        <Button
                           className="w-full mb-2"
                           asChild
                           onClick={() => setIsOpen(false)}
