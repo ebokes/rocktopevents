@@ -1,10 +1,31 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import cors from "cors";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.get("/health", (_req, res) => res.send("ok"));
+
+const allowed = (process.env.ALLOWED_ORIGIN || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+app.use(
+  cors({
+    origin(
+      origin: string | undefined,
+      cb: (err: Error | null, allow?: boolean) => void
+    ): void {
+      // allow same-origin/non-browser tools (no origin) and your Vercel URL(s)
+      if (!origin || allowed.includes(origin)) return cb(null, true);
+      cb(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+  })
+);
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -64,8 +85,8 @@ app.use((req, res, next) => {
   server.listen(
     {
       port,
-      host: "localhost",
-      // host: "0.0.0.0",
+      // host: "localhost",
+      host: "0.0.0.0",
       reusePort: true,
     },
     () => {
