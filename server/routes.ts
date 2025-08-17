@@ -2,12 +2,21 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAdminAuth, requireAdmin } from "./adminAuth";
-import { insertQuoteRequestSchema, insertContactMessageSchema, insertBlogPostSchema, insertGalleryItemSchema, insertVenueSchema, insertServiceSchema } from "@shared/schema";
+import {
+  insertQuoteRequestSchema,
+  insertContactMessageSchema,
+  insertBlogPostSchema,
+  insertGalleryItemSchema,
+  insertVenueSchema,
+  insertServiceSchema,
+} from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup admin authentication
   setupAdminAuth(app);
+
+  app.get("/health", (_req, res) => res.send("ok"));
 
   // Quote request routes
   app.post("/api/quotes", async (req, res) => {
@@ -17,7 +26,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(quote);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating quote request:", error);
         res.status(500).json({ message: "Failed to create quote request" });
@@ -51,7 +62,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.patch("/api/quotes/:id/status", requireAdmin, async (req, res) => {
     try {
       const { status, estimatedCost } = req.body;
-      const quote = await storage.updateQuoteRequestStatus(req.params.id, status, estimatedCost);
+      const quote = await storage.updateQuoteRequestStatus(
+        req.params.id,
+        status,
+        estimatedCost
+      );
       res.json(quote);
     } catch (error) {
       console.error("Error updating quote status:", error);
@@ -67,7 +82,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(message);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating contact message:", error);
         res.status(500).json({ message: "Failed to send message" });
@@ -88,7 +105,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.patch("/api/contact/:id/status", requireAdmin, async (req, res) => {
     try {
       const { status } = req.body;
-      const message = await storage.updateContactMessageStatus(req.params.id, status);
+      const message = await storage.updateContactMessageStatus(
+        req.params.id,
+        status
+      );
       res.json(message);
     } catch (error) {
       console.error("Error updating message status:", error);
@@ -99,7 +119,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Blog routes
   app.get("/api/blog", async (req, res) => {
     try {
-      const published = req.query.published === 'false' ? false : true;
+      const published = req.query.published === "false" ? false : true;
       const posts = await storage.getBlogPosts(published);
       res.json(posts);
     } catch (error) {
@@ -128,7 +148,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(post);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating blog post:", error);
         res.status(500).json({ message: "Failed to create blog post" });
@@ -143,7 +165,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(post);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error updating blog post:", error);
         res.status(500).json({ message: "Failed to update blog post" });
@@ -180,7 +204,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(item);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating gallery item:", error);
         res.status(500).json({ message: "Failed to create gallery item" });
@@ -234,7 +260,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(venue);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating venue:", error);
         res.status(500).json({ message: "Failed to create venue" });
@@ -249,7 +277,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(venue);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error updating venue:", error);
         res.status(500).json({ message: "Failed to update venue" });
@@ -270,7 +300,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Service routes
   app.get("/api/services", async (req, res) => {
     try {
-      const activeOnly = req.query.active === 'true';
+      const activeOnly = req.query.active === "true";
       const services = await storage.getServices(activeOnly);
       res.json(services);
     } catch (error) {
@@ -286,7 +316,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(service);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error creating service:", error);
         res.status(500).json({ message: "Failed to create service" });
@@ -301,7 +333,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(service);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res.status(400).json({ message: "Validation error", errors: error.errors });
+        res
+          .status(400)
+          .json({ message: "Validation error", errors: error.errors });
       } else {
         console.error("Error updating service:", error);
         res.status(500).json({ message: "Failed to update service" });
