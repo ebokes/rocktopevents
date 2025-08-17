@@ -28,7 +28,7 @@ export default defineConfig(async ({ mode }) => {
 
     // Emit build output to client/dist (what Vercel expects)
     build: {
-      outDir: "dist",
+      outDir: path.resolve(import.meta.dirname, "client", "dist"),
       emptyOutDir: true,
     },
 
