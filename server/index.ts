@@ -3,6 +3,52 @@ import { registerRoutes } from "./routes";
 import { setupVite, log } from "./vite";
 import cors from "cors";
 import { serveStatic } from "./serveStatic";
+import { getConfig } from "./env";
+
+import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs";
+
+// Get current directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Create symlink in development
+if (process.env.NODE_ENV === "development") {
+  const clientPath = path.join(__dirname, "..", "client");
+  const distPath = path.join(__dirname, "..", "dist");
+
+  try {
+    // Verify client directory exists
+    if (!fs.existsSync(clientPath)) {
+      console.error("❌ Client directory not found:", clientPath);
+      process.exit(1);
+    }
+
+    // Handle symlink creation
+    if (!fs.existsSync(distPath)) {
+      fs.symlinkSync(clientPath, distPath, "dir");
+      console.log("✅ Created development symlink: dist → client");
+    } else {
+      const realPath = fs.realpathSync(distPath);
+      if (realPath !== clientPath) {
+        fs.rmSync(distPath, { recursive: true, force: true });
+        fs.symlinkSync(clientPath, distPath, "dir");
+        console.log("✅ Recreated development symlink: dist → client");
+      }
+    }
+
+    // Verify main entry file exists
+    const mainEntry = path.join(clientPath, "src", "main.tsx");
+    if (!fs.existsSync(mainEntry)) {
+      console.error("❌ Main entry file not found:", mainEntry);
+      process.exit(1);
+    }
+  } catch (err) {
+    console.error("❌ Error creating symlink:", err);
+    process.exit(1);
+  }
+}
 
 const app = express();
 app.use(express.json());
@@ -11,10 +57,16 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/health", (_req, res) => res.send("ok"));
 
 // Remove the complex origin check and simplify:
-const allowedOrigins = (process.env.ALLOWED_ORIGIN || "").split(",");
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin(
+      origin: string | undefined,
+      cb: (err: Error | null, allow?: boolean) => void
+    ) {
+      const { allowedOrigins } = getConfig();
+      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+      cb(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
@@ -49,6 +101,9 @@ app.use((req, res, next) => {
   next();
 });
 
+const isProduction = process.env.NODE_ENV === "production";
+const shouldServeStatic = isProduction && process.env.HOST_FRONTEND === "true";
+
 (async () => {
   const server = await registerRoutes(app);
 
@@ -65,7 +120,7 @@ app.use((req, res, next) => {
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
-  } else {
+  } else if (shouldServeStatic) {
     serveStatic(app);
   }
 

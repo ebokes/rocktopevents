@@ -5,8 +5,12 @@ import { createServer as createViteServer, createLogger } from "vite";
 import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
+import { fileURLToPath } from "url";
 
 const viteLogger = createLogger();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -19,6 +23,23 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
+// export async function setupVite(app: express.Application, server: http.Server) {
+//   const vite = await createViteServer({
+//     server: { middlewareMode: true },
+//     appType: "custom",
+//     root: path.join(__dirname, "..", "client"),
+//     configFile: path.join(__dirname, "..", "vite.config.ts"), // Explicit config path
+//     resolve: {
+//       alias: {
+//         // Mirror the alias from vite.config.ts
+//         "/src": path.join(__dirname, "..", "client", "src"),
+//       },
+//     },
+//   });
+
+//   app.use(vite.middlewares);
+// }
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -27,18 +48,31 @@ export async function setupVite(app: Express, server: Server) {
   };
 
   const vite = await createViteServer({
-    ...viteConfig,
-    configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
+    server: { middlewareMode: true },
+    appType: "custom",
+    root: path.join(__dirname, "..", "client"),
+    configFile: path.join(__dirname, "..", "vite.config.ts"), // Explicit config path
+    resolve: {
+      alias: {
+        // Mirror the alias from vite.config.ts
+        "/src": path.join(__dirname, "..", "client", "src"),
       },
     },
-    server: serverOptions,
-    appType: "custom",
   });
+
+  // const vite = await createViteServer({
+  //   ...viteConfig,
+  //   configFile: false,
+  //   customLogger: {
+  //     ...viteLogger,
+  //     error: (msg, options) => {
+  //       viteLogger.error(msg, options);
+  //       process.exit(1);
+  //     },
+  //   },
+  //   server: serverOptions,
+  //   appType: "custom",
+  // });
 
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {

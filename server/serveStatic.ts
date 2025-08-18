@@ -1,15 +1,16 @@
 import path from "path";
 import express from "express";
+import { getConfig } from "./env";
 
 export function serveStatic(app: express.Application) {
-  // Serve static assets from client/dist
-  const staticPath = path.join(__dirname, "..", "client", "dist");
+  const config = getConfig();
+  const staticPath = config.isProduction
+    ? path.join(__dirname, "..", "dist")
+    : path.join(__dirname, "..", "client");
+
   app.use(express.static(staticPath));
 
-  // SPA fallback: serve index.html for all non-API routes
   app.get("*", (req, res) => {
-    if (!req.path.startsWith("/api")) {
-      res.sendFile(path.join(staticPath, "index.html"));
-    }
+    res.sendFile(path.join(staticPath, "index.html"));
   });
 }
