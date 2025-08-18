@@ -1,7 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, log } from "./vite";
 import cors from "cors";
+import { serveStatic } from "./serveStatic";
 
 const app = express();
 app.use(express.json());
@@ -9,20 +10,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/health", (_req, res) => res.send("ok"));
 
-const allowed = (process.env.ALLOWED_ORIGIN || "")
-  .split(",")
-  .map((s) => s.trim())
-  .filter(Boolean);
+// Remove the complex origin check and simplify:
+const allowedOrigins = (process.env.ALLOWED_ORIGIN || "").split(",");
 app.use(
   cors({
-    origin(
-      origin: string | undefined,
-      cb: (err: Error | null, allow?: boolean) => void
-    ): void {
-      // allow same-origin/non-browser tools (no origin) and your Vercel URL(s)
-      if (!origin || allowed.includes(origin)) return cb(null, true);
-      cb(new Error("Not allowed by CORS"));
-    },
+    origin: allowedOrigins,
     credentials: true,
   })
 );

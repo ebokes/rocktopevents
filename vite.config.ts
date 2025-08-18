@@ -30,7 +30,17 @@ export default defineConfig(async ({ mode }) => {
     build: {
       outDir: path.resolve(import.meta.dirname, "client", "dist"),
       emptyOutDir: true,
+      rollupOptions: {
+        input: {
+          main: path.resolve(import.meta.dirname, "client", "index.html"),
+        },
+      },
     },
+    // build: {
+    //   outDir: path.resolve(import.meta.dirname, "client", "dist"),
+    //   emptyOutDir: true,
+    //   assetsDir: "assets", // Explicit assets directory
+    // },
 
     // Local dev server (Vite) — proxies API calls to your local backend
     server: {
