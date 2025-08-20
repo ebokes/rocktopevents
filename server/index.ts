@@ -3,11 +3,10 @@ import { registerRoutes } from "./routes";
 import { setupVite, log } from "./vite";
 import cors from "cors";
 import { serveStatic } from "./serveStatic";
-import { getConfig } from "./env";
-
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
+import { corsOptions } from "./corsOptions";
 
 // Get current directory path
 const __filename = fileURLToPath(import.meta.url);
@@ -56,31 +55,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/health", (_req, res) => res.send("ok"));
 
-// Replace the current CORS setup with this:
-const corsOptions = {
-  origin: (
-    origin: string | undefined,
-    callback: (err: Error | null, allow?: boolean) => void
-  ) => {
-    const { allowedOrigins } = getConfig();
-
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      // In development, allow common localhost origins
-      if (process.env.NODE_ENV === "development") {
-        if (origin.includes("localhost") || origin.includes("127.0.0.1")) {
-          return callback(null, true);
-        }
-      }
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
+// Replace your current CORS setup with this more flexible configuration:
 
 app.use(cors(corsOptions));
 
@@ -98,6 +73,16 @@ app.use(cors(corsOptions));
 //     credentials: true,
 //   })
 // );
+
+// Add this to your CORS configuration for better debugging
+app.use((req, res, next) => {
+  res.on("finish", () => {
+    if (req.method === "OPTIONS") {
+      log(`CORS Preflight: ${req.headers.origin} -> ${res.statusCode}`);
+    }
+  });
+  next();
+});
 
 app.use((req, res, next) => {
   const start = Date.now();

@@ -11,10 +11,20 @@ import {
   insertServiceSchema,
 } from "@shared/schema";
 import { z } from "zod";
+import cors from "cors";
+import { corsOptions } from "./corsOptions";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup admin authentication
   setupAdminAuth(app);
+
+  // Add this before your other routes
+  app.options("*", cors(corsOptions)); // Handle preflight requests
+
+  // Also add OPTIONS handling for specific auth routes
+  app.options("/api/admin/login", cors(corsOptions));
+  app.options("/api/admin/logout", cors(corsOptions));
+  app.options("/api/admin/user", cors(corsOptions));
 
   app.get("/health", (_req, res) => res.send("ok"));
 

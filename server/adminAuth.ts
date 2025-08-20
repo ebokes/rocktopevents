@@ -1,6 +1,6 @@
 import express from "express";
 import session from "express-session";
-import { storage } from "./storage";
+// import { storage } from "./storage";
 
 // Simple admin credentials
 const ADMIN_CREDENTIALS = {
@@ -9,7 +9,21 @@ const ADMIN_CREDENTIALS = {
 };
 
 export function setupAdminAuth(app: express.Express) {
-  // Setup session middleware
+  // // Setup session middleware
+  // app.use(
+  //   session({
+  //     secret: process.env.SESSION_SECRET || "default-secret-key",
+  //     resave: false,
+  //     saveUninitialized: false,
+  //     cookie: {
+  //       httpOnly: true,
+  //       secure: false, // Set to true in production with HTTPS
+  //       maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  //     },
+  //   })
+  // );
+
+  // Update your session configuration
   app.use(
     session({
       secret: process.env.SESSION_SECRET || "default-secret-key",
@@ -17,7 +31,8 @@ export function setupAdminAuth(app: express.Express) {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: false, // Set to true in production with HTTPS
+        secure: process.env.NODE_ENV === "production", // Set to true in production
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Required for cross-origin in production
         maxAge: 24 * 60 * 60 * 1000, // 24 hours
       },
     })

@@ -14,6 +14,7 @@ export function useAuth() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
         credentials: "include",
+        mode: "cors",
       });
 
       if (!response.ok) {
