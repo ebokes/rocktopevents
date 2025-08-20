@@ -18,8 +18,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup admin authentication
   setupAdminAuth(app);
 
+  console.log(corsOptions.origin);
+  console.log(app.options);
+
   // Add this before your other routes
-  app.options("*", cors(corsOptions)); // Handle preflight requests
+  // app.options("*", cors(corsOptions)); // Handle preflight requests
 
   // Also add OPTIONS handling for specific auth routes
   app.options("/api/admin/login", cors(corsOptions));

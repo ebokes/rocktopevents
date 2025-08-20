@@ -33,7 +33,10 @@ export default function AdminLogin() {
       await loginMutation.mutateAsync({ username, password });
       setLocation("/admin");
     } catch (err) {
-      setError("Invalid username or password");
+      setError(
+        err instanceof Error ? err.message : "Invalid username or password"
+      );
+      // setError("Invalid username or password");
     }
   };
 
