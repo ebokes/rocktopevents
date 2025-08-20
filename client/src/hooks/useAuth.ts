@@ -13,12 +13,13 @@ export function useAuth() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials),
+        credentials: "include",
       });
-      
+
       if (!response.ok) {
         throw new Error("Invalid credentials");
       }
-      
+
       return response.json();
     },
     onSuccess: (data) => {
@@ -31,11 +32,11 @@ export function useAuth() {
       const response = await fetch("/api/admin/logout", {
         method: "POST",
       });
-      
+
       if (!response.ok) {
         throw new Error("Logout failed");
       }
-      
+
       return response.json();
     },
     onSuccess: () => {

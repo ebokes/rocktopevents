@@ -56,20 +56,48 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get("/health", (_req, res) => res.send("ok"));
 
+// Replace the current CORS setup with this:
+const corsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) => {
+    const { allowedOrigins } = getConfig();
+
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      // In development, allow common localhost origins
+      if (process.env.NODE_ENV === "development") {
+        if (origin.includes("localhost") || origin.includes("127.0.0.1")) {
+          return callback(null, true);
+        }
+      }
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 // Remove the complex origin check and simplify:
-app.use(
-  cors({
-    origin(
-      origin: string | undefined,
-      cb: (err: Error | null, allow?: boolean) => void
-    ) {
-      const { allowedOrigins } = getConfig();
-      if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-      cb(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin(
+//       origin: string | undefined,
+//       cb: (err: Error | null, allow?: boolean) => void
+//     ) {
+//       const { allowedOrigins } = getConfig();
+//       if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+//       cb(new Error("Not allowed by CORS"));
+//     },
+//     credentials: true,
+//   })
+// );
 
 app.use((req, res, next) => {
   const start = Date.now();
