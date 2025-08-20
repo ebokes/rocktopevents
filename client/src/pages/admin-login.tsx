@@ -2,9 +2,15 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { AlertCircle, Shield } from "lucide-react";
+import { AlertCircle, Eye, EyeClosed, Shield } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function AdminLogin() {
@@ -13,11 +19,16 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const { loginMutation } = useAuth();
   const [, setLocation] = useLocation();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    
+
     try {
       await loginMutation.mutateAsync({ username, password });
       setLocation("/admin");
@@ -52,22 +63,36 @@ export default function AdminLogin() {
                 data-testid="input-username"
               />
             </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+
+            <div className="relative">
               <Input
                 id="password"
-                type="password"
+                type={isPasswordVisible ? "text" : "password"}
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 data-testid="input-password"
               />
+              {password && (
+                <span
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                >
+                  {isPasswordVisible ? (
+                    <EyeClosed size={18} />
+                  ) : (
+                    <Eye size={18} />
+                  )}
+                </span>
+              )}
             </div>
 
             {error && (
-              <div className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded-lg" data-testid="login-error">
+              <div
+                className="flex items-center gap-2 text-sm text-red-600 bg-red-50 p-3 rounded-lg"
+                data-testid="login-error"
+              >
                 <AlertCircle className="h-4 w-4" />
                 {error}
               </div>
