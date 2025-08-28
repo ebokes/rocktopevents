@@ -18,16 +18,6 @@ export async function apiRequest(
     ...(data ? {} : {}), // getAuthHeaders already includes Content-Type
   };
 
-  // Debug logging
-  console.log("📶 API Request Debug:", {
-    method,
-    url,
-    hasAuth: !!(headers as any).Authorization,
-    authPreview: (headers as any).Authorization
-      ? `${(headers as any).Authorization.substring(0, 20)}...`
-      : "No auth header",
-  });
-
   const res = await fetch(url, {
     method,
     headers,

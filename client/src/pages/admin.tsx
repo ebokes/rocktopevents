@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
+import { ImageUpload } from "@/components/ui/image-upload";
 import Navbar from "@/components/layout/navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -117,6 +118,8 @@ export default function Admin() {
   const { isAuthenticated, isLoading } = useAuth();
   const queryClient = useQueryClient();
   const [activeEditDialog, setActiveEditDialog] = useState<string | null>(null);
+  const [isGalleryDialogOpen, setIsGalleryDialogOpen] = useState(false);
+  const [isBlogDialogOpen, setIsBlogDialogOpen] = useState(false);
 
   // Redirect to home if not authenticated
   useEffect(() => {
@@ -192,6 +195,7 @@ export default function Admin() {
       queryClient.invalidateQueries({ queryKey: ["/api/blog"] });
       toast({ title: "Blog post created successfully" });
       setActiveEditDialog(null);
+      setIsBlogDialogOpen(false); // Close the dialog
     },
   });
 
@@ -221,6 +225,7 @@ export default function Admin() {
       queryClient.invalidateQueries({ queryKey: ["/api/gallery"] });
       toast({ title: "Gallery item created successfully" });
       setActiveEditDialog(null);
+      setIsGalleryDialogOpen(false); // Close the dialog
     },
   });
 
@@ -566,6 +571,8 @@ export default function Admin() {
                       New Post
                     </Button>
                   }
+                  open={isBlogDialogOpen}
+                  onOpenChange={setIsBlogDialogOpen}
                   onSubmit={(data) => createBlogMutation.mutate(data)}
                 />
               </CardHeader>
@@ -659,6 +666,8 @@ export default function Admin() {
                       New Item
                     </Button>
                   }
+                  open={isGalleryDialogOpen}
+                  onOpenChange={setIsGalleryDialogOpen}
                   onSubmit={(data) => createGalleryMutation.mutate(data)}
                 />
               </CardHeader>
@@ -924,9 +933,13 @@ export default function Admin() {
 function CreateBlogDialog({
   trigger,
   onSubmit,
+  open,
+  onOpenChange,
 }: {
   trigger: React.ReactNode;
   onSubmit: (data: any) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
   const form = useForm({
     resolver: zodResolver(blogPostSchema),
@@ -941,15 +954,23 @@ function CreateBlogDialog({
     },
   });
 
+  const handleSubmit = (data: any) => {
+    onSubmit(data);
+    form.reset(); // Reset form after submission
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Blog Post</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4"
+          >
             <FormField
               control={form.control}
               name="title"
@@ -1015,15 +1036,18 @@ function CreateBlogDialog({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="featuredImage"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Featured Image URL</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Featured Image"
+                    folder="blog"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -1057,9 +1081,13 @@ function CreateBlogDialog({
 function CreateGalleryDialog({
   trigger,
   onSubmit,
+  open,
+  onOpenChange,
 }: {
   trigger: React.ReactNode;
   onSubmit: (data: any) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
   const form = useForm({
     resolver: zodResolver(galleryItemSchema),
@@ -1073,15 +1101,23 @@ function CreateGalleryDialog({
     },
   });
 
+  const handleSubmit = (data: any) => {
+    onSubmit(data);
+    form.reset(); // Reset form after submission
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="bg-white dark:bg-gray-900">
         <DialogHeader>
           <DialogTitle>Create New Gallery Item</DialogTitle>
         </DialogHeader>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="space-y-4"
+          >
             <FormField
               control={form.control}
               name="title"
@@ -1095,15 +1131,18 @@ function CreateGalleryDialog({
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="imageUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image URL</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Gallery Image"
+                    folder="gallery"
+                  />
                   <FormMessage />
                 </FormItem>
               )}
@@ -1503,10 +1542,12 @@ function CreateServiceDialog({
               name="imageUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image URL</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <ImageUpload
+                    value={field.value}
+                    onChange={field.onChange}
+                    label="Service Image"
+                    folder="services"
+                  />
                   <FormMessage />
                 </FormItem>
               )}

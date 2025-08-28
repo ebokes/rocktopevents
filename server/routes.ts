@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAdminAuth, requireAdmin, requireJWTAuth } from "./adminAuth";
+import { upload, uploadToCloudinary } from "./cloudinary";
 import {
   insertQuoteRequestSchema,
   insertContactMessageSchema,
@@ -30,6 +31,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.options("/api/admin/user", cors(corsOptions));
 
   app.get("/health", (_req, res) => res.send("ok"));
+
+  // Image upload endpoint
+  app.post(
+    "/api/upload",
+    requireJWTAuth,
+    upload.single("image"),
+    async (req, res) => {
+      try {
+        if (!req.file) {
+          return res.status(400).json({ message: "No image file provided" });
+        }
+
+        const { folder = "eventpilot" } = req.body;
+
+        // Upload to Cloudinary
+        const result = await uploadToCloudinary(req.file.buffer, folder);
+
+        res.json({
+          success: true,
+          url: result.url,
+          public_id: result.public_id,
+        });
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        res.status(500).json({
+          success: false,
+          message: "Failed to upload image",
+          error: error instanceof Error ? error.message : "Unknown error",
+        });
+      }
+    }
+  );
 
   // Quote request routes
   app.post("/api/quotes", async (req, res) => {

@@ -21,11 +21,6 @@ export function getAuthHeaders(): HeadersInit {
   const token = getStoredToken();
 
   // Debug logging
-  console.log("🔍 Auth Debug:", {
-    hasToken: !!token,
-    tokenPreview: token ? `${token.substring(0, 20)}...` : "No token",
-    tokenLength: token?.length || 0,
-  });
 
   return token
     ? {

@@ -6,3 +6,6 @@ vite.config.ts.*
 *.tar.gz
 .env
 replit.md
+CLOUDINARY_INTEGRATION.md
+replit.md
+.replit
