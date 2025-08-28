@@ -13,12 +13,24 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined
 ): Promise<Response> {
+  const headers = {
+    ...getAuthHeaders(),
+    ...(data ? {} : {}), // getAuthHeaders already includes Content-Type
+  };
+
+  // Debug logging
+  console.log("📶 API Request Debug:", {
+    method,
+    url,
+    hasAuth: !!(headers as any).Authorization,
+    authPreview: (headers as any).Authorization
+      ? `${(headers as any).Authorization.substring(0, 20)}...`
+      : "No auth header",
+  });
+
   const res = await fetch(url, {
     method,
-    headers: {
-      ...getAuthHeaders(),
-      ...(data ? {} : {}), // getAuthHeaders already includes Content-Type
-    },
+    headers,
     body: data ? JSON.stringify(data) : undefined,
     credentials: "include",
   });
