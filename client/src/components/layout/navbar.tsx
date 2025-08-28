@@ -94,7 +94,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navigation.map((item) => (
                 <Link
@@ -116,7 +116,7 @@ export default function Navbar() {
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             {isLoading ? (
               <div className="text-sm text-slate-600">Loading...</div>
             ) : isAuthenticated ? (
@@ -148,12 +148,12 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
                 <Button
                   variant="ghost"
-                  size="sm"
+                  size="lg"
                   data-testid="mobile-menu-button"
                 >
                   <Menu className="h-6 w-6" />

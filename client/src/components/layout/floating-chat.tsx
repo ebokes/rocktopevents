@@ -24,9 +24,9 @@ export default function FloatingChat() {
         aria-label="Chat on WhatsApp"
       >
         <FaWhatsapp className="h-7 w-7" />
-        
+
         {/* Tooltip */}
-        <div className="absolute right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        <div className="absolute hidden md:inline-block right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
           Chat on WhatsApp
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
         </div>
@@ -40,9 +40,9 @@ export default function FloatingChat() {
         aria-label="Open Chatbot"
       >
         <MessageCircle className="h-7 w-7" />
-        
+
         {/* Tooltip */}
-        <div className="absolute right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        <div className="absolute hidden md:inline-block right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
           Live Chat Support
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
         </div>
@@ -56,9 +56,9 @@ export default function FloatingChat() {
         aria-label="Call Us"
       >
         <Phone className="h-6 w-6" />
-        
+
         {/* Tooltip */}
-        <div className="absolute right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        <div className="absolute hidden md:inline-block right-16 bg-gray-800 text-white px-3 py-2 rounded-lg text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
           Call Us Now
           <div className="absolute top-1/2 -right-1 transform -translate-y-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
         </div>
