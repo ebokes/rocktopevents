@@ -67,7 +67,8 @@ export default function AdminLogin() {
               />
             </div>
 
-            <div className="relative">
+            <div className="relative space-y-2">
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type={isPasswordVisible ? "text" : "password"}
@@ -80,7 +81,7 @@ export default function AdminLogin() {
               {password && (
                 <span
                   onClick={togglePasswordVisibility}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer text-gray-500"
+                  className="absolute right-3 top-11 transform -translate-y-1/2 cursor-pointer text-gray-500"
                 >
                   {isPasswordVisible ? (
                     <EyeClosed size={18} />
