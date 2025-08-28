@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAdminAuth, requireAdmin } from "./adminAuth";
+import { setupAdminAuth, requireAdmin, requireJWTAuth } from "./adminAuth";
 import {
   insertQuoteRequestSchema,
   insertContactMessageSchema,
@@ -49,7 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/quotes", requireAdmin, async (req, res) => {
+  app.get("/api/quotes", requireJWTAuth, async (req, res) => {
     try {
       const quotes = await storage.getQuoteRequests();
       res.json(quotes);
@@ -59,7 +59,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/quotes/:id", requireAdmin, async (req, res) => {
+  app.get("/api/quotes/:id", requireJWTAuth, async (req, res) => {
     try {
       const quote = await storage.getQuoteRequest(req.params.id);
       if (!quote) {
@@ -72,7 +72,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/quotes/:id/status", requireAdmin, async (req, res) => {
+  app.patch("/api/quotes/:id/status", requireJWTAuth, async (req, res) => {
     try {
       const { status, estimatedCost } = req.body;
       const quote = await storage.updateQuoteRequestStatus(
@@ -105,7 +105,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/contact", requireAdmin, async (req, res) => {
+  app.get("/api/contact", requireJWTAuth, async (req, res) => {
     try {
       const messages = await storage.getContactMessages();
       res.json(messages);
@@ -115,7 +115,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/contact/:id/status", requireAdmin, async (req, res) => {
+  app.patch("/api/contact/:id/status", requireJWTAuth, async (req, res) => {
     try {
       const { status } = req.body;
       const message = await storage.updateContactMessageStatus(
@@ -154,7 +154,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog", requireAdmin, async (req, res) => {
+  app.post("/api/blog", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertBlogPostSchema.parse(req.body);
       const post = await storage.createBlogPost(validatedData);
@@ -171,7 +171,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/blog/:id", requireAdmin, async (req, res) => {
+  app.put("/api/blog/:id", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertBlogPostSchema.partial().parse(req.body);
       const post = await storage.updateBlogPost(req.params.id, validatedData);
@@ -188,7 +188,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/blog/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/blog/:id", requireJWTAuth, async (req, res) => {
     try {
       await storage.deleteBlogPost(req.params.id);
       res.json({ message: "Blog post deleted successfully" });
@@ -210,7 +210,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/gallery", requireAdmin, async (req, res) => {
+  app.post("/api/gallery", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertGalleryItemSchema.parse(req.body);
       const item = await storage.createGalleryItem(validatedData);
@@ -227,7 +227,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/gallery/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/gallery/:id", requireJWTAuth, async (req, res) => {
     try {
       await storage.deleteGalleryItem(req.params.id);
       res.json({ message: "Gallery item deleted successfully" });
@@ -266,7 +266,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/venues", requireAdmin, async (req, res) => {
+  app.post("/api/venues", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertVenueSchema.parse(req.body);
       const venue = await storage.createVenue(validatedData);
@@ -283,7 +283,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/venues/:id", requireAdmin, async (req, res) => {
+  app.put("/api/venues/:id", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertVenueSchema.partial().parse(req.body);
       const venue = await storage.updateVenue(req.params.id, validatedData);
@@ -300,7 +300,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/venues/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/venues/:id", requireJWTAuth, async (req, res) => {
     try {
       await storage.deleteVenue(req.params.id);
       res.json({ message: "Venue deleted successfully" });
@@ -322,7 +322,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/services", requireAdmin, async (req, res) => {
+  app.post("/api/services", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertServiceSchema.parse(req.body);
       const service = await storage.createService(validatedData);
@@ -339,7 +339,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.put("/api/services/:id", requireAdmin, async (req, res) => {
+  app.put("/api/services/:id", requireJWTAuth, async (req, res) => {
     try {
       const validatedData = insertServiceSchema.partial().parse(req.body);
       const service = await storage.updateService(req.params.id, validatedData);
@@ -356,7 +356,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.delete("/api/services/:id", requireAdmin, async (req, res) => {
+  app.delete("/api/services/:id", requireJWTAuth, async (req, res) => {
     try {
       await storage.deleteService(req.params.id);
       res.json({ message: "Service deleted successfully" });

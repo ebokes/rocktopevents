@@ -1,5 +1,6 @@
 import express from "express";
 import session from "express-session";
+import jwt from "jsonwebtoken";
 // import { storage } from "./storage";
 
 // Simple admin credentials
@@ -46,10 +47,20 @@ export function setupAdminAuth(app: express.Express) {
       username === ADMIN_CREDENTIALS.username &&
       password === ADMIN_CREDENTIALS.password
     ) {
+      // Generate JWT token
+      const token = jwt.sign(
+        { username, role: "admin" },
+        process.env.JWT_SECRET || "default-secret",
+        { expiresIn: "1h" }
+      );
+
+      // Still set session for backward compatibility
       (req.session as any).isAdmin = true;
       (req.session as any).username = username;
+
       res.json({
         success: true,
+        token,
         user: { username, role: "admin" },
       });
     } else {
@@ -72,19 +83,42 @@ export function setupAdminAuth(app: express.Express) {
   });
 
   // Check admin status route
-  app.get("/api/admin/user", (req, res) => {
-    if ((req.session as any)?.isAdmin) {
-      res.json({
-        username: (req.session as any).username,
-        role: "admin",
-      });
-    } else {
-      res.status(401).json({ message: "Not authenticated" });
-    }
+  app.get("/api/admin/user", requireJWTAuth, (req, res) => {
+    const user = (req as any).user;
+    res.json({
+      username: user.username,
+      role: user.role,
+    });
   });
 }
 
-// Middleware to protect admin routes
+// JWT-based middleware to protect admin routes
+export function requireJWTAuth(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(" ")[1]; // Bearer TOKEN
+
+  if (!token) {
+    return res.status(401).json({ message: "Token is required" });
+  }
+
+  jwt.verify(
+    token,
+    process.env.JWT_SECRET || "default-secret",
+    (err: any, decoded: any) => {
+      if (err) {
+        return res.status(403).json({ message: "Invalid or expired token" });
+      }
+      (req as any).user = decoded;
+      next();
+    }
+  );
+}
+
+// Legacy session-based middleware (kept for backward compatibility)
 export function requireAdmin(
   req: express.Request,
   res: express.Response,
