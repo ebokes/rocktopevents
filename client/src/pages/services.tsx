@@ -167,7 +167,7 @@ const testimonials = [
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Services — Event Planning, Decoration, Rentals, Lighting & Staging"
         description="Explore our full-service event solutions: planning, decoration, equipment rentals, lighting, staging, and academic events."
@@ -195,7 +195,7 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -206,16 +206,16 @@ export default function Services() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="process-title"
             >
               Our Process
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We follow a proven process to ensure your event is perfectly
               planned and executed.
             </p>
@@ -235,7 +235,7 @@ export default function Services() {
                   <CardTitle className="text-xl">{step.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-slate-600">{step.description}</p>
+                  <p className="text-muted-foreground">{step.description}</p>
                 </CardContent>
                 {index < processSteps.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
@@ -249,17 +249,17 @@ export default function Services() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2
-                className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+                className="text-4xl md:text-5xl font-bold text-foreground mb-6"
                 data-testid="why-choose-title"
               >
                 Why Choose ROCKTOP?
               </h2>
-              <p className="text-xl text-slate-600 mb-8">
+              <p className="text-xl text-muted-foreground mb-8">
                 With years of experience and a passion for creating memorable
                 events, we're your trusted partner for any occasion.
               </p>
@@ -268,10 +268,10 @@ export default function Services() {
                 <div className="flex items-start">
                   <CheckCircle className="text-green-500 mt-1 mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Professional Expertise
                     </h3>
-                    <p className="text-slate-600">
+                    <p className="text-muted-foreground">
                       Our experienced team brings years of industry knowledge to
                       every event.
                     </p>
@@ -281,10 +281,10 @@ export default function Services() {
                 <div className="flex items-start">
                   <CheckCircle className="text-green-500 mt-1 mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Full-Service Solutions
                     </h3>
-                    <p className="text-slate-600">
+                    <p className="text-muted-foreground">
                       From planning to execution, we handle every detail of your
                       event.
                     </p>
@@ -294,10 +294,10 @@ export default function Services() {
                 <div className="flex items-start">
                   <CheckCircle className="text-green-500 mt-1 mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Customized Approach
                     </h3>
-                    <p className="text-slate-600">
+                    <p className="text-muted-foreground">
                       Every event is unique, and we tailor our services to match
                       your vision.
                     </p>
@@ -307,10 +307,10 @@ export default function Services() {
                 <div className="flex items-start">
                   <CheckCircle className="text-green-500 mt-1 mr-4 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Reliable Partnership
                     </h3>
-                    <p className="text-slate-600">
+                    <p className="text-muted-foreground">
                       We're committed to delivering excellence and building
                       lasting relationships.
                     </p>
@@ -332,16 +332,16 @@ export default function Services() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="testimonials-title"
             >
               What Our Clients Say
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Don't just take our word for it. Here's what our satisfied clients
               have to say about working with us.
             </p>
