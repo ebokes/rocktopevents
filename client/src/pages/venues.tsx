@@ -47,7 +47,7 @@ export default function Venues() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Event Venues — Find the Perfect Venue"
         description="Discover and filter venues by location, capacity, and event type to find the perfect space for your event."
@@ -70,7 +70,7 @@ export default function Venues() {
       </section>
 
       {/* Search and Filters */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-8 bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Card className="shadow-lg" data-testid="venue-filters">
             <CardContent className="p-6">
@@ -135,7 +135,7 @@ export default function Venues() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-slate-800" data-testid="venues-results-title">
+            <h2 className="text-2xl font-bold text-foreground" data-testid="venues-results-title">
               Available Venues
             </h2>
             {venues && (
@@ -175,7 +175,7 @@ export default function Venues() {
             </div>
           ) : (
             <div className="text-center py-12" data-testid="venues-empty">
-              <div className="text-slate-600 mb-4">
+              <div className="text-muted-foreground mb-4">
                 No venues found matching your criteria.
               </div>
               <Button onClick={clearFilters}>Clear Filters</Button>
@@ -185,13 +185,13 @@ export default function Venues() {
       </section>
 
       {/* Map Section Placeholder */}
-      <section className="py-12 bg-gray-100">
+      <section className="py-12 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-slate-800 mb-8 text-center">
+          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
             Venues Map View
           </h2>
-          <div className="bg-gray-200 rounded-2xl h-96 flex items-center justify-center">
-            <div className="text-center text-slate-600">
+          <div className="bg-muted rounded-2xl h-96 flex items-center justify-center">
+            <div className="text-center text-muted-foreground">
               <MapPin className="h-12 w-12 mx-auto mb-4 text-primary" />
               <p className="text-lg font-medium">Interactive Map</p>
               <p className="text-sm">Google Maps integration shows venue locations</p>

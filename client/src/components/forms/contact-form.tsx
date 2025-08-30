@@ -81,8 +81,8 @@ export default function ContactForm() {
   return (
     <Card className="w-full" data-testid="contact-form">
       <CardHeader>
-        <CardTitle className="text-2xl">Send us a message</CardTitle>
-        <p className="text-slate-600">
+        <CardTitle className="text-2xl text-foreground">Send us a message</CardTitle>
+        <p className="text-muted-foreground">
           We'd love to hear from you. Send us a message and we'll respond as
           soon as possible.
         </p>

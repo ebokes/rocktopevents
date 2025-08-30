@@ -43,7 +43,8 @@
   --secondary: 43 96% 56%;
   --secondary-foreground: 0 0% 0%;
   --muted: 217 19% 27%;
-  --muted-foreground: 215 20% 65%;
+  /* Increase muted-foreground lightness for better dark-mode readability */
+  --muted-foreground: 215 20% 78%;
   --accent: 328 85% 70%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 63% 31%;

@@ -31,6 +31,16 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme') || 'system';
+          var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var shouldDark = stored === 'dark' || (stored === 'system' && systemDark);
+          if (shouldDark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

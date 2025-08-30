@@ -63,14 +63,14 @@ export default function ServiceCard({ service }: ServiceCardProps) {
               }`}
             />
           </div>
-          <CardTitle className="text-2xl text-slate-800">
+          <CardTitle className="text-2xl text-slate-800 dark:text-slate-100">
             {service.title}
           </CardTitle>
         </div>
 
-        <p className="text-slate-600 mb-6">{service.description}</p>
+        <p className="text-slate-600 dark:text-slate-300 mb-6">{service.description}</p>
 
-        <ul className="text-sm text-slate-600 mb-6 space-y-2">
+        <ul className="text-sm text-slate-600 dark:text-slate-300 mb-6 space-y-2">
           {service.features.map((feature, index) => (
             <li key={index} className="flex items-center">
               <Check className="text-green-500 mr-2 h-4 w-4" />

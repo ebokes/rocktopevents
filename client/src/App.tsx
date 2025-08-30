@@ -15,6 +15,7 @@ import Contact from "@/pages/contact";
 import Admin from "@/pages/admin";
 import AdminLogin from "@/pages/admin-login";
 import ScrollToTop from "./components/ui/scroll-to-top";
+import { ThemeProvider } from "./theme/ThemeProvider";
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -42,11 +43,13 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <ScrollToTop />
-        <Toaster />
-        <Router />
-      </TooltipProvider>
+      <ThemeProvider>
+        <TooltipProvider>
+          <ScrollToTop />
+          <Toaster />
+          <Router />
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

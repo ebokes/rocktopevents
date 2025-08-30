@@ -342,7 +342,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO title="Admin Dashboard" robots="noindex,nofollow" type="website" />
       <Navbar />
 

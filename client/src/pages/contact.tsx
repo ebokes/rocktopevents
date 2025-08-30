@@ -23,21 +23,21 @@ const contactInfo = [
       "Awka, Anambra State.",
     ],
     color: "text-primary",
-    bgColor: "bg-primary/10",
+    bgColor: "bg-primary/10 dark:bg-primary/20",
   },
   {
     icon: Phone,
     title: "Phone",
     details: ["(+234) 813 6842 241", "24hrs support"],
     color: "text-green-600",
-    bgColor: "bg-green-600/10",
+    bgColor: "bg-green-600/10 dark:bg-green-600/20",
   },
   {
     icon: Mail,
     title: "Email",
     details: ["rocktopevents@gmail.com"],
     color: "text-accent",
-    bgColor: "bg-accent/10",
+    bgColor: "bg-accent/10 dark:bg-accent/20",
   },
 ];
 
@@ -63,7 +63,7 @@ const socialLinks = [
     name: "X",
     icon: faXTwitter,
     href: "https://x.com/Rocktop_events",
-    color: "text-black",
+    color: "text-black dark:text-white",
   },
   {
     name: "Pinterest",
@@ -75,7 +75,7 @@ const socialLinks = [
 
 export default function Contact() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Contact — Get a Free Consultation"
         description="Contact ROCKTOP Premium Events for quotes, consultations, and inquiries. We’re ready to bring your event vision to life."
@@ -114,7 +114,7 @@ export default function Contact() {
             <div className="space-y-8">
               <div>
                 <h2
-                  className="text-2xl font-bold text-slate-800 mb-6"
+                  className="text-2xl font-bold text-foreground mb-6"
                   data-testid="contact-info-title"
                 >
                   Contact Information
@@ -133,11 +133,11 @@ export default function Contact() {
                           <Icon className={`${info.color} text-xl`} />
                         </div>
                         <div>
-                          <h3 className="font-semibold text-slate-800 mb-1">
+                          <h3 className="font-semibold text-foreground mb-1">
                             {info.title}
                           </h3>
                           {info.details.map((detail, detailIndex) => (
-                            <p key={detailIndex} className="text-slate-600">
+                            <p key={detailIndex} className="text-muted-foreground">
                               {detail}
                             </p>
                           ))}
@@ -150,7 +150,7 @@ export default function Contact() {
 
               {/* Social Media */}
               <div>
-                <h3 className="text-xl font-bold text-slate-800 mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-4">
                   Follow Us
                 </h3>
                 <div className="flex space-x-4">
@@ -160,7 +160,7 @@ export default function Contact() {
                       href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${social.color} p-3 bg-white rounded-lg shadow-sm hover:shadow-md`}
+                      className={`${social.color} p-3 bg-card border border-border rounded-lg shadow-sm hover:shadow-md`}
                       data-testid={`social-${social.name.toLowerCase()}`}
                     >
                       <FontAwesomeIcon icon={social.icon} className="text-xl" />
@@ -174,7 +174,7 @@ export default function Contact() {
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <Clock className="text-primary mr-2" />
-                    <h3 className="text-xl font-bold text-slate-800">
+                    <h3 className="text-xl font-bold text-foreground">
                       Business Hours
                     </h3>
                   </div>
@@ -185,8 +185,8 @@ export default function Contact() {
                         className="flex justify-between"
                         data-testid={`business-hours-${index}`}
                       >
-                        <span className="text-slate-600">{schedule.day}</span>
-                        <span className="text-slate-800 font-medium">
+                        <span className="text-muted-foreground">{schedule.day}</span>
+                        <span className="text-foreground font-medium">
                           {schedule.hours}
                         </span>
                       </div>
@@ -212,7 +212,7 @@ export default function Contact() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="w-full hover:bg-primary text-slate-800"
+                  className="w-full hover:bg-primary hover:text-primary-foreground text-foreground"
                   data-testid="quick-contact-call"
                   onClick={() => window.open("tel:+2348136842241", "_self")}
                 >

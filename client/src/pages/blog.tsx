@@ -53,7 +53,7 @@ export default function Blog() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Blog — Event Planning Insights and Tips"
         description="Read the latest articles on event planning, design, technology, and trends from ROCKTOP Premium Events."
@@ -93,10 +93,10 @@ export default function Blog() {
 
       {/* Featured Article */}
       {featuredPost && (
-        <section className="py-16 bg-white">
+        <section className="py-16 bg-card">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-800 mb-4">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
                 Featured Article
               </h2>
             </div>
@@ -115,7 +115,7 @@ export default function Blog() {
                   />
                 </div>
                 <CardContent className="p-8 lg:p-12">
-                  <div className="flex items-center text-sm text-slate-600 mb-4">
+                  <div className="flex items-center text-sm text-muted-foreground mb-4">
                     <Badge className="mr-3">Featured</Badge>
                     <Calendar className="h-4 w-4 mr-1" />
                     <span data-testid="featured-post-date">
@@ -129,13 +129,13 @@ export default function Blog() {
                     </span>
                   </div>
                   <h3
-                    className="text-3xl font-bold text-slate-800 mb-4"
+                    className="text-3xl font-bold text-foreground mb-4"
                     data-testid="featured-post-title"
                   >
                     {featuredPost.title}
                   </h3>
                   <p
-                    className="text-slate-600 mb-6 text-lg"
+                    className="text-muted-foreground mb-6 text-lg"
                     data-testid="featured-post-excerpt"
                   >
                     {featuredPost.excerpt}
@@ -159,7 +159,7 @@ export default function Blog() {
 
       {/* Categories */}
       {categories.length > 0 && (
-        <section className="py-8 bg-gray-100 border-b">
+        <section className="py-8 bg-muted/20 border-b border-border">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-3">
               <Badge variant="outline" className="text-sm">
@@ -179,11 +179,11 @@ export default function Blog() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800">
+            <h2 className="text-3xl font-bold text-foreground">
               Latest Articles
             </h2>
             {filteredPosts.length > 0 && (
-              <span className="text-slate-600" data-testid="blog-posts-count">
+              <span className="text-muted-foreground" data-testid="blog-posts-count">
                 {filteredPosts.length} articles
               </span>
             )}
@@ -220,7 +220,7 @@ export default function Blog() {
             </div>
           ) : (
             <div className="text-center py-12" data-testid="blog-empty">
-              <div className="text-slate-600 mb-4">
+              <div className="text-muted-foreground mb-4">
                 {searchTerm
                   ? `No articles found for "${searchTerm}"`
                   : "No blog posts available."}

@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import Rocktop from "../../../assets/rocktop-img.webp";
 import RocktopLogo1 from "../../../assets/rocktop-logo1.webp";
+import ThemeToggle from "@/components/ui/theme-toggle";
 
 function LogoutButton({
   mobile = false,
@@ -62,7 +63,7 @@ export default function Navbar() {
     <nav
       className={`${
         navColor
-          ? "bg-white shadow-lg sticky top-0 z-50"
+          ? "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b border-border shadow-sm sticky top-0 z-50"
           : "bg-transparent z-50"
       }`}
       data-testid="navbar"
@@ -102,8 +103,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`px-3 py-2 text-sm font-medium transition-colors ${
                     isActive(item.href)
-                      ? "text-purple-600 font-semibold"
-                      : "text-slate-600 hover:text-purple-600"
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground hover:text-primary"
                   }`}
                   data-testid={`nav-${item.name
                     .toLowerCase()
@@ -117,15 +118,13 @@ export default function Navbar() {
 
           {/* Auth Buttons */}
           <div className="hidden lg:flex items-center space-x-4">
+            <ThemeToggle />
             {isLoading ? (
-              <div className="text-sm text-slate-600">Loading...</div>
+              <div className="text-sm text-muted-foreground">Loading...</div>
             ) : isAuthenticated ? (
               <>
                 <div className="flex items-center space-x-3">
-                  <span
-                    className="text-sm text-slate-700"
-                    data-testid="user-name"
-                  >
+                  <span className="text-sm text-foreground" data-testid="user-name">
                     Admin
                   </span>
                 </div>
@@ -161,14 +160,17 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px]">
                 <div className="flex flex-col space-y-4 mt-8">
+                  <div className="flex justify-end">
+                    <ThemeToggle />
+                  </div>
                   {navigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
                       className={`block px-3 py-2 text-base font-medium transition-colors ${
                         isActive(item.href)
-                          ? " text-purple-600 font-semibold"
-                          : "text-slate-600 hover:text-purple-600"
+                          ? "text-primary font-semibold"
+                          : "text-muted-foreground hover:text-primary"
                       }`}
                       onClick={() => setIsOpen(false)}
                       data-testid={`mobile-nav-${item.name
@@ -183,7 +185,7 @@ export default function Navbar() {
                     {isAuthenticated ? (
                       <>
                         <div className="px-3 py-2">
-                          <div className="text-sm text-slate-700">Admin</div>
+                          <div className="text-sm text-foreground">Admin</div>
                         </div>
                         <Button
                           className="w-full mb-2"

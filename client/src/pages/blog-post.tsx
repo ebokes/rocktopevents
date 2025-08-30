@@ -136,7 +136,7 @@ export default function BlogPost() {
             </Link>
           </Button>
           
-          <div className="flex items-center text-sm text-slate-600 mb-4">
+          <div className="flex items-center text-sm text-muted-foreground mb-4">
             <Badge 
               className={`mr-4 text-white ${categoryColors[post.category] || 'bg-slate-500'}`}
               data-testid="blog-post-category"
@@ -153,11 +153,11 @@ export default function BlogPost() {
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6 leading-tight" data-testid="blog-post-title">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight" data-testid="blog-post-title">
             {post.title}
           </h1>
           
-          <p className="text-xl text-slate-600 mb-8" data-testid="blog-post-excerpt">
+          <p className="text-xl text-muted-foreground mb-8" data-testid="blog-post-excerpt">
             {post.excerpt}
           </p>
           
@@ -201,7 +201,7 @@ export default function BlogPost() {
         {/* Tags */}
         {post.tags && post.tags.length > 0 && (
           <div className="border-t border-gray-200 pt-8 mb-8">
-            <h3 className="text-sm font-medium text-slate-800 mb-4">Tags</h3>
+            <h3 className="text-sm font-medium text-foreground mb-4">Tags</h3>
             <div className="flex flex-wrap gap-2">
               {post.tags.map((tag: string, index: number) => (
                 <Badge key={index} variant="outline" data-testid={`tag-${index}`}>

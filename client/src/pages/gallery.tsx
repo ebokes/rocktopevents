@@ -30,7 +30,7 @@ export default function Gallery() {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Gallery — Our Event Portfolio"
         description="Browse our portfolio of weddings, corporate, social, and academic events. See how we transform ideas into unforgettable experiences."
@@ -53,7 +53,7 @@ export default function Gallery() {
       </section>
 
       {/* Category Filters */}
-      <section className="py-8 bg-white border-b">
+      <section className="py-8 bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-center gap-4">
             {galleryFilters.map((filter) => (
@@ -96,7 +96,7 @@ export default function Gallery() {
             </div>
           ) : (
             <div className="text-center py-12" data-testid="gallery-empty">
-              <div className="text-slate-600 mb-4">
+              <div className="text-muted-foreground mb-4">
                 No gallery items found for this category.
               </div>
               <Button onClick={() => setActiveFilter("all")}>
@@ -108,13 +108,13 @@ export default function Gallery() {
       </section>
 
       {/* Featured Work Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Featured Events
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Some of our most memorable and successful events that showcase our expertise and creativity.
             </p>
           </div>
@@ -132,10 +132,10 @@ export default function Gallery() {
                 </Badge>
               </div>
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   Elegant Garden Wedding
                 </h3>
-                <p className="text-slate-600 mb-6">
+                <p className="text-muted-foreground mb-6">
                   A breathtaking outdoor wedding celebration featuring custom floral arrangements, string lighting, 
                   and a romantic garden setting for 200 guests.
                 </p>
@@ -159,10 +159,10 @@ export default function Gallery() {
                 </Badge>
               </div>
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-slate-800 mb-4">
+                <h3 className="text-2xl font-bold text-foreground mb-4">
                   Tech Summit Conference
                 </h3>
-                <p className="text-slate-600 mb-6">
+                <p className="text-muted-foreground mb-6">
                   A high-tech corporate conference with advanced AV setup, professional staging, 
                   and seamless logistics for 500+ attendees.
                 </p>

@@ -162,7 +162,7 @@ export default function Landing() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <SEO
         title="Event Planning, Decoration, Rentals, Lighting & Staging"
         description="Professional event planning, decoration, rentals, lighting and staging services. Get quotes, explore venues, and plan your perfect event."
@@ -238,16 +238,16 @@ export default function Landing() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-white" id="services">
+      <section className="py-20 bg-card" id="services">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="services-title"
             >
               Our Services
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Comprehensive event solutions tailored to your needs. From concept
               to completion, we handle every detail.
             </p>
@@ -263,16 +263,16 @@ export default function Landing() {
 
       {/* Quote Request Section */}
       {showQuoteForm && (
-        <section className="py-20 bg-gray-100" id="quote">
+        <section className="py-20 bg-muted/20" id="quote">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2
-                className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+                className="text-4xl md:text-5xl font-bold text-foreground mb-6"
                 data-testid="quote-title"
               >
                 Get Your Free Quote
               </h2>
-              <p className="text-xl text-slate-600">
+              <p className="text-xl text-muted-foreground">
                 Tell us about your event and we'll provide a customized quote
                 within 24 hours.
               </p>
@@ -283,16 +283,16 @@ export default function Landing() {
       )}
 
       {/* Find Venues Section */}
-      <section className="py-20 bg-white" id="venues">
+      <section className="py-20 bg-card" id="venues">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="venues-title"
             >
               Find Event Venues
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Discover the perfect venue for your event. Search by location,
               capacity, and amenities.
             </p>
@@ -309,7 +309,7 @@ export default function Landing() {
                 .map((venue: any) => <VenueCard key={venue.id} venue={venue} />)
             ) : (
               <div className="col-span-full text-center py-8">
-                <div className="text-slate-600">
+                <div className="text-muted-foreground">
                   No venues available at the moment.
                 </div>
               </div>
@@ -325,16 +325,16 @@ export default function Landing() {
       </section>
 
       {/* Gallery Section */}
-      <section className="py-20 bg-gray-100" id="gallery">
+      <section className="py-20 bg-muted/20" id="gallery">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="gallery-title"
             >
               Our Portfolio
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Explore our recent events and see how we bring visions to life
               with creativity and attention to detail.
             </p>
@@ -366,7 +366,7 @@ export default function Landing() {
                 .map((item: any) => <GalleryItem key={item.id} item={item} />)
             ) : (
               <div className="col-span-full text-center py-8">
-                <div className="text-slate-600">
+                <div className="text-muted-foreground">
                   No gallery items available.
                 </div>
               </div>
@@ -382,16 +382,16 @@ export default function Landing() {
       </section>
 
       {/* Blog Section */}
-      <section className="py-20 bg-white" id="blog">
+      <section className="py-20 bg-card" id="blog">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2
-              className="text-4xl md:text-5xl font-bold text-slate-800 mb-6"
+              className="text-4xl md:text-5xl font-bold text-foreground mb-6"
               data-testid="blog-title"
             >
               Latest from Our Blog
             </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Get insights, tips, and inspiration for planning the perfect
               event. Stay updated with the latest trends in event management.
             </p>
