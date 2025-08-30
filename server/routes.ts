@@ -147,6 +147,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch messages" });
     }
   });
+  app.delete("/api/contact/:id", requireJWTAuth, async (req, res) => {
+    try {
+      await storage.deleteContactMessage(req.params.id);
+      res.json({ message: "Contact item deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting contact item:", error);
+      res.status(500).json({ message: "Failed to delete contact item" });
+    }
+  });
 
   app.patch("/api/contact/:id/status", requireJWTAuth, async (req, res) => {
     try {

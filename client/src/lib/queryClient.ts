@@ -26,6 +26,14 @@ export async function apiRequest(
   });
 
   await throwIfResNotOk(res);
+  // async function throwIfResNotOk(res: Response) {
+  if (!res.ok) {
+    const text = await res.clone().text(); // read body safely
+    console.error("API ERROR", res.status, res.url, text);
+    throw new Error(`${res.status}: ${text || res.statusText}`);
+  }
+  // }
+
   return res;
 }
 

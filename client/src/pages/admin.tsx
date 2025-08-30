@@ -218,6 +218,15 @@ export default function Admin() {
     },
   });
 
+  const deleteContactMessageMutation = useMutation({
+    mutationFn: async (id: string) =>
+      await apiRequest("DELETE", `/api/contact/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/contact"] });
+      toast({ title: "Contact Message deleted successfully" });
+    },
+  });
+
   const createGalleryMutation = useMutation({
     mutationFn: async (data: any) =>
       await apiRequest("POST", "/api/gallery", data),
@@ -529,16 +538,52 @@ export default function Admin() {
                             <p className="text-sm text-slate-600">
                               {contact.email}
                             </p>
+                            <p className="text-sm text-slate-600">
+                              {contact.phone}
+                            </p>
                           </div>
-                          <Badge
-                            variant={
-                              contact.status === "unread"
-                                ? "secondary"
-                                : "default"
-                            }
-                          >
-                            {contact.status}
-                          </Badge>
+                          <div className="flex flex-col gap-2">
+                            <Badge
+                              variant={
+                                contact.status === "unread"
+                                  ? "secondary"
+                                  : "default"
+                              }
+                            >
+                              {contact.status}
+                            </Badge>
+                            <AlertDialog>
+                              <AlertDialogTrigger asChild>
+                                <Button size="sm" variant="outline">
+                                  <Trash2 className="h-4 w-4" />
+                                </Button>
+                              </AlertDialogTrigger>
+                              <AlertDialogContent className="bg-white dark:bg-gray-900">
+                                <AlertDialogHeader>
+                                  <AlertDialogTitle>
+                                    Delete Message Item
+                                  </AlertDialogTitle>
+                                  <AlertDialogDescription>
+                                    Are you sure you want to delete Message?
+                                    This action cannot be undone.
+                                  </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                  <AlertDialogAction
+                                    onClick={() =>
+                                      deleteContactMessageMutation.mutate(
+                                        contact.id
+                                      )
+                                    }
+                                    className="bg-red-600 hover:bg-red-700"
+                                  >
+                                    Delete
+                                  </AlertDialogAction>
+                                </AlertDialogFooter>
+                              </AlertDialogContent>
+                            </AlertDialog>
+                          </div>
                         </div>
                         <h4 className="font-medium mb-1">{contact.subject}</h4>
                         <p className="text-sm text-slate-600">

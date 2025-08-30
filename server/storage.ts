@@ -28,37 +28,49 @@ export interface IStorage {
   // User operations (mandatory for Replit Auth)
   getUser(id: string): Promise<User | undefined>;
   upsertUser(user: UpsertUser): Promise<User>;
-  
+
   // Quote operations
   createQuoteRequest(quote: InsertQuoteRequest): Promise<QuoteRequest>;
   getQuoteRequests(): Promise<QuoteRequest[]>;
   getQuoteRequest(id: string): Promise<QuoteRequest | undefined>;
-  updateQuoteRequestStatus(id: string, status: string, estimatedCost?: string): Promise<QuoteRequest>;
-  
+  updateQuoteRequestStatus(
+    id: string,
+    status: string,
+    estimatedCost?: string
+  ): Promise<QuoteRequest>;
+
   // Contact operations
   createContactMessage(message: InsertContactMessage): Promise<ContactMessage>;
   getContactMessages(): Promise<ContactMessage[]>;
-  updateContactMessageStatus(id: string, status: string): Promise<ContactMessage>;
-  
+  updateContactMessageStatus(
+    id: string,
+    status: string
+  ): Promise<ContactMessage>;
+  deleteContactMessage(id: string): Promise<void>;
+
   // Blog operations
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
   getBlogPosts(published?: boolean): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | undefined>;
   updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost>;
   deleteBlogPost(id: string): Promise<void>;
-  
+
   // Gallery operations
   createGalleryItem(item: InsertGalleryItem): Promise<GalleryItem>;
   getGalleryItems(category?: string): Promise<GalleryItem[]>;
   deleteGalleryItem(id: string): Promise<void>;
-  
+
   // Venue operations
   createVenue(venue: InsertVenue): Promise<Venue>;
-  getVenues(filters?: { city?: string, capacity?: string, eventType?: string }): Promise<Venue[]>;
+  getVenues(filters?: {
+    city?: string;
+    capacity?: string;
+    eventType?: string;
+  }): Promise<Venue[]>;
   getVenue(id: string): Promise<Venue | undefined>;
   updateVenue(id: string, venue: Partial<InsertVenue>): Promise<Venue>;
   deleteVenue(id: string): Promise<void>;
-  
+
   // Service operations
   createService(service: InsertService): Promise<Service>;
   getServices(activeOnly?: boolean): Promise<Service[]>;
@@ -113,13 +125,17 @@ export class DatabaseStorage implements IStorage {
     return quote;
   }
 
-  async updateQuoteRequestStatus(id: string, status: string, estimatedCost?: string): Promise<QuoteRequest> {
+  async updateQuoteRequestStatus(
+    id: string,
+    status: string,
+    estimatedCost?: string
+  ): Promise<QuoteRequest> {
     const [quote] = await db
       .update(quoteRequests)
-      .set({ 
-        status, 
+      .set({
+        status,
         estimatedCost,
-        updatedAt: new Date() 
+        updatedAt: new Date(),
       })
       .where(eq(quoteRequests.id, id))
       .returning();
@@ -127,7 +143,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Contact operations
-  async createContactMessage(message: InsertContactMessage): Promise<ContactMessage> {
+  async createContactMessage(
+    message: InsertContactMessage
+  ): Promise<ContactMessage> {
     const [contactMessage] = await db
       .insert(contactMessages)
       .values(message)
@@ -142,7 +160,10 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(contactMessages.createdAt));
   }
 
-  async updateContactMessageStatus(id: string, status: string): Promise<ContactMessage> {
+  async updateContactMessageStatus(
+    id: string,
+    status: string
+  ): Promise<ContactMessage> {
     const [message] = await db
       .update(contactMessages)
       .set({ status })
@@ -151,22 +172,23 @@ export class DatabaseStorage implements IStorage {
     return message;
   }
 
+  async deleteContactMessage(id: string): Promise<void> {
+    await db.delete(contactMessages).where(eq(contactMessages.id, id));
+  }
+
   // Blog operations
   async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
-    const [blogPost] = await db
-      .insert(blogPosts)
-      .values(post)
-      .returning();
+    const [blogPost] = await db.insert(blogPosts).values(post).returning();
     return blogPost;
   }
 
   async getBlogPosts(published?: boolean): Promise<BlogPost[]> {
     const query = db.select().from(blogPosts);
-    
+
     if (published !== undefined) {
       query.where(eq(blogPosts.published, published));
     }
-    
+
     return await query.orderBy(desc(blogPosts.createdAt));
   }
 
@@ -178,7 +200,10 @@ export class DatabaseStorage implements IStorage {
     return post;
   }
 
-  async updateBlogPost(id: string, post: Partial<InsertBlogPost>): Promise<BlogPost> {
+  async updateBlogPost(
+    id: string,
+    post: Partial<InsertBlogPost>
+  ): Promise<BlogPost> {
     const [blogPost] = await db
       .update(blogPosts)
       .set({ ...post, updatedAt: new Date() })
@@ -202,11 +227,11 @@ export class DatabaseStorage implements IStorage {
 
   async getGalleryItems(category?: string): Promise<GalleryItem[]> {
     const query = db.select().from(galleryItems);
-    
-    if (category && category !== 'all') {
+
+    if (category && category !== "all") {
       query.where(eq(galleryItems.category, category));
     }
-    
+
     return await query.orderBy(desc(galleryItems.createdAt));
   }
 
@@ -216,51 +241,50 @@ export class DatabaseStorage implements IStorage {
 
   // Venue operations
   async createVenue(venue: InsertVenue): Promise<Venue> {
-    const [newVenue] = await db
-      .insert(venues)
-      .values(venue)
-      .returning();
+    const [newVenue] = await db.insert(venues).values(venue).returning();
     return newVenue;
   }
 
-  async getVenues(filters?: { city?: string, capacity?: string, eventType?: string }): Promise<Venue[]> {
+  async getVenues(filters?: {
+    city?: string;
+    capacity?: string;
+    eventType?: string;
+  }): Promise<Venue[]> {
     const conditions = [eq(venues.available, true)];
-    
+
     if (filters?.city) {
       conditions.push(like(venues.city, `%${filters.city}%`));
     }
-    
+
     if (filters?.capacity) {
       const capacityRanges: { [key: string]: [number, number] } = {
-        '1-50': [1, 50],
-        '51-100': [51, 100],
-        '101-200': [101, 200],
-        '201-500': [201, 500],
-        '500+': [500, 99999],
+        "1-50": [1, 50],
+        "51-100": [51, 100],
+        "101-200": [101, 200],
+        "201-500": [201, 500],
+        "500+": [500, 99999],
       };
-      
+
       const range = capacityRanges[filters.capacity];
       if (range) {
         conditions.push(sql`${venues.capacity} >= ${range[0]}`);
         conditions.push(sql`${venues.capacity} <= ${range[1]}`);
       }
     }
-    
+
     if (filters?.eventType) {
       conditions.push(like(venues.suitableFor, `%${filters.eventType}%`));
     }
-    
-    return await db.select()
+
+    return await db
+      .select()
       .from(venues)
       .where(and(...conditions))
       .orderBy(desc(venues.rating));
   }
 
   async getVenue(id: string): Promise<Venue | undefined> {
-    const [venue] = await db
-      .select()
-      .from(venues)
-      .where(eq(venues.id, id));
+    const [venue] = await db.select().from(venues).where(eq(venues.id, id));
     return venue;
   }
 
@@ -279,10 +303,7 @@ export class DatabaseStorage implements IStorage {
 
   // Service operations
   async createService(service: InsertService): Promise<Service> {
-    const [newService] = await db
-      .insert(services)
-      .values(service)
-      .returning();
+    const [newService] = await db.insert(services).values(service).returning();
     return newService;
   }
 
@@ -291,8 +312,9 @@ export class DatabaseStorage implements IStorage {
     if (activeOnly) {
       conditions.push(eq(services.active, true));
     }
-    
-    return await db.select()
+
+    return await db
+      .select()
       .from(services)
       .where(and(...conditions))
       .orderBy(services.displayOrder, services.title);
@@ -306,7 +328,10 @@ export class DatabaseStorage implements IStorage {
     return service;
   }
 
-  async updateService(id: string, service: Partial<InsertService>): Promise<Service> {
+  async updateService(
+    id: string,
+    service: Partial<InsertService>
+  ): Promise<Service> {
     const [updatedService] = await db
       .update(services)
       .set({ ...service, updatedAt: new Date() })
