@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search, MapPin, Users, Filter } from "lucide-react";
+import SEO from "@/components/seo";
 
 interface VenueFilters {
   location: string;
@@ -47,6 +48,11 @@ export default function Venues() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Event Venues — Find the Perfect Venue"
+        description="Discover and filter venues by location, capacity, and event type to find the perfect space for your event."
+        type="website"
+      />
       <Navbar />
       
       {/* Hero Section */}

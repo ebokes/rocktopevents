@@ -11,6 +11,7 @@ import {
   faXTwitter,
   faPinterest,
 } from "@fortawesome/free-brands-svg-icons";
+import SEO from "@/components/seo";
 
 const contactInfo = [
   {
@@ -75,6 +76,11 @@ const socialLinks = [
 export default function Contact() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Contact — Get a Free Consultation"
+        description="Contact ROCKTOP Premium Events for quotes, consultations, and inquiries. We’re ready to bring your event vision to life."
+        type="website"
+      />
       <Navbar />
 
       {/* Hero Section */}

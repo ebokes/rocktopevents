@@ -5,6 +5,7 @@ import ServiceCard from "@/components/ui/service-card";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import SEO from "@/components/seo";
 import {
   Calendar,
   Palette,
@@ -167,6 +168,11 @@ const testimonials = [
 export default function Services() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Services — Event Planning, Decoration, Rentals, Lighting & Staging"
+        description="Explore our full-service event solutions: planning, decoration, equipment rentals, lighting, staging, and academic events."
+        type="website"
+      />
       <Navbar />
 
       {/* Hero Section */}

@@ -12,6 +12,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { AlertCircle, Eye, EyeClosed, Shield } from "lucide-react";
 import { useLocation } from "wouter";
+import SEO from "@/components/seo";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -42,6 +43,7 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary to-accent flex items-center justify-center p-4">
+      <SEO title="Admin Login" robots="noindex,nofollow" type="website" />
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">

@@ -7,6 +7,7 @@ import GalleryItem from "@/components/ui/gallery-item";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import SEO from "@/components/seo";
 
 const galleryFilters = [
   { id: "all", label: "All Events" },
@@ -30,6 +31,11 @@ export default function Gallery() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Gallery — Our Event Portfolio"
+        description="Browse our portfolio of weddings, corporate, social, and academic events. See how we transform ideas into unforgettable experiences."
+        type="website"
+      />
       <Navbar />
       
       {/* Hero Section */}

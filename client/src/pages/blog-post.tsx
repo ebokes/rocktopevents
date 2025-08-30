@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar, User, ArrowLeft, Share2 } from "lucide-react";
 import { Link } from "wouter";
+import SEO from "@/components/seo";
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -90,6 +91,39 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title={`${post.title} — Blog`}
+        description={post.excerpt}
+        type="article"
+        image={post.featuredImage}
+        publishedTime={(post.publishedAt || post.createdAt) as string}
+        modifiedTime={(post.updatedAt || post.publishedAt || post.createdAt) as string}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: post.title,
+          description: post.excerpt,
+          image: post.featuredImage ? [post.featuredImage] : undefined,
+          datePublished: post.publishedAt || post.createdAt,
+          dateModified: post.updatedAt || post.publishedAt || post.createdAt,
+          mainEntityOfPage: typeof window !== "undefined" ? window.location.href : undefined,
+          author: {
+            "@type": "Organization",
+            name: "ROCKTOP Premium Events",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "ROCKTOP Premium Events",
+            logo: {
+              "@type": "ImageObject",
+              url:
+                typeof window !== "undefined"
+                  ? `${window.location.origin}/favicon.ico`
+                  : "/favicon.ico",
+            },
+          },
+        }}
+      />
       <Navbar />
       
       {/* Article Header */}

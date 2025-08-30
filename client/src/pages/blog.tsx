@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Search, Calendar, User, ArrowRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import SEO from "@/components/seo";
 
 export default function Blog() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -53,6 +54,11 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Blog — Event Planning Insights and Tips"
+        description="Read the latest articles on event planning, design, technology, and trends from ROCKTOP Premium Events."
+        type="website"
+      />
       <Navbar />
 
       {/* Hero Section */}

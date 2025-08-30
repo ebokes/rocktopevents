@@ -408,6 +408,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // SEO: robots.txt (dynamic host) and sitemap.xml
+  app.get("/robots.txt", async (req, res) => {
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const robots = [
+      "User-agent: *",
+      "Allow: /",
+      "Disallow: /admin",
+      "Disallow: /admin/*",
+      `Sitemap: ${baseUrl}/sitemap.xml`,
+      "",
+    ].join("\n");
+    res.type("text/plain").send(robots);
+  });
+
+  app.get("/sitemap.xml", async (req, res) => {
+    try {
+      const baseUrl = `${req.protocol}://${req.get("host")}`;
+      const now = new Date().toISOString();
+
+      // Static pages
+      const staticPaths = [
+        { loc: `${baseUrl}/`, priority: 1.0 },
+        { loc: `${baseUrl}/services`, priority: 0.9 },
+        { loc: `${baseUrl}/venues`, priority: 0.8 },
+        { loc: `${baseUrl}/gallery`, priority: 0.8 },
+        { loc: `${baseUrl}/blog`, priority: 0.7 },
+        { loc: `${baseUrl}/contact`, priority: 0.7 },
+      ];
+
+      // Dynamic blog posts (only published)
+      const posts = await storage.getBlogPosts(true);
+      const postEntries = posts.map((p) => ({
+        loc: `${baseUrl}/blog/${p.slug}`,
+        lastmod: (p.updatedAt || p.publishedAt || p.createdAt)?.toISOString?.() || now,
+        priority: 0.6,
+      }));
+
+      // Build XML
+      const urls = [
+        ...staticPaths.map((p) =>
+          `  <url>\n    <loc>${p.loc}</loc>\n    <lastmod>${now}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+        ),
+        ...postEntries.map(
+          (p) =>
+            `  <url>\n    <loc>${p.loc}</loc>\n    <lastmod>${p.lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${p.priority}</priority>\n  </url>`
+        ),
+      ].join("\n");
+
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+        `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>`;
+
+      res.header("Content-Type", "application/xml").send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap:", error);
+      res.status(500).send("Sitemap generation error");
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

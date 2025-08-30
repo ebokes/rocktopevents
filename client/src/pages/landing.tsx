@@ -1,4 +1,5 @@
 import QuoteForm from "@/components/forms/quote-form";
+import SEO from "@/components/seo";
 import FloatingChat from "@/components/layout/floating-chat";
 import Footer from "@/components/layout/footer";
 import Navbar from "@/components/layout/navbar";
@@ -162,6 +163,11 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEO
+        title="Event Planning, Decoration, Rentals, Lighting & Staging"
+        description="Professional event planning, decoration, rentals, lighting and staging services. Get quotes, explore venues, and plan your perfect event."
+        type="website"
+      />
       <Navbar />
 
       {/* Hero Section */}
