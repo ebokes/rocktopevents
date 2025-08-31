@@ -211,7 +211,7 @@ export default function Landing() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-black hover:bg-white hover:text-slate-800 px-8 py-4 text-lg transform hover:scale-105 transition-all"
+                className="border-white bg-white text-black hover:bg-white hover:text-slate-800 px-8 py-4 text-lg transform hover:scale-105 transition-all"
                 data-testid="button-view-work"
               >
                 <Link href="/gallery">View Our Work</Link>

@@ -7,8 +7,15 @@ import VenueCard from "@/components/ui/venue-card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Search, MapPin, Users, Filter } from "lucide-react";
+import VenuesMap from "@/components/ui/venues-map";
 import SEO from "@/components/seo";
 
 interface VenueFilters {
@@ -24,14 +31,20 @@ export default function Venues() {
     eventType: "",
   });
 
-  const { data: venues, isLoading, error } = useQuery({
+  const {
+    data: venues,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["/api/venues", filters],
     queryFn: async () => {
       const params = new URLSearchParams();
       if (filters.location) params.append("city", filters.location);
-      if (filters.capacity && filters.capacity !== "any") params.append("capacity", filters.capacity);
-      if (filters.eventType && filters.eventType !== "any") params.append("eventType", filters.eventType);
-      
+      if (filters.capacity && filters.capacity !== "any")
+        params.append("capacity", filters.capacity);
+      if (filters.eventType && filters.eventType !== "any")
+        params.append("eventType", filters.eventType);
+
       const response = await fetch(`/api/venues?${params}`);
       if (!response.ok) throw new Error("Failed to fetch venues");
       return response.json();
@@ -39,7 +52,7 @@ export default function Venues() {
   });
 
   const handleFilterChange = (key: keyof VenueFilters, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const clearFilters = () => {
@@ -54,17 +67,21 @@ export default function Venues() {
         type="website"
       />
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-accent text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-accent/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6" data-testid="venues-hero-title">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6"
+            data-testid="venues-hero-title"
+          >
             Find Your Perfect Venue
           </h1>
           <p className="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto">
-            Discover amazing venues for your event. Search by location, capacity, and amenities to find the perfect space.
+            Discover amazing venues for your event. Search by location,
+            capacity, and amenities to find the perfect space.
           </p>
         </div>
       </section>
@@ -80,13 +97,20 @@ export default function Venues() {
                   <Input
                     placeholder="City, state, or zip code"
                     value={filters.location}
-                    onChange={(e) => handleFilterChange("location", e.target.value)}
+                    onChange={(e) =>
+                      handleFilterChange("location", e.target.value)
+                    }
                     className="pl-10"
                     data-testid="filter-location"
                   />
                 </div>
-                
-                <Select value={filters.capacity} onValueChange={(value) => handleFilterChange("capacity", value)}>
+
+                <Select
+                  value={filters.capacity}
+                  onValueChange={(value) =>
+                    handleFilterChange("capacity", value)
+                  }
+                >
                   <SelectTrigger data-testid="filter-capacity">
                     <Users className="h-4 w-4 mr-2" />
                     <SelectValue placeholder="Any capacity" />
@@ -100,8 +124,13 @@ export default function Venues() {
                     <SelectItem value="500+">500+ guests</SelectItem>
                   </SelectContent>
                 </Select>
-                
-                <Select value={filters.eventType} onValueChange={(value) => handleFilterChange("eventType", value)}>
+
+                <Select
+                  value={filters.eventType}
+                  onValueChange={(value) =>
+                    handleFilterChange("eventType", value)
+                  }
+                >
                   <SelectTrigger data-testid="filter-event-type">
                     <SelectValue placeholder="Any event type" />
                   </SelectTrigger>
@@ -113,10 +142,10 @@ export default function Venues() {
                     <SelectItem value="academic">Academic</SelectItem>
                   </SelectContent>
                 </Select>
-                
+
                 <div className="flex gap-2">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={clearFilters}
                     className="flex-1"
                     data-testid="button-clear-filters"
@@ -132,7 +161,7 @@ export default function Venues() {
       </section>
 
       {/* Venues Grid */}
-      <section className="py-12">
+      {/* <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-2xl font-bold text-foreground" data-testid="venues-results-title">
@@ -182,26 +211,24 @@ export default function Venues() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
 
-      {/* Map Section Placeholder */}
+      {/* Map and Nearby Discovery */}
       <section className="py-12 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">
-            Venues Map View
+          <h2 className="text-2xl font-bold text-foreground mb-6">
+            Nearby Event Centers
           </h2>
-          <div className="bg-muted rounded-2xl h-96 flex items-center justify-center">
-            <div className="text-center text-muted-foreground">
-              <MapPin className="h-12 w-12 mx-auto mb-4 text-primary" />
-              <p className="text-lg font-medium">Interactive Map</p>
-              <p className="text-sm">Google Maps integration shows venue locations</p>
-            </div>
-          </div>
+          <p className="text-sm text-muted-foreground mb-4">
+            Enter a city or area above, then scroll here to see nearby event
+            centers on the map and send an enquiry.
+          </p>
+          <VenuesMap location={filters.location} />
         </div>
       </section>
 
       <Footer />
-      
+
       {/* Floating Chat Icons */}
       <FloatingChat />
     </div>

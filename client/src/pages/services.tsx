@@ -17,6 +17,7 @@ import {
   Star,
   Users,
 } from "lucide-react";
+import { Link } from "wouter";
 
 const services = [
   {
@@ -188,8 +189,14 @@ export default function Services() {
             Comprehensive event solutions designed to bring your vision to life
             with excellence and attention to detail.
           </p>
-          <Button size="lg" variant="primary" data-testid="button-get-quote">
-            Get Free Consultation
+          <Button
+            variant="outline"
+            size="sm"
+            className="border-white bg-white text-violet-600 hover:bg-white hover:text-violet-600 px-8 py-4  transform hover:scale-105 transition-all"
+            data-testid="button-get-quote"
+            asChild
+          >
+            <Link href="/contact">Get Free Consultation</Link>
           </Button>
         </div>
       </section>
@@ -238,7 +245,7 @@ export default function Services() {
                   <p className="text-muted-foreground">{step.description}</p>
                 </CardContent>
                 {index < processSteps.length - 1 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                  <div className="hidden lg:block absolute top-1/2 -right-8 transform -translate-y-1/2">
                     <div className="w-8 h-0.5 bg-purple-300"></div>
                   </div>
                 )}
@@ -367,11 +374,11 @@ export default function Services() {
                       />
                     ))}
                   </div>
-                  <p className="text-slate-600 mb-6 italic">
+                  <p className="text-muted-foreground  mb-6 italic">
                     "{testimonial.text}"
                   </p>
                   <div>
-                    <p className="font-semibold text-slate-800">
+                    <p className="font-semibold text-muted-foreground ">
                       {testimonial.name}
                     </p>
                     <p className="text-sm text-slate-500">
@@ -400,18 +407,22 @@ export default function Services() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              size="lg"
-              variant="primary"
+              variant="outline"
+              size="sm"
+              className="border-white bg-white text-violet-600 hover:bg-white hover:text-violet-600 px-8 py-4  transform hover:scale-105 transition-all"
               data-testid="button-get-consultation"
+              asChild
             >
-              Get Free Consultation
+              <Link href="/contact">Get Free Consultation</Link>
             </Button>
             <Button
-              size="lg"
-              variant="primary"
+              variant="outline"
+              size="sm"
+              className="border-white bg-white text-violet-600 hover:bg-white hover:text-violet-600 px-8 py-4  transform hover:scale-105 transition-all"
               data-testid="button-view-portfolio"
+              asChild
             >
-              View Our Portfolio
+              <Link href="/gallery"> View Our Portfolio</Link>
             </Button>
           </div>
         </div>
