@@ -86,7 +86,7 @@ export default function Navbar() {
                     alt="rocktop img"
                     style={{ maxWidth: "100%" }}
                   />
-                  <span className="text-sm text-slate-600 min-w-[110px]">
+                  <span className="text-sm text-muted-foreground min-w-[110px]">
                     Premium Events
                   </span>
                 </div>
@@ -124,7 +124,10 @@ export default function Navbar() {
             ) : isAuthenticated ? (
               <>
                 <div className="flex items-center space-x-3">
-                  <span className="text-sm text-foreground" data-testid="user-name">
+                  <span
+                    className="text-sm text-foreground"
+                    data-testid="user-name"
+                  >
                     Admin
                   </span>
                 </div>

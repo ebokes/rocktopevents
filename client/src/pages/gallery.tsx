@@ -20,10 +20,18 @@ const galleryFilters = [
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState("all");
 
-  const { data: galleryItems, isLoading, error } = useQuery({
+  const {
+    data: galleryItems,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["/api/gallery", activeFilter],
     queryFn: async () => {
-      const response = await fetch(`/api/gallery${activeFilter !== 'all' ? `?category=${activeFilter}` : ''}`);
+      const response = await fetch(
+        `/api/gallery${
+          activeFilter !== "all" ? `?category=${activeFilter}` : ""
+        }`
+      );
       if (!response.ok) throw new Error("Failed to fetch gallery items");
       return response.json();
     },
@@ -37,17 +45,21 @@ export default function Gallery() {
         type="website"
       />
       <Navbar />
-      
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-primary to-accent text-white py-20 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80')] bg-cover bg-center opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-accent/80"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6" data-testid="gallery-hero-title">
+          <h1
+            className="text-4xl md:text-6xl font-bold mb-6"
+            data-testid="gallery-hero-title"
+          >
             Our Portfolio
           </h1>
           <p className="text-xl md:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto">
-            Explore our recent events and see how we bring visions to life with creativity and attention to detail.
+            Explore our recent events and see how we bring visions to life with
+            creativity and attention to detail.
           </p>
         </div>
       </section>
@@ -108,21 +120,22 @@ export default function Gallery() {
       </section>
 
       {/* Featured Work Section */}
-      <section className="py-20 bg-card">
+      <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Featured Events
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Some of our most memorable and successful events that showcase our expertise and creativity.
+              Some of our most memorable and successful events that showcase our
+              expertise and creativity.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <Card className="overflow-hidden">
               <div className="relative">
-                <img 
+                <img
                   src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
                   alt="Featured wedding event"
                   className="w-full h-64 object-cover"
@@ -136,8 +149,9 @@ export default function Gallery() {
                   Elegant Garden Wedding
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  A breathtaking outdoor wedding celebration featuring custom floral arrangements, string lighting, 
-                  and a romantic garden setting for 200 guests.
+                  A breathtaking outdoor wedding celebration featuring custom
+                  floral arrangements, string lighting, and a romantic garden
+                  setting for 200 guests.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="outline">Wedding</Badge>
@@ -149,7 +163,7 @@ export default function Gallery() {
 
             <Card className="overflow-hidden">
               <div className="relative">
-                <img 
+                <img
                   src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
                   alt="Featured corporate event"
                   className="w-full h-64 object-cover"
@@ -163,8 +177,9 @@ export default function Gallery() {
                   Tech Summit Conference
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  A high-tech corporate conference with advanced AV setup, professional staging, 
-                  and seamless logistics for 500+ attendees.
+                  A high-tech corporate conference with advanced AV setup,
+                  professional staging, and seamless logistics for 500+
+                  attendees.
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="outline">Corporate</Badge>
@@ -178,7 +193,7 @@ export default function Gallery() {
       </section>
 
       <Footer />
-      
+
       {/* Floating Chat Icons */}
       <FloatingChat />
     </div>

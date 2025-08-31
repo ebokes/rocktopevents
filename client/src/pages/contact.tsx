@@ -137,7 +137,10 @@ export default function Contact() {
                             {info.title}
                           </h3>
                           {info.details.map((detail, detailIndex) => (
-                            <p key={detailIndex} className="text-muted-foreground">
+                            <p
+                              key={detailIndex}
+                              className="text-muted-foreground"
+                            >
                               {detail}
                             </p>
                           ))}
@@ -185,7 +188,9 @@ export default function Contact() {
                         className="flex justify-between"
                         data-testid={`business-hours-${index}`}
                       >
-                        <span className="text-muted-foreground">{schedule.day}</span>
+                        <span className="text-muted-foreground">
+                          {schedule.day}
+                        </span>
                         <span className="text-foreground font-medium">
                           {schedule.hours}
                         </span>
@@ -226,13 +231,13 @@ export default function Contact() {
       </section>
 
       {/* Map Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-muted/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800 mb-4">
+            <h2 className="text-3xl font-bold text-muted-foreground mb-4">
               Find Our Office
             </h2>
-            <p className="text-slate-600">
+            <p className="text-muted-foreground ">
               Visit us at our convenient downtown location
             </p>
           </div>
@@ -250,22 +255,24 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 ">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-slate-800 mb-4">
+            <h2 className="text-3xl font-bold text-muted-foreground  mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-slate-600">Quick answers to common questions</p>
+            <p className="text-muted-foreground">
+              Quick answers to common questions
+            </p>
           </div>
 
           <div className="space-y-6">
             <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">
+              <CardContent className="p-6 ">
+                <h3 className="text-lg font-semibold text-muted-foreground  mb-2">
                   How far in advance should I book your services?
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-muted-foreground">
                   We recommend booking 3-6 months in advance for weddings and
                   large events, and 4-8 weeks for corporate events. However, we
                   can accommodate shorter timelines based on availability.
@@ -275,10 +282,10 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                <h3 className="text-lg font-semibold text-muted-foreground  mb-2">
                   Do you provide services outside your local area?
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-muted-foreground">
                   Yes, we travel for destination events. Additional travel costs
                   may apply based on location and distance.
                 </p>
@@ -287,10 +294,10 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                <h3 className="text-lg font-semibold text-muted-foreground  mb-2">
                   What's included in your event planning packages?
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-muted-foreground">
                   Our packages vary based on your needs but typically include
                   venue coordination, vendor management, timeline development,
                   and day-of coordination. We'll provide a detailed breakdown
@@ -301,10 +308,10 @@ export default function Contact() {
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                <h3 className="text-lg font-semibold text-muted-foreground  mb-2">
                   Do you offer payment plans?
                 </h3>
-                <p className="text-slate-600">
+                <p className="text-muted-foreground ">
                   Yes, we offer flexible payment plans to make our services
                   accessible. We typically require a deposit to secure your
                   date, with the balance due in installments.

@@ -214,7 +214,7 @@ export default function Venues() {
       </section> */}
 
       {/* Map and Nearby Discovery */}
-      <section className="py-12 bg-muted/20">
+      <section className="py-12 bg-muted/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl font-bold text-foreground mb-6">
             Nearby Event Centers
