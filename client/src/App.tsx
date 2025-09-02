@@ -12,6 +12,7 @@ import Gallery from "@/pages/gallery";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import Contact from "@/pages/contact";
+import About from "@/pages/about";
 import Admin from "@/pages/admin";
 import AdminLogin from "@/pages/admin-login";
 import ScrollToTop from "./components/ui/scroll-to-top";
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/services" component={Services} />
       <Route path="/venues" component={Venues} />
       <Route path="/gallery" component={Gallery} />
+      <Route path="/about" component={About} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/contact" component={Contact} />
